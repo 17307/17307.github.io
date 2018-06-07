@@ -9,7 +9,7 @@
 
 
 
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     
     
     
@@ -35,13 +35,13 @@
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
 
-    <!-- custom head -->
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </head>
 
 <body>
-    <div id="loading" class="active"></div>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
 
     <aside id="menu"  >
   <div class="inner flex-row-vertical">
@@ -86,7 +86,7 @@
             <li class="waves-block waves-effect">
               <a href="/custom"  >
                 <i class="icon icon-lg icon-link"></i>
-                软件收藏癖
+                精品
               </a>
             </li>
         
@@ -172,7 +172,19 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        111
+        决策树决策树ID3算法的信息论基础
+熵度量了事物的不确定性，越不确定的事物，它的熵就越大。具体的，随机变量X的熵的表达式如下：  
+$$info(X)=H(X)=\sum_{i=1}^{n}{p_i}log_{2}{p_i}$$
+
+
+
+决策树构建
+ID3
+C4.5
+
+
+
+
 
     
 
@@ -297,6 +309,27 @@ var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
 
 
 
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
 
 
 
@@ -319,7 +352,7 @@ var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
         }
     });
 })();
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://github/17307/"/>
-  <updated>2018-06-07T01:35:25.046Z</updated>
+  <updated>2018-06-07T02:35:50.971Z</updated>
   <id>http://github/17307/</id>
   
   <author>
@@ -21,16 +21,15 @@
     <link href="http://github/17307/2018/06/07/%E5%86%B3%E7%AD%96%E6%A0%91/"/>
     <id>http://github/17307/2018/06/07/决策树/</id>
     <published>2018-06-06T16:38:16.000Z</published>
-    <updated>2018-06-07T01:35:25.046Z</updated>
+    <updated>2018-06-07T02:35:50.971Z</updated>
     
-    <content type="html"><![CDATA[<p>111</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="决策树ID3算法的信息论基础"><a href="#决策树ID3算法的信息论基础" class="headerlink" title="决策树ID3算法的信息论基础"></a>决策树ID3算法的信息论基础</h2><ul><li><p>熵度量了事物的不确定性，越不确定的事物，它的熵就越大。具体的，随机变量X的熵的表达式如下：  </p><p>$$info(X)=H(X)=\sum_{i=1}^{n}{p_i}log_{2}{p_i}$$</p></li></ul><ul><li><h2 id="决策树构建"><a href="#决策树构建" class="headerlink" title="决策树构建"></a>决策树构建</h2><ul><li><h3 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h3></li><li><h3 id="C4-5"><a href="#C4-5" class="headerlink" title="C4.5"></a>C4.5</h3></li></ul></li></ul><p><img src="/img/post/ml/decisiontree/decissiontree3.jpg"><br><img src="/img/post/ml/decisiontree/decissiontree4.jpg"></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;111&lt;/p&gt;
-
+        &lt;h1 id=&quot;决策树&quot;&gt;&lt;a href=&quot;#决策树&quot; class=&quot;headerlink&quot; title=&quot;决策树&quot;&gt;&lt;/a&gt;决策树&lt;/h1&gt;&lt;h2 id=&quot;决策树ID3算法的信息论基础&quot;&gt;&lt;a href=&quot;#决策树ID3算法的信息论基础&quot; class=&quot;headerlink&quot; 
       
     
     </summary>
