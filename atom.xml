@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://github/17307/"/>
-  <updated>2018-06-06T15:03:02.000Z</updated>
+  <updated>2018-06-17T10:57:29.700Z</updated>
   <id>http://github/17307/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mongodb</title>
+    <link href="http://github/17307/2018/06/17/mongodb/"/>
+    <id>http://github/17307/2018/06/17/mongodb/</id>
+    <published>2018-06-17T10:57:07.000Z</published>
+    <updated>2018-06-17T10:57:29.700Z</updated>
+    
+    <content type="html"><![CDATA[<p>mongodb<br><a id="more"></a></p><h1 id="Docker-amp-amp-mongodb"><a href="#Docker-amp-amp-mongodb" class="headerlink" title="Docker &amp;&amp; mongodb"></a>Docker &amp;&amp; mongodb</h1><ul><li><h2 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h2><ul><li><code>docker pull mongo:3.2</code></li><li><p><code>docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo:3.2</code></p><blockquote><p><code>-p 27017:27017</code> : 将容器的27017 端口映射到主机的27017 端口<br><code>-v $PWD/db:/data/db</code> : 将主机中当前目录下的db挂载到容器的/data/db，作为mongo数据存储目录</p></blockquote></li><li><code>docker run -it mongo:3.2 mongo --host 172.17.0.1</code><blockquote><p><code>docker run -it mongo:3.2</code> 运行这个镜像 然后执行命令 <code>mongo --host 172.17.0.1</code></p></blockquote></li></ul></li><li><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><ul><li><h3 id="mongodb与sql型数据库类比"><a href="#mongodb与sql型数据库类比" class="headerlink" title="mongodb与sql型数据库类比"></a>mongodb与sql型数据库类比</h3><p>  | SQL术语/概念 | MongoDB术语/概念 | 解释/说明                                       |<br>  | ———— | —————- | ———————————————– |<br>  | database     | database         | 数据库                                          |<br>  | table        | collection       | 数据库表/集合                                   |<br>  | row          | document         | 数据记录行/文档                                 |<br>  | column       | field            | 数据字段/域                                     |<br>  | index        | index            | 索引                                            |<br>  | table        | joins            | 表连接,MongoDB不支持                            |<br>  | primary      | key              | primary key    主键,MongoDB自动将_id字段设置为主键 |</p></li><li><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul><li>一个mongodb中可以建立多个数据库。<br>  MongoDB的默认数据库为”db”，该数据库存储在data目录中。</li><li><code>show dbs</code></li><li>执行 <code>db</code> 命令可以显示当前数据库对象或集合</li><li>运行 <code>use</code> 命令，可以连接到一个指定的数据库<br>  <code>use local</code></li></ul></li><li><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul><li>文档是一组键值(key-value)对(即BSON)<ul><li>文档中的键/值对是有序的。</li><li>文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型（甚至可以是整个嵌入的文档)。</li><li>MongoDB区分类型和大小写。</li><li>MongoDB的文档不能有重复的键。</li><li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符。</li></ul></li></ul></li><li><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><ul><li>集合就是 MongoDB 文档组,类似与sql数据库中的表格</li><li>可以将以下不同数据结构的文档插入到集合中:<blockquote><p>{“site”:”<a href="http://www.baidu.com&quot;}" target="_blank" rel="noopener">www.baidu.com&quot;}</a><br>{“site”:”<a href="http://www.google.com&quot;,&quot;name&quot;:&quot;Google&quot;}" target="_blank" rel="noopener">www.google.com&quot;,&quot;name&quot;:&quot;Google&quot;}</a><br>{“site”:”<a href="http://www.runoob.com&quot;,&quot;name&quot;:&quot;菜鸟教程&quot;,&quot;num&quot;:5}" target="_blank" rel="noopener">www.runoob.com&quot;,&quot;name&quot;:&quot;菜鸟教程&quot;,&quot;num&quot;:5}</a>  </p></blockquote></li></ul></li><li><h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><ul><li>数据库一些信息</li></ul></li><li><h3 id="MongoDB-数据类型"><a href="#MongoDB-数据类型" class="headerlink" title="MongoDB 数据类型"></a>MongoDB 数据类型</h3></li><li><h3 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h3><ul><li><a href="http://www.runoob.com/mongodb/mongodb-connections.html" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-connections.html</a></li></ul></li><li><h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><ul><li>创建数据库 <code>use DATABASE_NAME</code></li><li>切换到数据库 <code>use my_dababase</code> ; 然后删除数据库 <code>db.dropDatabase()</code></li><li><code>show collections</code>显示集合</li><li>创建集合<ul><li>1.通过<code>db.createCollection(name, options)</code></li><li>2.在 MongoDB 中，你不需要创建集合。当你插入一些文档时，MongoDB 会自动创建集合。</li></ul></li><li>删除集合<blockquote><p><code>use runoob</code><br>  switched to db runoob<br><code>show tables</code><br>  site<br><code>db.site.drop()</code><br>  true<br><code>show tables</code>  </p></blockquote></li><li>创建文档<ul><li><code>db.COLLECTION_NAME.insert(document)</code></li><li><code>document = ({1:1})</code><br><code>db.col.insert(document)</code></li></ul></li><li><p>更新文档</p><ul><li><p>方法一</p>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update(</span><br><span class="line">    &lt;query&gt;, # update的查询条件，类似sql update查询内where后面的。</span><br><span class="line">    &lt;update&gt;, # update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的</span><br><span class="line">        &#123;</span><br><span class="line">            upsert: &lt;boolean&gt;, # 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</span><br><span class="line">            multi: &lt;boolean&gt;, # 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</span><br><span class="line">            writeConcern: &lt;document&gt; # 可选，抛出异常的级别。</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br></pre></td></tr></table></figure><blockquote><p><code>db.col.update({&#39;title&#39;:&#39;MongoDB 教程&#39;},{$set:{&#39;title&#39;:&#39;MongoDB&#39;}})</code></p></blockquote></li><li><p>方法二</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*save() 方法通过传入的文档来替换已有文档*/</span></span><br><span class="line">db.collection.save(</span><br><span class="line">&lt;<span class="built_in">document</span>&gt;,</span><br><span class="line">&#123;</span><br><span class="line">    writeConcern: &lt;document&gt;</span><br><span class="line">&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li><li><p><code>db.collection.updateOne() 向指定集合更新单个文档</code>  </p></li><li><code>db.collection.updateMany() 向指定集合更新多个文档</code></li></ul></li><li><p>删除文档</p>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deleteOne() </span><br><span class="line">deleteMany()</span><br></pre></td></tr></table></figure><blockquote><p>如删除集合下全部文档：<br>db.inventory.deleteMany({})<br>删除 status 等于 A 的全部文档：<br><code>db.inventory.deleteMany({ status : &quot;A&quot; })</code><br>删除 status 等于 D 的一个文档：<br><code>db.inventory.deleteOne( { status: &quot;D&quot; } )</code></p></blockquote></li><li>查询<ul><li><code>db.collection.find(query, projection)</code><blockquote><p>query ：可选，使用查询操作符指定查询条件<br>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。</p></blockquote></li><li>AND<ul><li><code>db.col.find({&quot;by&quot;:&quot;菜鸟教程&quot;, &quot;title&quot;:&quot;MongoDB 教程&quot;}).pretty()</code></li></ul></li><li>OR<ul><li><code>db.col.find({$or:[{&quot;by&quot;:&quot;菜鸟教程&quot;},{&quot;title&quot;: &quot;MongoDB 教程&quot;}]}).pretty()</code></li></ul></li><li>AND 和 OR<ul><li><code>db.col.find({&quot;likes&quot;: {$gt:50}, $or: [{&quot;by&quot;: &quot;菜鸟教程&quot;},{&quot;title&quot;: &quot;MongoDB 教程&quot;}]}).pretty()</code></li></ul></li><li>projection 参数的使用方法<ul><li><code>db.collection.find(query, {title: 1, by: 1}) // inclusion模式 指定返回的键，不返回其他键</code></li><li><code>db.collection.find(query, {title: 0, by: 0}) // exclusion模式 指定不返回的键,返回其他键</code></li><li>两种模式不可混用（因为这样的话无法推断其他键是否应返回）</li></ul></li></ul></li><li>条件查询<ul><li><code>db.col.find({likes : {$lt : 150}})</code><blockquote><p>$gt ——– greater than  &gt;<br>$gte ——— gt equal  &gt;=<br>$lt ——– less than  &lt;<br>$lte ——— lt equal  &lt;=<br>$ne ———– not equal  !=<br>$eq  ——–  equal  =  </p></blockquote></li><li><code>db.col.find({&quot;title&quot; : {$type : 2}})</code> </li><li><code>db.tabl1.deleteOne({&quot;likes&quot;:{$exists: false}})</code></li></ul></li><li><code>db.col.find({},{&quot;title&quot;:1,_id:0}).limit(1).skip(1)</code></li><li><code>db.COLLECTION_NAME.find().sort({KEY:1})</code>  1 为升序排列，而-1是用于降序排列</li><li><code>db.col.createIndex({&quot;title&quot;:1,&quot;description&quot;:-1})</code> 创建索引</li><li>聚合<ul><li><code>db.mycol.aggregate([{$group : {_id : &quot;$by_user&quot;, num_tutorial : {$sum : 1}}}])</code></li></ul></li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;mongodb&lt;br&gt;
+    
+    </summary>
+    
+      <category term="mongodb" scheme="http://github/17307/categories/mongodb/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu-ssh</title>
+    <link href="http://github/17307/2018/06/15/ubuntu-ssh/"/>
+    <id>http://github/17307/2018/06/15/ubuntu-ssh/</id>
+    <published>2018-06-15T08:47:48.000Z</published>
+    <updated>2018-06-15T08:51:01.869Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于linux如何配置ssh<br><a id="more"></a></p><h1 id="关于连接Ubuntu"><a href="#关于连接Ubuntu" class="headerlink" title="关于连接Ubuntu"></a>关于连接Ubuntu</h1><h2 id="首先需要打开22号端口"><a href="#首先需要打开22号端口" class="headerlink" title="首先需要打开22号端口"></a>首先需要打开22号端口</h2><p>打开Ubuntu SSH 22端口的方法如下：需要安装OpenSSH server</p><p>使用命令安装：<code>sudo apt-get install openssh-server</code><br>然后重启配置文件:<code>sudo /etc/init.d/ssh restart</code></p><h2 id="配置通过密钥连接ssh"><a href="#配置通过密钥连接ssh" class="headerlink" title="配置通过密钥连接ssh"></a>配置通过密钥连接ssh</h2><ul><li>首先在服务器上制作密钥对。首先用<font color="blue"><strong>密码登录到你打算使用密钥登录的账户</strong></font>，然后执行以下命令：<br><code>ssh-keygen</code><br>用户的home目录中生成了一个 .ssh 的隐藏目录，内含两个密钥文件。id_rsa 为私钥，id_rsa.pub 为公钥.</li><li><p>键入以下命令，在服务器上安装公钥：  </p><p><code>cd .ssh</code><br><code>cat id_rsa.pub &gt;&gt; authorized_keys</code></p></li><li><p>如此便完成了公钥的安装。为了确保连接成功，请保证以下文件权限正确：</p><p><code>chmod 600 authorized_keys</code><br><code>chmod 700 ~/.ssh</code>   –这里路径需要更改</p></li><li><p>设置 SSH，打开密钥登录功能 </p><ul><li>编辑 /etc/ssh/sshd_config 文件，进行如下设置：<br>RSAAuthentication yes<br>PubkeyAuthentication yes</li><li>另外，请留意 root 用户能否通过 SSH 登录：<br><code>PermitRootLogin yes</code></li><li>当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录：<br><code>PasswordAuthentication no</code>  可选</li><li><p>最后，重启 SSH 服务：</p><p><code>service sshd restart</code></p></li></ul></li></ul><p>github 地址 “<a href="https://github.com/17307/Learning/blob/master/linux/ssh.md&quot;" target="_blank" rel="noopener">https://github.com/17307/Learning/blob/master/linux/ssh.md&quot;</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于linux如何配置ssh&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://github/17307/categories/linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>python基础</title>
+    <link href="http://github/17307/2018/06/09/python%E5%9F%BA%E7%A1%80/"/>
+    <id>http://github/17307/2018/06/09/python基础/</id>
+    <published>2018-06-09T03:02:34.000Z</published>
+    <updated>2018-06-09T03:05:50.729Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>python</code>对象，引用，类<br><a id="more"></a></p><h1 id="python普通对象"><a href="#python普通对象" class="headerlink" title="python普通对象"></a>python普通对象</h1><h2 id="python中的变量与对象、可变对象和不可变对象："><a href="#python中的变量与对象、可变对象和不可变对象：" class="headerlink" title="python中的变量与对象、可变对象和不可变对象："></a>python中的变量与对象、可变对象和不可变对象：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3</span>         <span class="comment">#创建 int对象 3，创建变量a， 变量a指向对象3  </span></span><br><span class="line">a = <span class="string">"test"</span>    <span class="comment">#创建string对象，变量a指向对象"test"</span></span><br></pre></td></tr></table></figure><p>对象：<strong>可变对象</strong>和<strong>不可变对象</strong>，不可变对象包括<code>int</code>，<code>float</code>，<code>long</code>，<code>str</code>，<code>tuple</code>等，可变对象包括<code>list</code>，<code>set</code>，<code>dict</code>等。  </p><p>需要注意的是：这里说的不可变指的是对象值的不可变。  </p><ul><li>对于不可变类型的对象，如果要更改变量，则会创建一个新值，把变量绑定到新的对象上，而旧值如果没有被引用就等待垃圾回收。  </li><li>可变类型数据对对象操作的时候，不需要再在其他地方申请内存，只需要在此对象后面连续申请(+/-)即可，也就是它的内存地址会保持不变，但区域会变长或者变短。</li></ul><h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><ul><li>使用<code>copy.copy()</code>，可以进行对象的浅拷贝，它复制了对象，但对于对象中的元素，<strong>依然使用原始的引用</strong>.</li><li>如果需要复制一个容器对象，以及它里面的所有元素（包含元素的子元素），可以使用<code>copy.deepcopy()</code>进行深拷贝</li><li>对于非容器类型（如数字、字符串、和其他’原子’类型的对象）没有被拷贝一说</li><li>如果元祖变量只包含原子类型对象，则不能深拷贝，看下面的例子</li></ul><h1 id="python-类"><a href="#python-类" class="headerlink" title="python 类"></a>python 类</h1><ul><li><h2 id="init-构造函数"><a href="#init-构造函数" class="headerlink" title="__init__() 构造函数"></a><code>__init__()</code> 构造函数</h2></li><li><h2 id="del-析构函数"><a href="#del-析构函数" class="headerlink" title="__del__() 析构函数"></a><code>__del__()</code> 析构函数</h2></li><li><h2 id="p-私有属性"><a href="#p-私有属性" class="headerlink" title="__p 私有属性"></a><code>__p</code> 私有属性</h2></li><li><h2 id="method-私有方法"><a href="#method-私有方法" class="headerlink" title="__method() 私有方法"></a><code>__method()</code> 私有方法</h2></li><li><h2 id="方法"><a href="#方法" class="headerlink" title="方法:"></a>方法:</h2><pre><code>__init__ : 构造函数，在生成对象时调用__del__ : 析构函数，释放对象时使用__repr__ : 打印，转换__setitem__ : 按照索引赋值__getitem__: 按照索引获取值__len__: 获得长度__cmp__: 比较运算__call__: 函数调用__add__: 加运算__sub__: 减运算__mul__: 乘运算__div__: 除运算__mod__: 求余运算__pow__: 乘方__str__: print()</code></pre></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;python&lt;/code&gt;对象，引用，类&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://github/17307/categories/python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
