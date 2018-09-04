@@ -109,8 +109,8 @@ uyan_uid: false
 gitment:
    owner: 17307
    repo: 17307.github.io
-   client_id: ***
-   client_secret: ***
+   client_id: *****
+   client_secret: *****
       
 # Valine Comment system. https://valine.js.org
 valine:
