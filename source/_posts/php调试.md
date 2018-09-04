@@ -1,8 +1,12 @@
 ---
 title: php调试
 date: 2018-08-29 12:54:23
-categories:
+categories: php
 ---
+
+配置php xdebug.
+
+<!-- more-->
 
 - ### Xdebug 安装
 

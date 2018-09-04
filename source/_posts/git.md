@@ -2,7 +2,12 @@
 title: git
 date: 2018-08-29 21:12:13
 categories: others
+comment: true
 ---
+git基础~
+
+<!--more-->
+
 ## 常用
 
 - git init 将目录变成git管理目录
