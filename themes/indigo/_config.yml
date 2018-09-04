@@ -109,9 +109,9 @@ uyan_uid: false
 gitment:
    owner: 17307
    repo: 17307.github.io
-   client_id: **
-   client_secret: **
-   
+   client_id: 63b87ad3fef30cd6104e
+   client_secret: 4db42eb622bc1203b259533cff70602512a2ee56
+      
 # Valine Comment system. https://valine.js.org
 valine:
   enable: false # 如果你想使用valine，请将值设置为 true
