@@ -1,7 +1,7 @@
 ---
 title: indigo-comment配置
 date: 2018-09-08 18:27:35
-categories: orthers
+categories: others
 ---
 
 # indigo-comment 评论设置 #
