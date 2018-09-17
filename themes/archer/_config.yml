@@ -1,0 +1,129 @@
+# ========== Profile ========== #
+# avatar
+avatar: /avatar/Misaka.jpg
+# author name
+author: o1hy
+# signature
+signature: focus on hello world
+# SNS (you can custom the order)
+social:
+  email: 
+  github: //github.com/17307
+  # wechat and qq should be a path of qr-code image
+  wechat: 
+  qq: 
+  telegram: 
+  weibo: 
+  zhihu: 
+  douban: 
+  facebook: 
+  twitter: 
+  instagram: 
+  stack-overflow: 
+  segmentFault: 
+  juejin: 
+  v2ex: 
+  bilibili: 
+  linkedin: 
+  steam: 
+  others: 
+  rss: 
+# friends
+#friends:
+#  friendA: 123
+ # friendB: 345
+ # friendC: 
+about:
+  enable: true
+  image: '/intro/about-bg.jpg'
+
+# ========== Site ========== #
+# title of the site (good for SEO)
+SEO_title: o1hy's blog
+# keywords for site (good for SEO)
+SEO_keywords:
+  - hexo
+  - 'hexo-theme'
+  - 'hexo-blog'
+# main title shown in header image
+main_title: o1hy's blog
+# subtitle
+subtitle: it's better to burn out than to fade away
+# site haeder image
+site_header_image: '/intro/index-bg.jpg'
+# post haeder image
+post_header_image: '/intro/post-bg.jpg'
+# 404 image
+_404_image: '/intro/404-bg.jpg'
+
+# ========== Search ========== #
+algolia_search:
+  enable: false
+  hits:
+    per_page: 10
+  labels:
+    input_placeholder: Search for Posts
+    hits_empty: "We did not find any results for the search: ${query}"
+    hits_stats: "${hits} results found in ${time} ms"
+
+# ========== Comment ========== #
+# Fill in the field to enable the corresponding comment plugin
+# If you want to add other comment plugin, edit in "custom.ejs"
+comment:
+  # Livere  site: https://livere.com/
+  livere_uid: 
+  # Disqus  site: https://disqus.com/
+  disqus_shortname: 
+  # Gitment  site: https://github.com/imsun/gitment
+  gitment_owner: #17307
+  gitment_repo: #17307.github.io
+  gitment_client_id: #63b87ad3fef30cd6104e
+  gitment_client_secret: #4db42eb622bc1203b259533cff70602512a2ee56
+  # Youyan  site: http://www.uyan.cc/
+  youyan_uid: 
+  # Valine  site: https://valine.js.org/
+  valine_appId: 
+  valine_appKey: 
+  valine_placeHolder: 
+  #gitalk settings
+  gitalk:
+    enable: on #用来做启用判断可以不用
+    owner: 17307 #Github 用户名,
+    repo: 17307.github.io #储存评论issue的github仓库名
+    admin:  #Github 用户名,
+    clientID: 63b87ad3fef30cd6104e #`Github Application clientID`
+    clientSecret:  #`Github Application clientSecret`
+
+
+# ========== Analytics ========== #
+# enable Busuanzi analytics
+busuanzi: true
+# fill in pv or uv
+busuanzi_pv_or_uv: 'pv'
+# custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
+busuanzi_slug: 'PV: ${count} :)'
+# Baidu analytics
+baidu_analytics: 
+# Google analytics
+google_analytics: 
+# CNZZ analytics
+CNZZ_analytics: 
+
+# ========== Others ========== #
+# favicon
+favicon: /assets/favicon.ico
+# truncate length of abstracts in index page (the default is 300, there will be no abstruct if you input 0)
+truncate_length: 
+# enable toc
+toc: true
+# word count & reading time
+reading_info: true
+# intro height (the default is 50 percents of the screen, you can input other number)
+index_intro_height: 100
+post_intro_height: 50
+about_intro_height: 50
+# copyright
+copyright:
+  enable: true
+  # https://creativecommons.org/
+  license: '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
