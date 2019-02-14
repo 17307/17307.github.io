@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>docker | o1hy</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="docker">
+    
+    <meta name="description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="https://17307.github.io/2018/10/28/docker/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg">
+<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker">
+<meta name="twitter:description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+<meta name="twitter:image" content="http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/github.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ML-DL/">ML&DL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/PT/">PT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ctf/">ctf</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/">others</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/chrome/">chrome</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/git/">git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/indego/">indego</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/linux/">linux</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/papers/">papers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/">web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/db/">db</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/docker/">docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/flask/">flask</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/nginx/">nginx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/php/">php</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/web/docker/">docker</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-docker" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">TOC</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-安装"><span class="toc-text">0x00 安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-基本命令"><span class="toc-text">0x01 基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#image"><span class="toc-text">image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#container"><span class="toc-text">container</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dockerfile"><span class="toc-text">Dockerfile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目目录"><span class="toc-text">项目目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-py"><span class="toc-text">app.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile-1"><span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建镜像与启动"><span class="toc-text">创建镜像与启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#某些变量"><span class="toc-text">某些变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Volumn"><span class="toc-text">Volumn</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存修改的容器"><span class="toc-text">保存修改的容器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-注意"><span class="toc-text">0x02 注意</span></a></li></ol>
+</div>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        docker
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/10/28/docker/" class="article-date">
+            <time datetime="2018-10-28T02:46:48.000Z" itemprop="datePublished">2018-10-28</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/docker/">docker</a>
+    </div>
+
+                <span id="busuanzi_container_site_pv">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span id="busuanzi_container_page_pv">
+                    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                  </span>
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="0x00-安装"><a href="#0x00-安装" class="headerlink" title="0x00 安装"></a>0x00 安装</h1><p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce" target="_blank" rel="noopener">官网</a></p>
+<h1 id="0x01-基本命令"><a href="#0x01-基本命令" class="headerlink" title="0x01 基本命令"></a>0x01 基本命令</h1><h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取</span></span><br><span class="line">docker image pull hello-world</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行image ， 产生 container</span></span><br><span class="line">docker container run hello-world</span><br></pre></td></tr></table></figure>
+<h2 id="container"><a href="#container" class="headerlink" title="container"></a>container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 列出本机正在运行的容器</span></span><br><span class="line">docker container ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container ls --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 杀死某个 container</span></span><br><span class="line">docker container <span class="built_in">kill</span> [containID]</span><br></pre></td></tr></table></figure>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>这里给出一个flask的小例子。</p>
+<h3 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h3><p><img src="413BC09A31334384851E03F517CDF8BB" alt="image"></p>
+<h3 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a>app.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello DockerFile!'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>, port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Dockerfile-1"><a href="#Dockerfile-1" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3</span><br><span class="line"></span><br><span class="line">#安装flask</span><br><span class="line">RUN [&quot;pip&quot;,&quot;install&quot;,&quot;flask&quot;]</span><br><span class="line">#创建文件夹</span><br><span class="line">RUN mkdir -p  /flask/project</span><br><span class="line">#复制文件到相应目录</span><br><span class="line">COPY app.py /flask/project/</span><br><span class="line">#切换目录到/flask/project</span><br><span class="line">WORKDIR /flask/project</span><br><span class="line">#暴露端口,允许外部链接</span><br><span class="line">EXPOSE 5000</span><br><span class="line">#容器启动时 执行的命令 运行flask程序</span><br><span class="line">CMD [&quot;python&quot;,&quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+<h3 id="创建镜像与启动"><a href="#创建镜像与启动" class="headerlink" title="创建镜像与启动"></a>创建镜像与启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先把app.py Dockerfile文件一起放到一个文件夹下面 然后运行</span></span><br><span class="line"><span class="comment">#flask 是镜像的名字</span></span><br><span class="line"><span class="comment">#注意末尾的 .</span></span><br><span class="line">docker build -t flask .  </span><br><span class="line"></span><br><span class="line"><span class="comment">#这条命令运行flask镜像 并把flask镜像中的5000端口和宿主机中的6000端口作映射</span></span><br><span class="line">docker run -p 6000:5000 flask</span><br><span class="line"></span><br><span class="line"><span class="comment">#后台启动容器</span></span><br><span class="line">docker run -d -p 6000:5000 flask</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看容器中的标准输出</span></span><br><span class="line">docker logs [ID]</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看正在运行的容器</span></span><br><span class="line">docker ps </span><br><span class="line"></span><br><span class="line"><span class="comment">#杀死某个正在运行</span></span><br><span class="line">docker <span class="built_in">kill</span> [ID]</span><br><span class="line"></span><br><span class="line"><span class="comment">#进入docker的终端</span></span><br><span class="line"><span class="comment"># -i 允许你对容器内的标准输入 (STDIN) 进行交互</span></span><br><span class="line"><span class="comment"># -t （个人实验是用于交互）</span></span><br><span class="line">docker run -i -t [image] /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker container exec命令用于进入一个正在运行的 docker 容器。如果docker run命令运行容器的时候，没有使用-it参数，就要用这个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了。</span></span><br><span class="line">docker container <span class="built_in">exec</span> -it [containerID] /bin/bash</span><br></pre></td></tr></table></figure>
+<h2 id="某些变量"><a href="#某些变量" class="headerlink" title="某些变量"></a>某些变量</h2><h3 id="Volumn"><a href="#Volumn" class="headerlink" title="Volumn"></a>Volumn</h3><blockquote>
+<p>想要了解Docker Volume，首先我们需要知道Docker的文件系统是如何工作的。<br>Docker镜像是由多个文件系统（只读层）叠加而成。当我们启动一个容器的时候，Docker会加载只读镜像层并在其上（译者注：镜像栈顶部）添加一个读写层。如果运行中的容器修改了现有的一个已经存在的文件，那该文件将会从读写层下面的只读层复制到读写层，该文件的只读版本仍然存在，只是已经被读写层中该文件的副本所隐藏。当删除Docker容器，并通过该镜像重新启动时，之前的更改将会丢失。在Docker中，只读层及在顶部的读写层的组合被称为Union File System（联合文件系统）。</p>
+<p>为了能够保存（持久化）数据以及共享容器间的数据，Docker提出了Volume的概念。简单来说，Volume就是目录或者文件，它可以绕过默认的联合文件系统，而以正常的文件或者目录的形式存在于宿主机上。</p>
+</blockquote>
+<p>大概总结一下上面的内容，就是可以实现：<strong>存储数据</strong>和<strong>共享数据</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将宿主机当前目录的db目录 与 镜像中的 /data/db 做挂载</span></span><br><span class="line">docker run -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo:3.2</span><br></pre></td></tr></table></figure>
+<p>通过 VOLUME 指令创建的挂载点，无法指定主机上对应的目录，是自动生成的.语法为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line">VOLUME [&quot;/data1&quot;,&quot;/data2&quot;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="保存修改的容器"><a href="#保存修改的容器" class="headerlink" title="保存修改的容器"></a>保存修改的容器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit 614122c0aabb aoct/apache2</span><br></pre></td></tr></table></figure>
+<h1 id="0x02-注意"><a href="#0x02-注意" class="headerlink" title="0x02 注意"></a>0x02 注意</h1><p>今天遇到遇到了一个有趣的事情，我在构建一个镜像的时候，Dockerfile如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line">RUN apt-get update</span><br><span class="line"></span><br><span class="line">RUN apt-get install  python3</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>此时会报错退出，个人分析是因为在安装python3的过程中，需要用户的输入，导致docker中断。所以需要改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line">RUN apt-get update</span><br><span class="line"></span><br><span class="line">RUN apt-get install -y python3</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p><code>-y</code>表示同意各种要求。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://17307.github.io/2018/10/28/docker/" data-id="cjs40hsq6000l8kvljk0jiah0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "o1hy"
+        },
+        "headline": "docker",
+        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg",
+        "keywords": "docker",
+        "genre": "web docker",
+        "datePublished": "2018-10-28",
+        "dateCreated": "2018-10-28",
+        "dateModified": "2019-02-02",
+        "url": "https://17307.github.io/2018/10/28/docker/",
+        "description": "0x00 安装官网
+0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world
+container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont"
+        "wordCount": 446
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/17307" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/10/28/nginx-flask/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            nginx-flask
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/10/28/uwsgi/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">uwsgi</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/02/chrome-extension/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/02/chrome-extension/chrome.png)" alt="chrome-extension" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/others/chrome/">chrome</a></p>
+                            <p class="item-title"><a href="/2019/02/02/chrome-extension/" class="title">chrome-extension</a></p>
+                            <p class="item-date"><time datetime="2019-02-02T13:50:15.000Z" itemprop="datePublished">2019-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/12/infrastructures/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/FortRajgad_ZH-CN7621203821_400x240.jpg)" alt="Graph-theoretic characterization of cyber-threat infrastructures" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/11/12/infrastructures/" class="title">Graph-theoretic characterization of cyber-threat infrastructures</a></p>
+                            <p class="item-date"><time datetime="2018-11-12T08:30:45.000Z" itemprop="datePublished">2018-11-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/Metadata/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg)" alt="Identifying People by Metadata" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/10/28/Metadata/" class="title">Identifying People by Metadata</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:55:15.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/nginx-flask/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/MinnewankaBoathouse_ZH-CN0548323518_400x240.jpg)" alt="nginx-flask" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/nginx/">nginx</a></p>
+                            <p class="item-title"><a href="/2018/10/28/nginx-flask/" class="title">nginx-flask</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:48:58.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/docker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg)" alt="docker" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/docker/">docker</a></p>
+                            <p class="item-title"><a href="/2018/10/28/docker/" class="title">docker</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:46:48.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ML-DL/">ML&DL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PT/">PT</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ctf/">ctf</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/">others</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/others/chrome/">chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/indego/">indego</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/linux/">linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/papers/">papers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/db/">db</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/flask/">flask</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/nginx/">nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/php/">php</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">ctf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5碰撞/">md5碰撞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metadata/">metadata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php反序列化/">php反序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/">sqlmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件包含/">文件包含</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量包分析/">流量包分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://das.scusec.org/">DAS</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <a id="back-to-top" onclick="goTop()"><i class="icon fa fa-angle-up"></i></a>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 o1hy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = '17307';
+    
+    
+    var disqus_url = 'https://17307.github.io/2018/10/28/docker/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
+<script>
+    function goTop() {
+        $('body, html').animate({ scrollTop: 0 }, 600);
+    }
+</script>

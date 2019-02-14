@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>服务器安装 | o1hy</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="linux">
+    
+    <meta name="description" content="记一次服务器安装">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器安装">
+<meta property="og:url" content="https://17307.github.io/2018/08/30/服务器安装/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="记一次服务器安装">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://h1.ioliu.cn/bing/UpHellyAa_ZH-CN7287698551_400x240.jpg">
+<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务器安装">
+<meta name="twitter:description" content="记一次服务器安装">
+<meta name="twitter:image" content="http://h1.ioliu.cn/bing/UpHellyAa_ZH-CN7287698551_400x240.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/github.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ML-DL/">ML&DL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/PT/">PT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ctf/">ctf</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/">others</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/chrome/">chrome</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/git/">git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/indego/">indego</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/linux/">linux</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/papers/">papers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/">web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/db/">db</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/docker/">docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/flask/">flask</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/nginx/">nginx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/php/">php</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/others/linux/">linux</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-服务器安装" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">TOC</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#U盘启动器"><span class="toc-text">U盘启动器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#raid卡配置"><span class="toc-text">raid卡配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动配置"><span class="toc-text">启动配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑"><span class="toc-text">坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li></ol></li></ol>
+</div>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        服务器安装
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/08/30/服务器安装/" class="article-date">
+            <time datetime="2018-08-30T11:55:04.000Z" itemprop="datePublished">2018-08-30</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>
+    </div>
+
+                <span id="busuanzi_container_site_pv">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span id="busuanzi_container_page_pv">
+                    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                  </span>
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>记一次服务器安装</p>
+<a id="more"></a>
+<h2 id="U盘启动器"><a href="#U盘启动器" class="headerlink" title="U盘启动器"></a>U盘启动器</h2><p>选择工具为：<code>UltraISO</code>，但安装过程中会出现：无法从CD-ROM中找到镜像的问题……以及后面一系列问题。</p>
+<p>解决方法：将<code>Ubuntu</code>镜像<code>copy</code>到U盘中，然后手动挂载，或者扫描U盘。</p>
+<p>后经一位师兄提醒，将制作工具换为：<code>Win32DiskImager</code>.然后一切正常。</p>
+<h2 id="raid卡配置"><a href="#raid卡配置" class="headerlink" title="raid卡配置"></a>raid卡配置</h2><p>服务器有两块硬盘，需要配置raid卡。</p>
+<p>本服务器通过<code>CTRL+M</code>进入配置页面。将两个硬盘的<code>raid</code>全都设置为<code>0</code>，然后重新初始化。</p>
+<p><code>raid0</code>与<code>raid1</code>区别：</p>
+<ul>
+<li>如果2块硬盘，均为10GB.</li>
+<li><code>raid0</code>模式中，最后的硬盘容量是 <code>10GB+10GB=20GB</code></li>
+<li><code>raid1</code>模式中，最后的硬盘容量是 <code>10GB+10GB=10GB</code>，其中一块硬盘是另一块硬盘的备份。</li>
+</ul>
+<h2 id="启动配置"><a href="#启动配置" class="headerlink" title="启动配置"></a>启动配置</h2><p>进入 <code>bios</code> 页面，然后再<code>boot</code>选项中选择配置U盘 启动优先，或者直接选择U盘启动。</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a><font color="blue"><strong>坑</strong></font></h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>出现了<code>unable to install grub in /dev/md126X</code></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>关键点是在安装ubuntu的时候，安装grub所产生了错误，导致系统无法启动。<br>其实ubuntu 12.04已经支持了这块服务器的megaraid软RAID的驱动，在内核目录能看到驱动程序（也可以从官网上下载）。<br>所以在做分区的时候，其实也是能搜索到这个磁盘的，只是dev的名字有点怪，叫/dev/md126<br>关键点是需要手工echo “(hd0) /dev/md126” &gt; /boot/device.map,然后grub-install 到/dev/md126上。<br>因为在raid的安装上，如果要mount到合适的/boot分区，就必须mount到/dev/md126pX这种设备上，而这些设备是没有所谓MBR的，而GRUB的安装参数则必须要放到/dev/md126上，这个小小的差异就导致了问题。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>当遇到了<code>unable to install grub in /dev/md126X</code>时，首先深呼吸，接杯水压压惊。</p>
+<p>Now we start to install GRUB by our hand:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">`ALT+F2` <span class="comment">#进入cmd界面</span></span><br><span class="line"></span><br><span class="line">首先`ls -al`看看有没有`target`这个文件夹，</span><br><span class="line"></span><br><span class="line">如果有就进到`target`中，</span><br><span class="line">    看看有没有`home`这个文件夹，如果还是有……就`mount /dev/md126pX /target/home`,如果没有`home`	 就`mount /dev/md126pX /target`</span><br><span class="line">如果没有就`mkdir target`,然后 `mount /dev/md126pX /target`</span><br><span class="line"></span><br><span class="line"><span class="string">"X"</span> is your partion dev number, you should know it from prev installation process.</span><br><span class="line"></span><br><span class="line"><span class="comment"># mount -o bind /proc /target/proc</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mount -o bind /sys /target/sys</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mount --rbind /dev /target/dev</span></span><br><span class="line"></span><br><span class="line">（Now we <span class="keyword">do</span> a chroot to the mount system.）  </span><br><span class="line"><span class="comment"># chroot /target /bin/bash</span></span><br><span class="line"></span><br><span class="line">(Now create the file device.map, used by GRUB.）</span><br><span class="line"></span><br><span class="line"><span class="comment"># echo "(hd0) /dev/md126" &gt; /boot/device.map</span></span><br><span class="line">  &lt;font color=<span class="string">"red"</span>&gt;**NOTE THAT**:&lt;/font&gt;&lt;font color=<span class="string">"blue"</span>&gt; use /dev/md126, NOT /dev/md126p1, it should the <span class="string">"md126"</span>!&lt;/font&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># cp /boot/device.map /boot/grub/</span></span><br><span class="line"></span><br><span class="line">Now install grub  </span><br><span class="line"><span class="comment"># grub-install --root-directory=/ /dev/md126   </span></span><br><span class="line"><span class="comment"># grub-setup /dev/md126  </span></span><br><span class="line">没有此工具，不执行也没什么问题</span><br><span class="line"></span><br><span class="line"><span class="comment"># update-grub </span></span><br><span class="line">It will build the file: /boot/grub/grub.cfg  </span><br><span class="line">Done.</span><br><span class="line">看到<span class="keyword">done</span>后，`ALT+F1`退出命令行，重新安装gurb即可。</span><br></pre></td></tr></table></figure>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>The key process is # echo “(hd0) /dev/md126” &gt; /boot/device.map<br>Becaulse the Ubuntu installation program use the /target partition /dev/md126p1 directory in grub-install, so it can’t be done in a raid. The RAID MBR is not on the first partition /dev/md126p1,  but on the base devices file /dev/md126</p>
+<p>​    </p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://17307.github.io/2018/08/30/服务器安装/" data-id="cjs40hsrx003i8kvl3qn8d825" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "o1hy"
+        },
+        "headline": "服务器安装",
+        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/UpHellyAa_ZH-CN7287698551_400x240.jpg",
+        "keywords": "linux",
+        "genre": "others linux",
+        "datePublished": "2018-08-30",
+        "dateCreated": "2018-08-30",
+        "dateModified": "2019-02-02",
+        "url": "https://17307.github.io/2018/08/30/服务器安装/",
+        "description": "记一次服务器安装"
+        "wordCount": 311
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/17307" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/08/30/虚拟机通信/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            虚拟机通信
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/08/30/ubuntu基础配置/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">ubuntu基础配置</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/02/chrome-extension/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/02/chrome-extension/chrome.png)" alt="chrome-extension" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/others/chrome/">chrome</a></p>
+                            <p class="item-title"><a href="/2019/02/02/chrome-extension/" class="title">chrome-extension</a></p>
+                            <p class="item-date"><time datetime="2019-02-02T13:50:15.000Z" itemprop="datePublished">2019-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/12/infrastructures/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/FortRajgad_ZH-CN7621203821_400x240.jpg)" alt="Graph-theoretic characterization of cyber-threat infrastructures" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/11/12/infrastructures/" class="title">Graph-theoretic characterization of cyber-threat infrastructures</a></p>
+                            <p class="item-date"><time datetime="2018-11-12T08:30:45.000Z" itemprop="datePublished">2018-11-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/Metadata/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg)" alt="Identifying People by Metadata" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/10/28/Metadata/" class="title">Identifying People by Metadata</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:55:15.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/nginx-flask/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/MinnewankaBoathouse_ZH-CN0548323518_400x240.jpg)" alt="nginx-flask" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/nginx/">nginx</a></p>
+                            <p class="item-title"><a href="/2018/10/28/nginx-flask/" class="title">nginx-flask</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:48:58.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/docker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg)" alt="docker" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/docker/">docker</a></p>
+                            <p class="item-title"><a href="/2018/10/28/docker/" class="title">docker</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:46:48.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ML-DL/">ML&DL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PT/">PT</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ctf/">ctf</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/">others</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/others/chrome/">chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/indego/">indego</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/linux/">linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/papers/">papers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/db/">db</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/flask/">flask</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/nginx/">nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/php/">php</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">ctf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5碰撞/">md5碰撞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metadata/">metadata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php反序列化/">php反序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/">sqlmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件包含/">文件包含</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量包分析/">流量包分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://das.scusec.org/">DAS</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <a id="back-to-top" onclick="goTop()"><i class="icon fa fa-angle-up"></i></a>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 o1hy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = '17307';
+    
+    
+    var disqus_url = 'https://17307.github.io/2018/08/30/服务器安装/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
+<script>
+    function goTop() {
+        $('body, html').animate({ scrollTop: 0 }, 600);
+    }
+</script>

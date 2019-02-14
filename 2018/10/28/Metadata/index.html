@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Identifying People by Metadata | o1hy</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="metadata">
+    
+    <meta name="description" content="Identifying People by Metadata">
+<meta name="keywords" content="metadata">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Identifying People by Metadata">
+<meta property="og:url" content="https://17307.github.io/2018/10/28/Metadata/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="Identifying People by Metadata">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg">
+<meta property="og:updated_time" content="2019-02-04T10:40:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Identifying People by Metadata">
+<meta name="twitter:description" content="Identifying People by Metadata">
+<meta name="twitter:image" content="http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/github.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ML-DL/">ML&DL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/PT/">PT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ctf/">ctf</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/">others</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/chrome/">chrome</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/git/">git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/indego/">indego</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/linux/">linux</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/papers/">papers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/">web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/db/">db</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/docker/">docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/flask/">flask</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/nginx/">nginx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/php/">php</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/papers/">papers</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Metadata" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">TOC</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-基本信息"><span class="toc-text">0x00 基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-文章解读"><span class="toc-text">0x01 文章解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题提出"><span class="toc-text">问题提出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文章结构"><span class="toc-text">文章结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一部分"><span class="toc-text">第一部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二部分"><span class="toc-text">第二部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型设计"><span class="toc-text">模型设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#检测模型"><span class="toc-text">检测模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元数据保护模型"><span class="toc-text">元数据保护模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#data-anonymization"><span class="toc-text">data anonymization</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#data-randomization"><span class="toc-text">data randomization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验数据"><span class="toc-text">实验数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验步骤"><span class="toc-text">实验步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户识别"><span class="toc-text">用户识别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#特征选取"><span class="toc-text">特征选取</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#算法选择"><span class="toc-text">算法选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#结果"><span class="toc-text">结果</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-分析"><span class="toc-text">0x02 分析</span></a></li></ol>
+</div>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Identifying People by Metadata
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/10/28/Metadata/" class="article-date">
+            <time datetime="2018-10-28T02:55:15.000Z" itemprop="datePublished">2018-10-28</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/metadata/">metadata</a>
+    </div>
+
+                <span id="busuanzi_container_site_pv">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span id="busuanzi_container_page_pv">
+                    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                  </span>
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>Identifying People by Metadata</p>
+<a id="more"></a>
+<h2 id="0x00-基本信息"><a href="#0x00-基本信息" class="headerlink" title="0x00 基本信息"></a>0x00 基本信息</h2><p><strong>作者:</strong> o1hy@DAS<br><strong>原文作者：</strong> Beatrice Perez, Mirco Musolesi, and Gianluca Stringhini<br><strong>原文标题：</strong> You are your Metadata: Identification and Obfuscation of Social Media Users using Metadata Information<br><strong>原文会议或期刊：</strong> ICWSM2018（交叉型学科会议，人文科学社交网络）<br><strong>原文链接：</strong> <a href="https://www.ucl.ac.uk/~ucfamus/papers/icwsm18.pdf" target="_blank" rel="noopener">https://www.ucl.ac.uk/~ucfamus/papers/icwsm18.pdf</a><br><strong>论文主要内容：</strong> 讨论元数据与隐私,以及报保护元数据</p>
+<h2 id="0x01-文章解读"><a href="#0x01-文章解读" class="headerlink" title="0x01 文章解读"></a>0x01 文章解读</h2><h3 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h3><p>通常,人们关心的多为内容的安全,而信息的元数据被认为是不那么重要的.用户也通常不会在意对元数据的保护.一些厂商甚至会去收集用户的元数据,并告知用户,这不会侵犯他们的个人隐私.文章中,讨论了元数据到底会不会侵犯一个人的隐私.以及该怎么保护这些元数据.  </p>
+<h3 id="文章结构"><a href="#文章结构" class="headerlink" title="文章结构"></a>文章结构</h3><h4 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h4><p>作者以推特数据为实验数据,通过构造不同的特征,并且用了三种不同的机器学习算法通过这些特征识别用户,来验证保护元数据的重要性.  </p>
+<h4 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h4><p>作者通过两种方法来混淆,隐藏元数据,然后重新进行检测.用来验证元数据能否被保护.</p>
+<h3 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h3><h4 id="检测模型"><a href="#检测模型" class="headerlink" title="检测模型"></a>检测模型</h4><p>用户集合</p>
+<p>$$U = {u_1,u_2,…,u_k,..,u_M}$$</p>
+<p>每一个用户,都可以被一组特征标识.</p>
+<p>$$X^{u_k} = {x^{u_k}_1,x^{u_k}_2,…,x^{u_k}_R}$$</p>
+<p>所以可以认为,有M个用户,每一个用户都可以被唯一的特征锁标识,所以我们的目标就是在特征集合<code>I</code>中识别出具体的用户.</p>
+<p>$$I = {i_1,i_2,…,i_M}$$</p>
+<p>所以最后的识别公式为</p>
+<p>$$P_I(u_k) = {p_{i_1}(u_k),p_{i_2}(u_k),…,p_{i_M}(u_k)}$$</p>
+<p>识别的结果为:</p>
+<p>$$max_{i_l}{p_{i_l}(u_k)}$$</p>
+<p>本文认为,每一个用户都会有一组唯一的特征,所以可以根据这组特征来识别不同的用户.  </p>
+<h4 id="元数据保护模型"><a href="#元数据保护模型" class="headerlink" title="元数据保护模型"></a>元数据保护模型</h4><p>本文采用了两种方法混淆元数据,一种是: <code>data anonymization</code> ,另一种是: <code>data randomization</code> .文章主要使用了==data anonymization==的方式进行对元数据的混淆和检测.</p>
+<h5 id="data-anonymization"><a href="#data-anonymization" class="headerlink" title="data anonymization"></a>data anonymization</h5><p>数据匿名化是由其中列的值被分为不同的类别的过程中，并且每个读取是通过其相应的类别的索引代替。</p>
+<h5 id="data-randomization"><a href="#data-randomization" class="headerlink" title="data randomization"></a>data randomization</h5><p>数据随机化是根据一些预定函数改变每列中的数据点的子集的值的技术。<br>简单的来讲,对于每一个账户,又会有一个用户创建时间(ACT),这个时间会的形式是 <strong>年:月:日:时:分:秒</strong>,例如:<strong>2001:3:20:12:21:30</strong>.通过数据匿名的方式,这个时间会变成:<strong>2001年三月份</strong></p>
+<h3 id="实验数据"><a href="#实验数据" class="headerlink" title="实验数据"></a>实验数据</h3><p>通过 <code>Twitter Streaming Public API (Twitter, Inc. 2018)</code> 随机的选取了 <code>151,215,987</code>条数据,涵盖了<code>11,668,319</code>个用户.但是最后的使用的用户集仅采用了发过的推文多于<code>200</code>的用户:<code>5,412,693</code>位用户.</p>
+<h3 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h3><h4 id="用户识别"><a href="#用户识别" class="headerlink" title="用户识别"></a>用户识别</h4><h5 id="特征选取"><a href="#特征选取" class="headerlink" title="特征选取"></a>特征选取</h5><p>对于一个账户而言,元数据的特征有很多.每一个账户的元数据包含了144个字段.这些字段提供的信息包括很多.所选择的特征是那些描述用户帐户并且不受用户直接控制的特征，但被排除的帐户ID除外，因为它被用作每个观察的基本事实(标签).<br>最后选择出的单个特征如下表.</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account creation</td>
+<td>账户创建时间</td>
+</tr>
+<tr>
+<td>Favourites count</td>
+<td>用户标记⭐的数量</td>
+</tr>
+<tr>
+<td>Follower count</td>
+<td>用户的关注的人数</td>
+</tr>
+<tr>
+<td>Friend count</td>
+<td>朋友数量</td>
+</tr>
+<tr>
+<td>Geo enabled</td>
+<td>(boolean)指示此帐户的推文是否已进行地理标记</td>
+</tr>
+<tr>
+<td>Listed count</td>
+<td>包含该帐户的公共列表的数量</td>
+</tr>
+<tr>
+<td>Post time stamp</td>
+<td>推文发送时间</td>
+</tr>
+<tr>
+<td>Statuses count</td>
+<td>账户发送的推文的数量</td>
+</tr>
+<tr>
+<td>Verified</td>
+<td>有没有被官方认证</td>
+</tr>
+</tbody>
+</table>
+<p>文章中选择的特征包括:单一特征和不同的特征组合.在这些特征中有<strong>静态特征</strong>和<strong>动态特征</strong></p>
+<h5 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h5><p>文章选择了三种机器学习算法:随机森林,K邻近,逻辑回归.<br>随机森林选择了信息熵作为节点分割标准,K邻近选择欧氏距离作为具体计算方式.逻辑回归选择了<code>limited-memory</code><br>每个分类器的内部参数的优化是作为现场最佳实践和实验结果的组合进行的<br>其中我们使用scikit-learn提供的交叉验证<br>通过将相同的特征或者特征组分别用这三种方法去训练,然后验证准确率.</p>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p>通过上一步证明,得到结论:<strong>元数据可以标识用户身份</strong>.并将扰乱元数据后,个人身份依然可以被识别出来.<br>下面是文章在实验过程中，对于不同推文的各种特征选择的算法结果。</p>
+<p><strong>single feature combination 随着增加的用户</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v54inw3j30cf0a9755.jpg" alt=""><br><strong>每个用户观察的推文数量</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v4syx4xj30ew0agt9s.jpg" alt="">  </p>
+<p><strong>单一属性的熵</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v36tcirj30b00b1wfn.jpg" alt="">  </p>
+<p><strong>动态属性</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v1qhp1ij30dp0caq68.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v229wvrj30e20bw77d.jpg" alt=""><br><strong>动静混合-特征</strong>   </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6uyts923j30eq0a3wgj.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6uzjwzwsj30ep09wmz6.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6v0gdtinj30em0aswgi.jpg" alt=""><br><strong>机器学习比较</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6uya2fkij30vk08btah.jpg" alt=""></p>
+<p><strong>多特征结果</strong>  </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6uxtg34ej30vv0blwfz.jpg" alt=""><br><strong>混淆后的检测</strong>    </p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1fv6ux640rhj30vq0cptc3.jpg" alt="">  </p>
+<h2 id="0x02-分析"><a href="#0x02-分析" class="headerlink" title="0x02 分析"></a>0x02 分析</h2><ul>
+<li><p>[x] 本文有一个大的前提背景，就是，这个模型应用在黑客攻击时使用。所以关于 twiter的用户数量以及推文数量和获取的元数据的类型都是有一定范围的。</p>
+</li>
+<li><p>[x] 本文提出的观点可以用于不同社交系统间的使用.</p>
+</li>
+<li><p>[ ] <strong>动态特征</strong>到底对用户识别的贡献有多大影响;或者说,<strong>动态特征</strong>例如:用户的粉丝,是否真的可以作为用于区分用户身份的特征;或者如何操作。几个数量之间的变换或者很短时间内（1，2天）可以继续识别，假如过了一个月或者更久。</p>
+</li>
+<li><p>[ ] data anonymization 方式的扰乱数据,会创造出新的元数据,索引表.</p>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://17307.github.io/2018/10/28/Metadata/" data-id="cjs40hspr00078kvluz2pjoi6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "o1hy"
+        },
+        "headline": "Identifying People by Metadata",
+        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg",
+        "keywords": "metadata",
+        "genre": "papers",
+        "datePublished": "2018-10-28",
+        "dateCreated": "2018-10-28",
+        "dateModified": "2019-02-04",
+        "url": "https://17307.github.io/2018/10/28/Metadata/",
+        "description": "Identifying People by Metadata"
+        "wordCount": 214
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/17307" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/11/12/infrastructures/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Graph-theoretic characterization of cyber-threat infrastructures
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/10/28/nginx-flask/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">nginx-flask</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/02/chrome-extension/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2019/02/02/chrome-extension/chrome.png)" alt="chrome-extension" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/others/chrome/">chrome</a></p>
+                            <p class="item-title"><a href="/2019/02/02/chrome-extension/" class="title">chrome-extension</a></p>
+                            <p class="item-date"><time datetime="2019-02-02T13:50:15.000Z" itemprop="datePublished">2019-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/12/infrastructures/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/FortRajgad_ZH-CN7621203821_400x240.jpg)" alt="Graph-theoretic characterization of cyber-threat infrastructures" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/11/12/infrastructures/" class="title">Graph-theoretic characterization of cyber-threat infrastructures</a></p>
+                            <p class="item-date"><time datetime="2018-11-12T08:30:45.000Z" itemprop="datePublished">2018-11-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/Metadata/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/ApfelTag_ZH-CN7906570680_400x240.jpg)" alt="Identifying People by Metadata" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/papers/">papers</a></p>
+                            <p class="item-title"><a href="/2018/10/28/Metadata/" class="title">Identifying People by Metadata</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:55:15.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/nginx-flask/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/MinnewankaBoathouse_ZH-CN0548323518_400x240.jpg)" alt="nginx-flask" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/nginx/">nginx</a></p>
+                            <p class="item-title"><a href="/2018/10/28/nginx-flask/" class="title">nginx-flask</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:48:58.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/28/docker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://h1.ioliu.cn/bing/HoaryMarmot_ZH-CN7175843832_400x240.jpg)" alt="docker" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/web/">web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/web/docker/">docker</a></p>
+                            <p class="item-title"><a href="/2018/10/28/docker/" class="title">docker</a></p>
+                            <p class="item-date"><time datetime="2018-10-28T02:46:48.000Z" itemprop="datePublished">2018-10-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ML-DL/">ML&DL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PT/">PT</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ctf/">ctf</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/">others</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/others/chrome/">chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/indego/">indego</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/others/linux/">linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/papers/">papers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/db/">db</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/docker/">docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/flask/">flask</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/nginx/">nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/php/">php</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">ctf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5碰撞/">md5碰撞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metadata/">metadata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php反序列化/">php反序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/">sqlmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件包含/">文件包含</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量包分析/">流量包分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://das.scusec.org/">DAS</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <a id="back-to-top" onclick="goTop()"><i class="icon fa fa-angle-up"></i></a>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 o1hy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = '17307';
+    
+    
+    var disqus_url = 'https://17307.github.io/2018/10/28/Metadata/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
+<script>
+    function goTop() {
+        $('body, html').animate({ scrollTop: 0 }, 600);
+    }
+</script>
