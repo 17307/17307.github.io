@@ -6,25 +6,25 @@
     
 
     
-    <title>ubuntu基础配置 | o1hy</title>
+    <title>HTTPS and Certificate Transparency | o1hy</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="">
     
-    <meta name="description" content="ubuntu的简单配置">
+    <meta name="description" content="HTTPS ， CA , CT的一些内容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu基础配置">
-<meta property="og:url" content="https://17307.github.io/2018/08/30/ubuntu基础配置/index.html">
+<meta property="og:title" content="HTTPS and Certificate Transparency">
+<meta property="og:url" content="https://17307.github.io/2019/02/20/Transparency/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="ubuntu的简单配置">
+<meta property="og:description" content="HTTPS ， CA , CT的一些内容">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://h1.ioliu.cn/bing/ParkCity_ZH-CN7858135089_400x240.jpg">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0061DZOIgy1g0cy0ahb9oj30k80badg0.jpg">
+<meta property="og:updated_time" content="2019-02-20T07:58:44.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu基础配置">
-<meta name="twitter:description" content="ubuntu的简单配置">
-<meta name="twitter:image" content="http://h1.ioliu.cn/bing/ParkCity_ZH-CN7858135089_400x240.jpg">
+<meta name="twitter:title" content="HTTPS and Certificate Transparency">
+<meta name="twitter:description" content="HTTPS ， CA , CT的一些内容">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0061DZOIgy1g0cy0ahb9oj30k80badg0.jpg">
     
 
     
@@ -133,15 +133,15 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/others/linux/">linux</a>
+    <a class="page-title-link" href="/categories/PT/">PT</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-ubuntu基础配置" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+                            <article id="post-Transparency" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
     <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">TOC</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IP配置"><span class="toc-text">IP配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态IP"><span class="toc-text">静态IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置动态IP"><span class="toc-text">设置动态IP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#密码问题"><span class="toc-text">密码问题</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#证书的作用"><span class="toc-text">证书的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#证书验证机制"><span class="toc-text">证书验证机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端是是如何验证某个证书的有效性"><span class="toc-text">客户端是是如何验证某个证书的有效性</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#Certificate-Transparency-—-The-bright-side-and-The-dark-side"><span class="toc-text">Certificate Transparency — The bright side and The dark side</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#part-1"><span class="toc-text">part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Certificate-Transparency"><span class="toc-text">什么是Certificate Transparency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-did-Google-come-up-with-Certificate-Transparency"><span class="toc-text">Why did Google come up with Certificate Transparency?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Certificate-Transparency-—-Where-is-it-now"><span class="toc-text">Certificate Transparency — Where is it now?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-2"><span class="toc-text">part 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-problem-Certificate-Transparency-is-trying-to-solve"><span class="toc-text">The problem Certificate Transparency is trying to solve</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Can-Certificate-Transparency-deal-with-the-rogue-certificates"><span class="toc-text">Can Certificate Transparency deal with the rogue certificates?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-do-I-lookup-certificates-issued-for-my-domain"><span class="toc-text">How do I lookup certificates issued for my domain?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-state-of-Certificate-Transparency-adoption"><span class="toc-text">The state of Certificate Transparency adoption</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-text">Conclusion</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-3"><span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-side-effect-of-Certificate-Transparency"><span class="toc-text">The side effect of Certificate Transparency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Let’s-look-at-how-attackers-look-through-Certificate-Transparency-logs"><span class="toc-text">Let’s look at how attackers look through Certificate Transparency logs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attacking-Content-Management-Systems-using-Certificate-Transparency"><span class="toc-text">Attacking Content Management Systems using Certificate Transparency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-can-you-secure-your-domains-now"><span class="toc-text">How can you secure your domains now?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结语"><span class="toc-text">结语</span></a></li>
 </div>
 
     <div class="article-inner">
@@ -150,7 +150,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-        ubuntu基础配置
+        HTTPS and Certificate Transparency
         </h1>
     
 
@@ -160,8 +160,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/08/30/ubuntu基础配置/" class="article-date">
-            <time datetime="2018-08-30T11:52:36.000Z" itemprop="datePublished">2018-08-30</time>
+        <a href="/2019/02/20/Transparency/" class="article-date">
+            <time datetime="2019-02-20T07:53:02.000Z" itemprop="datePublished">2019-02-20</time>
         </a>
     </div>
 
@@ -178,17 +178,91 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>ubuntu的简单配置</p>
+            <p>HTTPS ， CA , CT的一些内容</p>
 <a id="more"></a>
-<h1 id="IP配置"><a href="#IP配置" class="headerlink" title="IP配置"></a><center>IP配置</center></h1><h2 id="静态IP"><a href="#静态IP" class="headerlink" title="静态IP"></a>静态IP</h2><p><code>sudo gedit /etc/network/interfaces</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">auto [自己网卡]</span><br><span class="line">iface [自己网卡] inet static</span><br><span class="line">address 192.168.8.100    //ip</span><br><span class="line">netmask 255.255.255.0   //子网掩码</span><br><span class="line">gateway 192.168.8.2 //网关</span><br><span class="line">dns-nameserver 8.8.8.8 //dns 实测 8.8.8.8</span><br></pre></td></tr></table></figure>
-<p><code>sudo /etc/init.d/networking restart</code></p>
-<p><code>reboot</code></p>
-<h2 id="设置动态IP"><a href="#设置动态IP" class="headerlink" title="设置动态IP"></a>设置动态IP</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto eth0</span><br><span class="line">#iface eth0 inet static</span><br><span class="line">iface eth0 inet dhcp</span><br></pre></td></tr></table></figure>
-<h1 id="密码问题"><a href="#密码问题" class="headerlink" title="密码问题"></a><center>密码问题</center></h1><ul>
-<li>ubuntu修改root密码，$ sudo passwd root</li>
-<li>su root<br>Password:   </li>
+<h1 id="证书的作用"><a href="#证书的作用" class="headerlink" title="证书的作用"></a>证书的作用</h1><h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>描述下HTTPS的过程</p>
+<p>下图描述了HTTPS的简化的流程，具体每一步的传输的内容：<a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html</a></p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0cxfdqfjwj30kv0k1jtd.jpg" alt=""></p>
+<h3 id="证书验证机制"><a href="#证书验证机制" class="headerlink" title="证书验证机制"></a>证书验证机制</h3><ol>
+<li><p>当用户拿到了站点的证书后，要去验证这个证书的有效性。所以要去验证该证书的颁发者。</p>
+</li>
+<li><p>找到证书颁发者后（中间CA），要去验证这个颁发者的有效性。</p>
+</li>
+<li><p>找到中间CA的 <strong><em>根证书</em></strong>  颁发机构证书。</p>
+</li>
+<li><p>最终确定证书可用性，继续通信</p>
+</li>
+</ol>
+<h3 id="客户端是是如何验证某个证书的有效性"><a href="#客户端是是如何验证某个证书的有效性" class="headerlink" title="客户端是是如何验证某个证书的有效性"></a>客户端是是如何验证某个证书的有效性</h3><p>证书颁发者一般提供两种方式来验证证书的有效性： <strong><em>CRL</em></strong> 和 <strong><em>OCSP</em></strong>。</p>
+<p>CRL（Certificate Revocation List）即 <strong>证书撤销名单</strong>。证书颁发者会提供一份已经失效证书的名单，供浏览器验证证书使用。浏览器会缓存 <strong><em>CRL</em></strong> 。一段时间更新一次。</p>
+<p>OCSP(Online Certificate StatusProtocol) 即 <strong>在线证书状态协议</strong>。</p>
+<blockquote>
+<p>除了 CRL，证书颁发者也会提供实时的查询接口，查询某个特定证书目前是否有效。实时查询的问题在于浏览器需要等待这个查询结束才能继续TLS握手，延迟会更大。</p>
+</blockquote>
+<p>下面的内容，是对某blog的文章翻译和自己的理解，讲了CT，以及CT该如何用。文章分为3部分，每部分的原文链接已给出。</p>
+<h1 id="Certificate-Transparency-—-The-bright-side-and-The-dark-side"><a href="#Certificate-Transparency-—-The-bright-side-and-The-dark-side" class="headerlink" title="Certificate Transparency — The bright side and The dark side"></a>Certificate Transparency — The bright side and The dark side</h1><p>原文连接：<a href="https://blog.appsecco.com/certificate-transparency-the-bright-side-and-the-dark-side-8aa47d9a6616" target="_blank" rel="noopener">https://blog.appsecco.com/certificate-transparency-the-bright-side-and-the-dark-side-8aa47d9a6616</a></p>
+<h2 id="part-1"><a href="#part-1" class="headerlink" title="part 1"></a>part 1</h2><h3 id="什么是Certificate-Transparency"><a href="#什么是Certificate-Transparency" class="headerlink" title="什么是Certificate Transparency"></a>什么是Certificate Transparency</h3><p>证书透明项目(Certificate Transparency project，简称CT)旨在记录、审计和监视证书颁发机构(CA)颁发的证书。这个项目的主要目的是防止ca在域所有者不知情的情况下为域颁发公钥证书。</p>
+<p>下面是一些术语</p>
+<p><strong>Certificate Authority</strong></p>
+<p>证书颁发机构(CA)是颁发数字证书的实体。CA是<strong>受信任的第三方</strong>，由数字证书的所有者和依赖证书的一方信任。因此，CAs在Internet如何运行以及如何透明、可信地进行事务方面发挥着关键作用。</p>
+<p><strong>Digital Certificates</strong></p>
+<p>数字证书是可验证的小型数据文件，其中包含身份凭证，以帮助网站、个人和设备代表其真实的在线身份。在本文的上下文中，我们关心SSL/TLS证书，这是一种将web服务器的所有权细节绑定到加密密钥的数字证书。</p>
+<h3 id="Why-did-Google-come-up-with-Certificate-Transparency"><a href="#Why-did-Google-come-up-with-Certificate-Transparency" class="headerlink" title="Why did Google come up with Certificate Transparency?"></a>Why did Google come up with Certificate Transparency?</h3><p>起因：google发现了自己家的域名被CA私自颁发了证书</p>
+<h3 id="Certificate-Transparency-—-Where-is-it-now"><a href="#Certificate-Transparency-—-Where-is-it-now" class="headerlink" title="Certificate Transparency — Where is it now?"></a>Certificate Transparency — Where is it now?</h3><p>CT现在是一个互联网工程工作组(IETF)的开放标准，用于监控和审计此类数字证书。CT通过一个认证日志、监控和审计系统，允许网站用户和域名所有者识别错误或恶意颁发的证书。这有助识别未经授权的核证机关。</p>
+<h2 id="part-2"><a href="#part-2" class="headerlink" title="part 2"></a>part 2</h2><p>原文连接：<a href="https://blog.appsecco.com/certificate-transparency-part-2-the-bright-side-c0b99ebf31a8" target="_blank" rel="noopener">https://blog.appsecco.com/certificate-transparency-part-2-the-bright-side-c0b99ebf31a8</a></p>
+<h3 id="The-problem-Certificate-Transparency-is-trying-to-solve"><a href="#The-problem-Certificate-Transparency-is-trying-to-solve" class="headerlink" title="The problem Certificate Transparency is trying to solve"></a>The problem Certificate Transparency is trying to solve</h3><p>公钥基础设施(Public Key Infrastructure, PKI)是一个框架，用于在可能从未谋面的各方之间实现安全通信。PKI模式依赖于：信任证书颁发机构(CAs)的第三方。CAs负责签发数码证书。SSL/TLS PKI依赖于：分层CA信任模型，叫做：<em>certification hierarchy</em></p>
+<p><strong>CA颁发证书模型</strong></p>
+<p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/ct-1.png" alt=""></p>
+<ul>
+<li>根CA位于证书层次结构的顶部，根CA是“自签名的”。大多数应用程序/设备都带有一组预先加载到其根存储中的根证书，根存储实际上是已批准的ca的数据库</li>
+<li>中间CA是信任链中的第一个环节。中间证书通常由根证书签名。如果中间CA受到攻击，来自其他中间CA的证书仍然有效</li>
+<li>用户是希望通过internet安全提供服务并需要SSL/TLS证书的任何人</li>
 </ul>
+<p>CT要做的就是防止流氓证书</p>
+<h4 id="Can-Certificate-Transparency-deal-with-the-rogue-certificates"><a href="#Can-Certificate-Transparency-deal-with-the-rogue-certificates" class="headerlink" title="Can Certificate Transparency deal with the rogue certificates?"></a>Can Certificate Transparency deal with the rogue certificates?</h4><p>在CT下，CA必须将其发出的每个SSL/TLS证书发布到公共日志中。目前已知的CT日志的详细信息可以在CT project页面上找到。任何人都可以通过这些日志查找为任何给定域颁发的SSL/TLS证书。</p>
+<p>域所有者可以简单地监视针对其管理的域颁发的证书的公共CT日志，并识别流氓证书。</p>
+<p>通过提供一种查找所有SSL/TLS证书的方法，CT帮助我们在野外识别流氓证书，并找出哪个CA颁发了流氓证书。这使得诸如谷歌、Mozilla等浏览器制造商能够对ca错误采取行动。</p>
+<h4 id="How-do-I-lookup-certificates-issued-for-my-domain"><a href="#How-do-I-lookup-certificates-issued-for-my-domain" class="headerlink" title="How do I lookup certificates issued for my domain?"></a>How do I lookup certificates issued for my domain?</h4><p>查找为您的域颁发的证书的最简单方法是使用收集CT日志的搜索引擎，并让任何人搜索它们。下面列出了一些流行的方法</p>
+<ol>
+<li><a href="https://crt.sh/" target="_blank" rel="noopener">https://crt.sh/</a></li>
+<li><a href="https://censys.io/" target="_blank" rel="noopener">https://censys.io/</a></li>
+<li><a href="https://developers.facebook.com/tools/ct/" target="_blank" rel="noopener">https://developers.facebook.com/tools/ct/</a></li>
+<li><a href="https://www.google.com/transparencyreport/https/ct/" target="_blank" rel="noopener">https://google.com/transparencyreport/https/ct/</a></li>
+</ol>
+<h4 id="The-state-of-Certificate-Transparency-adoption"><a href="#The-state-of-Certificate-Transparency-adoption" class="headerlink" title="The state of Certificate Transparency adoption"></a>The state of Certificate Transparency adoption</h4><p>到目前为止，CT受到了积极的欢迎，其使用率正在上升。</p>
+<ul>
+<li>这些 <a href="https://letsencrypt.org/certificates/" target="_blank" rel="noopener">Let’s encrypt</a>, <a href="https://www.digicert.com/blog/certificate-transparency-faqs/" target="_blank" rel="noopener">Digicert</a>, <a href="https://www.symantec.com/page.jsp%3Fid=certificate-transparency" target="_blank" rel="noopener">Symantec</a>, <a href="http://searchsecurity.techtarget.com/news/450415534/Comodo-to-open-its-Certificate-Transparency-logs-to-all-CAs" target="_blank" rel="noopener">Comodo</a> CA都在积极的这么做</li>
+<li>像Mozilla Firefox和谷歌Chrome这样的主流浏览器都实现了CT</li>
+<li>Facebook不仅倡导CT，还发布了一个证书透明监控工具。使用此工具，您可以搜索为域颁发的证书，并在为域颁发新证书时通过电子邮件得到通知。</li>
+</ul>
+<blockquote>
+<p>从2018年4月起，Chrome将强制所有新证书使用CT。Chrome对CT的支持要求CAs记录Chrome中出现的绿色地址栏的所有扩展验证(EV) SSL证书。</p>
+</blockquote>
+<p>Chrome还致力于实现一个新的HTTP头，expect-ct，它将允许服务器操作人员在CT被授权之前测试他们的配置和证书。</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>CT是提高SSL / TLS PKI生态系统安全性的重要一步。 CT正在整个行业中得到采用和实施，这是一个积极的信号。 如果越来越多的CA落后于CT，整个SSL / TLS生态系统就变得越透明和安全。</p>
+<h1 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h1><p>原文连接：<a href="https://blog.appsecco.com/certificate-transparency-part-3-the-dark-side-9d401809b025" target="_blank" rel="noopener">https://blog.appsecco.com/certificate-transparency-part-3-the-dark-side-9d401809b025</a></p>
+<h3 id="The-side-effect-of-Certificate-Transparency"><a href="#The-side-effect-of-Certificate-Transparency" class="headerlink" title="The side effect of Certificate Transparency"></a>The side effect of Certificate Transparency</h3><p>CT日志按设计包含由参与CA为任何给定域颁发的所有证书。这些日志是公开的，任何人都可以查看这些日志。</p>
+<p>SSL/TLS证书通常包含域名、子域名和电子邮件地址。这使得它们成为攻击者的信息宝库。</p>
+<p>通过查看CT日志，攻击者可以收集关于组织基础设施的大量信息，如内部域、电子邮件地址。</p>
+<h3 id="Let’s-look-at-how-attackers-look-through-Certificate-Transparency-logs"><a href="#Let’s-look-at-how-attackers-look-through-Certificate-Transparency-logs" class="headerlink" title="Let’s look at how attackers look through Certificate Transparency logs"></a>Let’s look at how attackers look through Certificate Transparency logs</h3><p>下面是一些搜索引擎，可以用来搜索CT日志</p>
+<ol>
+<li><a href="https://crt.sh/" target="_blank" rel="noopener">https://crt.sh/</a></li>
+<li><a href="https://censys.io/" target="_blank" rel="noopener">https://censys.io/</a></li>
+<li><a href="https://developers.facebook.com/tools/ct/" target="_blank" rel="noopener">https://developers.facebook.com/tools/ct/</a></li>
+<li><a href="https://www.google.com/transparencyreport/https/ct/" target="_blank" rel="noopener">https://www.google.com/transparencyreport/https/ct/</a></li>
+</ol>
+<h3 id="Attacking-Content-Management-Systems-using-Certificate-Transparency"><a href="#Attacking-Content-Management-Systems-using-Certificate-Transparency" class="headerlink" title="Attacking Content Management Systems using Certificate Transparency"></a><strong>Attacking Content Management Systems using Certificate Transparency</strong></h3><p>在设置Wordpress、Joomla等流行的内容管理系统(CMSs)时，有一个时间窗口，安装程序没有任何形式的身份验证。现在，许多web托管提供商默认支持HTTPS，因此域名最终将出现在CT日志中，这取决于CA，这可能发生在接近实时的情况下，或者有几个小时的延迟。如果攻击者可以通过CT日志搜索并在没有身份验证的情况下找到这样的web应用程序，那么他/她就可以接管服务器。</p>
+<p>对上面这段话进行下解释：在安装CMS时候，如果在安装过程中被攻击者发现域名，那么攻击者可以接手这个安装进程，好像如此。</p>
+<h3 id="How-can-you-secure-your-domains-now"><a href="#How-can-you-secure-your-domains-now" class="headerlink" title="How can you secure your domains now?"></a>How can you secure your domains now?</h3><ul>
+<li>您可以避免使用SSL/TLS支持，这样您的内部主机就不会出现在CT日志中。这种方法绝对不推荐。如果您正在处理敏感信息，那么不使用SSL/TLS不是一个好主意</li>
+<li>通过使用通配符证书，您可以拥有对所有子域有效的单个证书，从而不会在CT日志中显示子域名。使用一个通配符证书来保护多个域可能被证明是单点故障，因此不建议使用。</li>
+<li>接受这样一个事实:所有SSL/TLS受保护的域/子域将在公共CT日志文件中列出。更好地保护服务器和应用程序端点。<strong>任何不打算公开的内容都必须在身份验证之后。</strong></li>
+<li>您可以在组织中部署自己的公钥基础设施(PKI)。这将避免您的内部主机出现在由公共CA维护的CT日志中</li>
+<li>CloudFlare有一个有趣的项目CFSSL，用于构建内部CA基础设施。他们还有一个项目certmgr，可以使用CFSSL自动化证书管理</li>
+<li>一些ca为客户提供了一个选择，让他们选择不使用CT日志。选择退出CT日志可能听起来是一个安全的主意，但是您将错过CT提供的所有安全好处</li>
+<li>考虑从CT日志中编辑子域信息。如果您的CA支持名称编校，那么您可以选择将子域信息隐藏在CT日志中。尽管名字修订比退出CT要好，但它仍然会使您难以跟踪伪造的证书。修改后的域名将不会被Chrome识别为符合CT政策</li>
+</ul>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>虽然CT是一个非常棒的想法，但它也存在一些重大的隐私和安全风险，但是考虑到CT在解决恶意证书这一由来已久的问题方面所提供的优势，我们认为采用CT作为安全机制是一种公平的权衡。</p>
 
         </div>
         <footer class="article-footer">
@@ -196,7 +270,7 @@
 
 
 
-    <a data-url="https://17307.github.io/2018/08/30/ubuntu基础配置/" data-id="cjscwp2jr0024a4vlycnx8txw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://17307.github.io/2019/02/20/Transparency/" data-id="cjscwp2iv000da4vlu31mkwiq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -266,16 +340,16 @@
             "@type": "Person",
             "name": "o1hy"
         },
-        "headline": "ubuntu基础配置",
-        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/ParkCity_ZH-CN7858135089_400x240.jpg",
+        "headline": "HTTPS and Certificate Transparency",
+        "image": "https://17307.github.iohttp://ww1.sinaimg.cn/large/0061DZOIgy1g0cy0ahb9oj30k80badg0.jpg",
         "keywords": "",
-        "genre": "others linux",
-        "datePublished": "2018-08-30",
-        "dateCreated": "2018-08-30",
-        "dateModified": "2019-02-02",
-        "url": "https://17307.github.io/2018/08/30/ubuntu基础配置/",
-        "description": "ubuntu的简单配置"
-        "wordCount": 81
+        "genre": "PT",
+        "datePublished": "2019-02-20",
+        "dateCreated": "2019-02-20",
+        "dateModified": "2019-02-20",
+        "url": "https://17307.github.io/2019/02/20/Transparency/",
+        "description": "HTTPS ， CA , CT的一些内容"
+        "wordCount": 333
     }
 </script>
 
@@ -315,20 +389,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/08/30/服务器安装/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            服务器安装
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2018/08/30/ML基础/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/02/02/chrome-extension/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">ML基础</p>
+        <p class="article-nav-title">chrome-extension</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -533,7 +597,7 @@
     var disqus_shortname = '17307';
     
     
-    var disqus_url = 'https://17307.github.io/2018/08/30/ubuntu基础配置/';
+    var disqus_url = 'https://17307.github.io/2019/02/20/Transparency/';
     
     (function() {
     var dsq = document.createElement('script');
