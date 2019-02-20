@@ -149,17 +149,17 @@
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2018/09/08/sprintf格式输出逃逸/" class="thumbnail">
+        <a href="/2018/09/08/INSERT INTO 注入/" class="thumbnail">
     
     
-        <span style="background-image:url(http://h1.ioliu.cn/bing/HolocaustMemorial_ZH-CN7460471446_400x240.jpg)" alt="sprintf格式逃逸注入" class="thumbnail-image"></span>
+        <span style="background-image:url(http://h1.ioliu.cn/bing/KukeriCostume_ZH-CN7695643694_400x240.jpg)" alt="INSERT INTO注入" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="https://17307.github.io/2018/09/08/INSERT INTO 注入/">0</span>
     
 </span>
 
@@ -177,14 +177,15 @@
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/09/08/sprintf格式输出逃逸/">sprintf格式逃逸注入</a>
+        <a href="/2018/09/08/INSERT INTO 注入/">INSERT INTO注入</a>
         </h1>
     
 
         <p class="article-excerpt">
-            格式化漏洞题目描述sql注入 + % 报错
-题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错.
-123456789$sql = "select * from user where username = '%\' and 1=1#' and password='%s';";$args = "admin";echo sprintf( "select * fr
+            题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含
+题目分析在文章post处,存在insert into的注入
+解决INSERT TO 语句INSERT INTO 表名称 VALUES (值1, 值2,....)
+payload构造在本题中,发现无法闭合&#39;.同时由于插入的content部分为&lt;textarea&gt;,所以需要将payload插入到标题.但
         </p>
     </div>
 </article>
