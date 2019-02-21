@@ -6,26 +6,26 @@
     
 
     
-    <title>sprintf格式逃逸注入 | o1hy</title>
+    <title>tencent-cos-extension | o1hy</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="sql注入">
+        <meta name="keywords" content="chrome">
     
-    <meta name="description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
-<meta name="keywords" content="sql注入">
+    <meta name="description" content="Tencent COS想实现一款插件，对接腾讯图床。 遇到的问题：如果把网页上的图片直接传到图床中，这里给出思路，通过图片 url 将图片 变为 base64 的格式，然后将 base64 各式变为 blob 格式。（为啥不直接把图片变为 blob ？，因为我只是个业余javascript选手） 然后在上传图片的过程中，指定 ContentType 为图片类型（官方文档没有这个属性呀。没有？他们忘">
+<meta name="keywords" content="chrome">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sprintf格式逃逸注入">
-<meta property="og:url" content="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/index.html">
+<meta property="og:title" content="tencent-cos-extension">
+<meta property="og:url" content="https://17307.github.io/2019/02/21/tencent-cos-extension/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
+<meta property="og:description" content="Tencent COS想实现一款插件，对接腾讯图床。 遇到的问题：如果把网页上的图片直接传到图床中，这里给出思路，通过图片 url 将图片 变为 base64 的格式，然后将 base64 各式变为 blob 格式。（为啥不直接把图片变为 blob ？，因为我只是个业余javascript选手） 然后在上传图片的过程中，指定 ContentType 为图片类型（官方文档没有这个属性呀。没有？他们忘">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://h1.ioliu.cn/bing/HolocaustMemorial_ZH-CN7460471446_400x240.jpg">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/2255f742364d1-Snipaste_2019-02-21_14-28-22.png">
+<meta property="og:updated_time" content="2019-02-21T06:32:32.951Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sprintf格式逃逸注入">
-<meta name="twitter:description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
-<meta name="twitter:image" content="http://h1.ioliu.cn/bing/HolocaustMemorial_ZH-CN7460471446_400x240.jpg">
+<meta name="twitter:title" content="tencent-cos-extension">
+<meta name="twitter:description" content="Tencent COS想实现一款插件，对接腾讯图床。 遇到的问题：如果把网页上的图片直接传到图床中，这里给出思路，通过图片 url 将图片 变为 base64 的格式，然后将 base64 各式变为 blob 格式。（为啥不直接把图片变为 blob ？，因为我只是个业余javascript选手） 然后在上传图片的过程中，指定 ContentType 为图片类型（官方文档没有这个属性呀。没有？他们忘">
+<meta name="twitter:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/2255f742364d1-Snipaste_2019-02-21_14-28-22.png">
     
 
     
@@ -134,15 +134,15 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/ctf/">ctf</a>
+    <a class="page-title-link" href="/categories/others/">others</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/others/chrome/">chrome</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-sprintf格式输出逃逸" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+                            <article id="post-tencent-cos-extension" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
     <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">TOC</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#格式化漏洞"><span class="toc-text">格式化漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目描述"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-text">题目分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式化注入漏洞"><span class="toc-text">格式化注入漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-text">解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编写tamper"><span class="toc-text">编写tamper</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tencent-COS"><span class="toc-text">Tencent COS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于popup"><span class="toc-text">关于popup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-text">Question 1</span></a></li></ol></li></ol>
 </div>
 
     <div class="article-inner">
@@ -151,7 +151,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-        sprintf格式逃逸注入
+        tencent-cos-extension
         </h1>
     
 
@@ -161,8 +161,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/09/08/sprintf格式输出逃逸/" class="article-date">
-            <time datetime="2018-09-08T10:27:35.000Z" itemprop="datePublished">2018-09-08</time>
+        <a href="/2019/02/21/tencent-cos-extension/" class="article-date">
+            <time datetime="2019-02-21T04:00:04.000Z" itemprop="datePublished">2019-02-21</time>
         </a>
     </div>
 
@@ -171,7 +171,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/sql注入/">sql注入</a>
+        <a class="tag-link" href="/tags/chrome/">chrome</a>
     </div>
 
                 <span id="busuanzi_container_site_pv">
@@ -184,15 +184,31 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h1 id="格式化漏洞"><a href="#格式化漏洞" class="headerlink" title="格式化漏洞"></a>格式化漏洞</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>sql注入 + % 报错<br><img src="1.png" alt="1536150551652"></p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h3 id="格式化注入漏洞"><a href="#格式化注入漏洞" class="headerlink" title="格式化注入漏洞"></a>格式化注入漏洞</h3><p>在php调用<code>sprintf</code>函数时,如果 参数的数量少于 <code>%</code>数量,会报错.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">$sql = <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">//select * from user where username = '' and 1=1#' and password='admin';</span></span><br></pre></td></tr></table></figure>
-<p>其中通过<code>%&#39;</code>会先被waf过滤为<code>%\&#39;</code>然后,<code>sprintf</code>会把<code>%\</code>吞掉.其中<code>%1$&#39;</code>原理一样.</p>
-<p>但是不知道为什么,<font color="red"><code>%&#39;</code>会报错. </font>而<code>%1$&#39;</code><font color="red">不会报错 </font>.</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>构造参数 <code>admin%1$&#39; or 1=1</code> 与 <code>admin$1&#39; or 1=2</code>存在报错注入.可以通过sqlmap编写 tamper 去跑.</p>
-<h3 id="编写tamper"><a href="#编写tamper" class="headerlink" title="编写tamper"></a>编写tamper</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">v0.0.1</span></span><br><span class="line"><span class="string">2018.3.30</span></span><br><span class="line"><span class="string">filename: sprintf.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.LOW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span><span class="params">(payload, **kwargs)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    通过格式化字符串漏洞来完成对单引号的闭合</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> payload.replace(<span class="string">"'"</span>, <span class="string">"%1$'"</span>)</span><br></pre></td></tr></table></figure>
-<p>然后执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r “request.txt” -p username –level 3 –dbms mysql –tamper sprintf.py</span><br></pre></td></tr></table></figure>
+            <h2 id="Tencent-COS"><a href="#Tencent-COS" class="headerlink" title="Tencent COS"></a>Tencent COS</h2><p>想实现一款插件，对接腾讯图床。</p>
+<p>遇到的问题：如果把网页上的图片直接传到图床中，这里给出思路，通过图片 <em>url</em> 将图片 变为 <em>base64</em> 的格式，然后将 <em>base64</em> 各式变为 <em>blob</em> 格式。（为啥不直接把图片变为 <em>blob</em> ？，因为我只是个业余javascript选手）</p>
+<p>然后在上传图片的过程中，指定 <em>ContentType</em> 为图片类型（官方文档没有这个属性呀。没有？他们忘写了。）</p>
+<p>下面是些插件遇到的问题（没错，我还是个业余的chrome-extension选手）</p>
+<h2 id="关于popup"><a href="#关于popup" class="headerlink" title="关于popup"></a>关于popup</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question 1"></a>Question 1</h3><p><strong>如何让 <em>popup.html</em> 以弹出的方式进行工作？</strong><br>上面的问题分为2种情况</p>
+<ul>
+<li><p>第一种是 <em>background.js</em> 监听 <em>browserAction</em> 的情况下，只要 <em>browserAction</em> 被点击了，就将 <em>popup</em> 以弹出的方式工作。</p>
+</li>
+<li><p>第二种是 <em>browserAction</em> 已默认的方式使用，而达到某个出发条件后，将 <em>popup</em> 以弹出的方式工作。</p>
+</li>
+</ul>
+<p><strong>情况二</strong></p>
+<p>情况二的问题更少些，放在前面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在某个事件被触发时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initPopupPage</span>(<span class="params">url = <span class="string">'popup.html'</span>, callback</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> w = <span class="number">800</span>;</span><br><span class="line">      <span class="keyword">var</span> h = <span class="number">550</span>;</span><br><span class="line">      <span class="keyword">var</span> left = <span class="built_in">Math</span>.round((screen.width / <span class="number">2</span>) - (w / <span class="number">2</span>));</span><br><span class="line">      <span class="keyword">var</span> top = <span class="built_in">Math</span>.round((screen.height / <span class="number">2</span>) - (h / <span class="number">2</span>));</span><br><span class="line">      chrome.windows.create(&#123;</span><br><span class="line">          url : url,</span><br><span class="line">          width : w,</span><br><span class="line">          height : h,</span><br><span class="line">          focused : <span class="literal">true</span>,</span><br><span class="line">          <span class="string">'left'</span> : left,</span><br><span class="line">          <span class="string">'top'</span> : top,</span><br><span class="line">          type : <span class="string">'popup'</span></span><br><span class="line">      &#125;, callback);</span><br><span class="line">  &#125;</span><br><span class="line">initPopupPage(<span class="literal">undefined</span>,(win)=&gt;&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听页面是否加载完</span></span><br><span class="line">    chrome.tabs.onUpdated.addListener(<span class="function"><span class="keyword">function</span> (<span class="params">id , info</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (info.status === <span class="string">'complete'</span> &amp;&amp; id === tabId) &#123;</span><br><span class="line">         	<span class="comment">// background 与 弹出的 popup 通信</span></span><br><span class="line">            chrome.tabs.sendMessage(tabId,&#123;<span class="string">'url'</span>:data.Location&#125;,(data)=&gt;&#123;</span><br><span class="line">                <span class="comment">//console.log(data);</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>情况一</strong></p>
+<p>情况一以经表明，要监听 <em>browserAction</em> 。如果要通过这种情况，可以在 <em>background.js</em> 中注册监听函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js</span></span><br><span class="line"><span class="comment">//具体的函数细节可以查阅官方文档。</span></span><br><span class="line">chrome.browserAction.onClicked.addListener(<span class="function"><span class="keyword">function</span> (<span class="params">tab</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> w = <span class="number">800</span>; <span class="comment">//长</span></span><br><span class="line">	<span class="keyword">var</span> h = <span class="number">550</span>; <span class="comment">//宽</span></span><br><span class="line">	<span class="keyword">var</span> left = <span class="built_in">Math</span>.round((screen.width / <span class="number">2</span>) - (w / <span class="number">2</span>)); <span class="comment">//屏幕坐标</span></span><br><span class="line">	<span class="keyword">var</span> top = <span class="built_in">Math</span>.round((screen.height / <span class="number">2</span>) - (h / <span class="number">2</span>)); <span class="comment">//屏幕坐标</span></span><br><span class="line">	chrome.windows.create(&#123;</span><br><span class="line">		url : <span class="string">'popup.html'</span>,</span><br><span class="line">		width : w,</span><br><span class="line">		height : h,</span><br><span class="line">		focused : <span class="literal">true</span>,</span><br><span class="line">		<span class="string">'left'</span> : left,</span><br><span class="line">		<span class="string">'top'</span> : top,</span><br><span class="line">		type : <span class="string">'popup'</span> <span class="comment">//类型（有坑）</span></span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意，这种情况下，存在一个问题，如果要通过监听的方式打开 <em>popup.html</em> 那么在  <em>manifest.json</em> 中不能注册 <code>&quot;default_popup&quot;: &quot;popup.html&quot;</code>这条信息，否则监听无效。</p>
+<p><strong>坑</strong></p>
+<p>下面说一下，在做这2个东西时候遇到的坑。</p>
+<p>如上面代码所示，在<code>chrome.windows.create</code>中，明明有指定<code>type</code>的类型为 <em>popup</em>，但是如果通过下面的代码获取 <em>popup</em> 是无法获取到的。但是下面的代码可以获取 <code>&quot;default_popup&quot;: &quot;popup.html&quot;</code>情况下的 <em>popup</em>页面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> views = chrome.extension.getViews(&#123;<span class="attr">type</span>:<span class="string">'popup'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>但通过测试发现，要用下面的方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> views = chrome.extension.getViews(&#123;<span class="attr">type</span>:<span class="string">'tab'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>也就是说，创建出的页面仍然是 <code>tab</code>的类型。</p>
 
         </div>
         <footer class="article-footer">
@@ -200,7 +216,7 @@
 
 
 
-    <a data-url="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/" data-id="cjse950ol001ntwvldzi0r8ad" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://17307.github.io/2019/02/21/tencent-cos-extension/" data-id="cjse950ol001ptwvl1kzux04j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -270,18 +286,18 @@
             "@type": "Person",
             "name": "o1hy"
         },
-        "headline": "sprintf格式逃逸注入",
-        "image": "https://17307.github.iohttp://h1.ioliu.cn/bing/HolocaustMemorial_ZH-CN7460471446_400x240.jpg",
-        "keywords": "sql注入",
-        "genre": "ctf",
-        "datePublished": "2018-09-08",
-        "dateCreated": "2018-09-08",
-        "dateModified": "2019-02-02",
-        "url": "https://17307.github.io/2018/09/08/sprintf格式输出逃逸/",
-        "description": "格式化漏洞题目描述sql注入 + % 报错
-题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错.
-123456789$sql = "select * from user where username = '%\' and 1=1#' and password='%s';";$args = "admin";echo sprintf( "select * fr"
-        "wordCount": 277
+        "headline": "tencent-cos-extension",
+        "image": "https://17307.github.iohttps://o1hy-1253938230.cos.ap-beijing.myqcloud.com/2255f742364d1-Snipaste_2019-02-21_14-28-22.png",
+        "keywords": "chrome",
+        "genre": "others chrome",
+        "datePublished": "2019-02-21",
+        "dateCreated": "2019-02-21",
+        "dateModified": "2019-02-21",
+        "url": "https://17307.github.io/2019/02/21/tencent-cos-extension/",
+        "description": "Tencent COS想实现一款插件，对接腾讯图床。
+遇到的问题：如果把网页上的图片直接传到图床中，这里给出思路，通过图片 url 将图片 变为 base64 的格式，然后将 base64 各式变为 blob 格式。（为啥不直接把图片变为 blob ？，因为我只是个业余javascript选手）
+然后在上传图片的过程中，指定 ContentType 为图片类型（官方文档没有这个属性呀。没有？他们忘"
+        "wordCount": 541
     }
 </script>
 
@@ -321,20 +337,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/09/08/indigo-comment配置/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            indigo-comment配置
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2018/09/06/INSERT-INTO注入/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/02/20/Transparency/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">INSERT INTO注入</p>
+        <p class="article-nav-title">HTTPS and Certificate Transparency</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -427,7 +433,7 @@
     var disqus_shortname = '17307';
     
     
-    var disqus_url = 'https://17307.github.io/2018/09/08/sprintf格式输出逃逸/';
+    var disqus_url = 'https://17307.github.io/2019/02/21/tencent-cos-extension/';
     
     (function() {
     var dsq = document.createElement('script');

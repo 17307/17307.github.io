@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://17307.github.io/2019/02/21/tencent-cos-extension/</loc>
+    
+    <lastmod>2019-02-21T06:32:32.951Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://17307.github.io/2019/02/20/Transparency/</loc>
     
-    <lastmod>2019-02-20T11:41:23.174Z</lastmod>
+    <lastmod>2019-02-20T14:01:12.243Z</lastmod>
     
   </url>
   
@@ -23,14 +30,7 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/29/php%E8%B0%83%E8%AF%95/</loc>
-    
-    <lastmod>2019-02-02T11:52:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://17307.github.io/2018/09/30/GET%E5%91%BD%E4%BB%A4%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>https://17307.github.io/2018/10/28/nginx/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/09/15/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</loc>
+    <loc>https://17307.github.io/2018/09/06/INSERT-INTO%E6%B3%A8%E5%85%A5/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/09/06/INSERT-INTO%E6%B3%A8%E5%85%A5/</loc>
+    <loc>https://17307.github.io/2018/09/15/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/10/28/docker/</loc>
+    <loc>https://17307.github.io/2018/08/30/ML%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/ML%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://17307.github.io/2018/10/28/docker/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -149,7 +149,7 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/10/28/nginx/</loc>
+    <loc>https://17307.github.io/2018/08/29/php%E8%B0%83%E8%AF%95/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -157,6 +157,13 @@
   
   <url>
     <loc>https://17307.github.io/2018/09/08/sprintf%E6%A0%BC%E5%BC%8F%E8%BE%93%E5%87%BA%E9%80%83%E9%80%B8/</loc>
+    
+    <lastmod>2019-02-02T11:52:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://17307.github.io/2018/09/30/GET%E5%91%BD%E4%BB%A4%E6%BC%8F%E6%B4%9E/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -212,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/09/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0/</loc>
+    <loc>https://17307.github.io/2018/08/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85/</loc>
+    <loc>https://17307.github.io/2018/09/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
