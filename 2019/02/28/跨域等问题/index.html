@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>跨域等问题 | o1hy</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="flask">
+    
+    <meta name="description" content="跨域相关的问题">
+<meta name="keywords" content="flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域等问题">
+<meta property="og:url" content="https://17307.github.io/2019/02/28/跨域等问题/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="跨域相关的问题">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0061DZOIgy1g0n2piapn0j30kr09rweu.jpg">
+<meta property="og:updated_time" content="2019-03-01T03:00:32.858Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域等问题">
+<meta name="twitter:description" content="跨域相关的问题">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0061DZOIgy1g0n2piapn0j30kr09rweu.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/github.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ML-DL/">ML&DL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/PT/">PT</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ctf/">ctf</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/">others</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/chrome/">chrome</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/git/">git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/indego/">indego</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/others/linux/">linux</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/papers/">papers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/">web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/db/">db</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/docker/">docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/flask/">flask</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/nginx/">nginx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/web/php/">php</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/web/">web</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-跨域等问题" class="article article-single article-type-post" itemscope="" itemprop="blogPost">
+    <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">TOC</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境配置"><span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#virtualhost"><span class="toc-text">virtualhost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#httpd-vhosts-conf中的配置"><span class="toc-text">httpd-vhosts.conf中的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域问题"><span class="toc-text">跨域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单请求"><span class="toc-text">简单请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非简单请求"><span class="toc-text">非简单请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决跨域问题"><span class="toc-text">解决跨域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单请求-1"><span class="toc-text">简单请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非简单请求-1"><span class="toc-text">非简单请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域请求过程中的cookie"><span class="toc-text">跨域请求过程中的cookie</span></a></li></ol>
+</div>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        跨域等问题
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/28/跨域等问题/" class="article-date">
+            <time datetime="2019-02-28T10:42:21.000Z" itemprop="datePublished">2019-02-28</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/flask/">flask</a>
+    </div>
+
+                <span id="busuanzi_container_site_pv">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span id="busuanzi_container_page_pv">
+                    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                  </span>
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>跨域相关的问题</p>
+<a id="more"></a>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>最近又把 <em>xampp</em> 换成了 <em>wampserver</em> 。 <em>wampserver</em> 真好用！</p>
+<p>先用 <em>wampserver</em> 配置两个 <em>virtualhost</em> 。</p>
+<h3 id="virtualhost"><a href="#virtualhost" class="headerlink" title="virtualhost"></a>virtualhost</h3><p>先在 <strong><em>httpd.conf</em></strong>  开启 <em>virtualhost</em></p>
+<p>然后配置 <strong><em>httpd-vhosts.conf</em></strong></p>
+<p>最后配置计算机中的 <strong><em>hosts</em></strong> 文件</p>
+<h3 id="httpd-vhosts-conf中的配置"><a href="#httpd-vhosts-conf中的配置" class="headerlink" title="httpd-vhosts.conf中的配置"></a>httpd-vhosts.conf中的配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">VirtualHost</span> *<span class="attr">:80</span>&gt;</span></span><br><span class="line">	ServerName abc.test.com</span><br><span class="line">	DocumentRoot "e:/code/**/www2"</span><br><span class="line">	<span class="tag">&lt;<span class="name">Directory</span>  "<span class="attr">e:</span>/<span class="attr">code</span>/**/<span class="attr">www2</span>/"&gt;</span></span><br><span class="line">		Options +Indexes +Includes +FollowSymLinks +MultiViews</span><br><span class="line">		AllowOverride All</span><br><span class="line">		Require local</span><br><span class="line">	<span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">VirtualHost</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>DocumentRoot</strong>  “ **”  #主站点的网页存储位置。</p>
+<p><strong>ServerName</strong>  “ **” #主站点名称(网站的主机名)。</p>
+<p><strong><code>&lt;directory&gt;</code></strong> 是对目录进行访问控制的相关功能。</p>
+<p><strong><em>Options</em></strong>：配置在特定目录使用哪些特性，常用的值和基本含义如下：</p>
+<ul>
+<li>ExecCGI: 在该目录下允许执行CGI脚本。</li>
+<li>FollowSymLinks: 在该目录下允许文件系统使用符号连接。</li>
+<li><strong>Indexes</strong>: 当用户访问该目录时，如果用户找不到DirectoryIndex指定的主页文件(例如index.html),则返回该目录下的文件列表给用户。</li>
+<li><strong>includes</strong>：允许使用<code>mod_include</code>模块提供的服务器端包含功能。</li>
+<li><strong>MultiViews</strong>:如果客户端请求的路径可能对应多种类型的文件，那么服务器将根据客户端请求的具体情况自动选择一个最匹配客户端要求的文件。例如，在服务器站点的<code>file</code>文件夹下中存在名为<code>hello.jpg</code>和<code>hello.html</code>的两个文件，此时用户输入<code>Http://localhost/file/hello</code>，如果在<code>file</code>文件夹下并没有<code>hello</code>子目录，那么服务器将会尝试在<code>file</code>文件夹下查找形如<code>hello.*</code>的文件，然后根据用户请求的具体情况返回最匹配要求的<code>hello.jpg</code>或者<code>hello.html</code>。</li>
+</ul>
+<p><strong>AllowOverride</strong>：</p>
+<ul>
+<li>None    不读取.htaccess</li>
+<li>all   允许.htaccess所有指令，缺省是all</li>
+</ul>
+<p><strong>Require</strong></p>
+<ul>
+<li>local 仅允许本机访问</li>
+<li>Require ip 192.168.1.104 192.168.1.205</li>
+<li>Require host example.org </li>
+</ul>
+<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><blockquote>
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）</p>
+</blockquote>
+<p>无论是简单请求，还是非简单请求都会带来跨域问题，只是其他的一些不同。</p>
+<p><strong>简单请求</strong></p>
+<p>满足下面条件的是简单请求：</p>
+<ul>
+<li>请求方法是以下三种：<strong>HEAD</strong> , <strong>GET</strong> , <strong>POST</strong></li>
+<li>HTTP的头信息只含有以下这些字段：<strong>Accept</strong> , <strong>Accept-Language</strong> , <strong>Content-Language</strong> , <strong>Last-Event-ID</strong> , <strong>Content-Type</strong> 。其中 <strong>Content-Type</strong> 只允许三个值，分别为：<em>application/x-www-form-urlencoded</em> ，<em>multipart/form-data</em> ， <em>text/plain</em></li>
+</ul>
+<p><strong>非简单请求</strong></p>
+<p>不满足简单请求的，即为非简单请求。</p>
+<h3 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h3><p>看下面的代码，实现了一个简单的请求。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>test2<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'button'</span>&gt;</span>Ajax<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	$(<span class="string">'#button'</span>).click(</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			$.ajax(</span></span><br><span class="line"><span class="undefined">				&#123;</span></span><br><span class="line"><span class="javascript">					method: <span class="string">'GET'</span>,</span></span><br><span class="line"><span class="javascript">					url:<span class="string">"http://127.0.0.1:5000"</span>,</span></span><br><span class="line"><span class="javascript">					headers: &#123; <span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>&#125;,</span></span><br><span class="line"><span class="javascript">					success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;alert(result);&#125;,</span></span><br><span class="line"><span class="javascript">					error: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'error!'</span>);&#125;</span></span><br><span class="line"><span class="undefined">    			&#125;</span></span><br><span class="line"><span class="undefined">    		);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>服务器代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, jsonify, request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'123'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span></span><br></pre></td></tr></table></figure>
+<p>现在查看下结果。虽然这是个简单请求，但是仍然会引发跨域。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0mdq5q5lwj30ku0f4mxl.jpg" alt="图一"></p>
+<p>现在我们查看下服务器的情况，虽然跨域了，但是服务器返回了结果，只是前端没有得到。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0mdsprp5jj30iz01uwed.jpg" alt=""></p>
+<p>再看一下请求包，服务器发送的是GET请求的信息。</p>
+<blockquote>
+<p>简单请求，就自动在头信息之中，添加一个<code>Origin</code>字段</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0mdu63ikpj30el0b5gma.jpg" alt=""></p>
+<p>看一下相应包，服务器其实返回了！</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0mdvheaosj30es088mx2.jpg" alt=""></p>
+<p><strong>总结</strong> </p>
+<p>​    也就是说，在发送简单请求时，服务器收到这个请求，是当作正常请求处理的，但是浏览器阻止了这一过程。所以这种情况下，就会存在安全的隐患。因为服务器是执行了代码的。</p>
+<h3 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h3><p>前端代码,在header中添加了 ‘others’ 请求头。后端代码未变。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>test2<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'button'</span>&gt;</span>Ajax<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	$(<span class="string">'#button'</span>).click(</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			$.ajax(</span></span><br><span class="line"><span class="undefined">				&#123;</span></span><br><span class="line"><span class="javascript">					method: <span class="string">'GET'</span>,</span></span><br><span class="line"><span class="javascript">					url:<span class="string">"http://127.0.0.1:5000"</span>,</span></span><br><span class="line"><span class="javascript">					headers: &#123; <span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>,<span class="string">'others'</span>:<span class="string">'1234'</span>&#125;,</span></span><br><span class="line"><span class="javascript">					success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;alert(result);&#125;,</span></span><br><span class="line"><span class="javascript">					error: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'error'</span>);&#125;</span></span><br><span class="line"><span class="undefined">    			&#125;</span></span><br><span class="line"><span class="undefined">    		);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>先看以下请求包，惊奇的发现，它变成了 <strong><em>opption</em></strong> 。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0me3tbqahj30fa0e475f.jpg" alt=""></p>
+<p>看一下响应包，发现变成了空！</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0me4n358xj30cs06szk3.jpg" alt=""></p>
+<p>再看一下后面的服务器，发现它只收到了<strong>OPPTION</strong>的请求，并且没有执行代码。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0me5mtt79j30la03fglj.jpg" alt=""></p>
+<h2 id="解决跨域问题"><a href="#解决跨域问题" class="headerlink" title="解决跨域问题"></a>解决跨域问题</h2><p>那面对这两种情况，该如何处理呢。</p>
+<h3 id="简单请求-1"><a href="#简单请求-1" class="headerlink" title="简单请求"></a>简单请求</h3><p>看一下图一中的报错，<em>已拦截跨源请求：同源策略禁止读取位于 <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> 的远程资源。（原因：CORS 头缺少 ‘Access-Control-Allow-Origin’）</em> 。所以我们需要在服务器中，为它增加 <strong>Access-Control-Allow-Origin</strong> 。</p>
+<p>服务器端代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    resp = make_response(jsonify(&#123;<span class="string">'data'</span>: <span class="string">'hello'</span>&#125;))  <span class="comment"># 返回json格式</span></span><br><span class="line">    resp.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">"http://abc.test.com"</span></span><br><span class="line">    <span class="keyword">return</span> resp</span><br></pre></td></tr></table></figure>
+<p>对于简单请求，除了 <strong>Access-Control-Allow-Origin</strong> 字段外，还有另外两个需要关注的字段。</p>
+<p><strong>Access-Control-Allow-Credentials</strong> 如果请求需要带cookie，该header必须为true，同时Access-Control-Allow-Origin不能为*，否则同样拿不到结果。一些问题看下文。</p>
+<p><strong>Access-Control-Allow-Methods</strong>：用于预检请求响应，表示允许使用的HTTP方法。</p>
+<p>处理简单请求，常见的服务器代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resp.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">"http://abc.test.com"</span></span><br><span class="line">resp.headers[<span class="string">'Access-Control-Allow-Credentials'</span>] = <span class="string">'true'</span></span><br><span class="line">resp.headers[<span class="string">'Access-Control-Allow-Methods'</span>] = <span class="string">"POST, GET, OPTIONS, PUT, DELETE, PATCH"</span></span><br></pre></td></tr></table></figure>
+<h3 id="非简单请求-1"><a href="#非简单请求-1" class="headerlink" title="非简单请求"></a>非简单请求</h3><p>客户端代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#button'</span>).click(</span><br><span class="line">		<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			$.ajax(</span><br><span class="line">				&#123;</span><br><span class="line">					method: <span class="string">'GET'</span>,</span><br><span class="line">					url:<span class="string">"http://127.0.0.1:5000"</span>,</span><br><span class="line">					headers: &#123; <span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>,<span class="string">'others'</span>:<span class="string">'1234'</span>&#125;,</span><br><span class="line">					success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;alert(result);&#125;,</span><br><span class="line">					error: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'error'</span>);&#125;</span><br><span class="line">    			&#125;</span><br><span class="line">    		);</span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+<p>需要服务器端跟前端协商好，服务器端对不符合简单请求的字段进行添加。这里主要 <em>flask</em> 有一个坑，它必须在路由方法中加上 <em>OPTIONS</em> 这个方法才能收到。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/', methods=['POST', 'GET', 'OPTIONS'])  # 坑</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    print(request.cookies)</span><br><span class="line">    resp = make_response(jsonify(&#123;<span class="string">'data'</span>: <span class="string">'hello'</span>&#125;))</span><br><span class="line">    resp.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">"*"</span></span><br><span class="line">    resp.headers[<span class="string">'Access-Control-Allow-Methods'</span>] = <span class="string">"POST, GET, OPTIONS, PUT"</span></span><br><span class="line">    resp.headers[<span class="string">'Access-Control-Allow-Headers'</span>] = <span class="string">"others, content-type"</span></span><br><span class="line">    <span class="keyword">return</span> resp</span><br></pre></td></tr></table></figure>
+<h2 id="跨域请求过程中的cookie"><a href="#跨域请求过程中的cookie" class="headerlink" title="跨域请求过程中的cookie"></a>跨域请求过程中的cookie</h2><p>我在尝试 <strong>Access-Control-Allow-Credentials</strong> 字段时，遇到了一些问题。两种不同程度的跨域，问题如下图。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0061DZOIgy1g0n2piapn0j30kr09rweu.jpg" alt=""></p>
+<p>首先，对于 <em>ajax</em> 跨域，在jquery的ajax中，是禁止直接在header头，添加cookie的，需要通过如下方式。它的前端代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			$.ajax(</span><br><span class="line">					&#123;</span><br><span class="line">						method: <span class="string">'GET'</span>,</span><br><span class="line">						url:<span class="string">"http://127.0.0.1:5000"</span>,</span><br><span class="line">						xhrFields: &#123;</span><br><span class="line">					            withCredentials: <span class="literal">true</span></span><br><span class="line">					        &#125;,</span><br><span class="line">						success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;alert(result);&#125;,</span><br><span class="line">						error: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'error'</span>);&#125;</span><br><span class="line">	    			&#125;</span><br><span class="line">    			);</span><br><span class="line">    		&#125;</span><br></pre></td></tr></table></figure>
+<p>而对于图中的问题，经过查阅资料以及测试发现，只有二者属于同一个域(域名)下，才能跨域携带cookie。</p>
+<p>对于第二种情况，如果想让 <em>abc.test.com</em> 携带cookie，必须先由服务器进行 <em>set-cookie</em> 。然后客户端才能携带cookie。但是服务器 <em>set</em> 的 <em>cookie</em> ，客户端是无法获取，无法更改的。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://17307.github.io/2019/02/28/跨域等问题/" data-id="cjsph0w26003ts8vl14p7iens" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "o1hy"
+        },
+        "headline": "跨域等问题",
+        "image": "https://17307.github.iohttp://ww1.sinaimg.cn/large/0061DZOIgy1g0n2piapn0j30kr09rweu.jpg",
+        "keywords": "flask",
+        "genre": "web",
+        "datePublished": "2019-02-28",
+        "dateCreated": "2019-02-28",
+        "dateModified": "2019-03-01",
+        "url": "https://17307.github.io/2019/02/28/跨域等问题/",
+        "description": "跨域相关的问题"
+        "wordCount": 818
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/17307" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/02/21/tencent-cos-extension/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">tencent-cos-extension</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://das.scusec.org/">DAS</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.sec-wiki.com/index.php">secwiki</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://prettymask.github.io">prettymask</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://herasu.github.io/">Fish</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">ctf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5碰撞/">md5碰撞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metadata/">metadata</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php反序列化/">php反序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/">sqlmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件包含/">文件包含</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量包分析/">流量包分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <a id="back-to-top" onclick="goTop()"><i class="icon fa fa-angle-up"></i></a>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 o1hy</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = '17307';
+    
+    
+    var disqus_url = 'https://17307.github.io/2019/02/28/跨域等问题/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":100,"hOffset":0,"vOffset":30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script>
+    function goTop() {
+        $('body, html').animate({ scrollTop: 0 }, 600);
+    }
+</script>
