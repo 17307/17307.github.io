@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求 123456789101112&amp;lt;?php     $sandbox = &quot;sandbox/&quot; . md5(&quot;orange&quot; . $_SERVER[&quot;REMOTE_ADDR&quot;]);     @mkdir($sandbox);     @">
+  <meta name="description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GET命令漏洞">
 <meta property="og:url" content="https://17307.github.io/2018/09/30/GET命令漏洞/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求 123456789101112&amp;lt;?php     $sandbox = &quot;sandbox/&quot; . md5(&quot;orange&quot; . $_SERVER[&quot;REMOTE_ADDR&quot;]);     @mkdir($sandbox);     @">
+<meta property="og:description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://17307.github.io/2018/09/30/GET命令漏洞/CC1DB461E0374CD282ADDED8FF873BBF">
 <meta property="og:image" content="https://17307.github.io/2018/09/30/GET命令漏洞/15AEAB38D73045658EB89AD598F4F116">
 <meta property="og:image" content="https://17307.github.io/2018/09/30/GET命令漏洞/2CD36734625743E29B20B19A247196C4">
 <meta property="og:image" content="https://17307.github.io/2018/09/30/GET命令漏洞/FEC1A9D0DC854EBCB410C2DC8A6322C2">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:updated_time" content="2019-03-02T15:17:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GET命令漏洞">
-<meta name="twitter:description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求 123456789101112&amp;lt;?php     $sandbox = &quot;sandbox/&quot; . md5(&quot;orange&quot; . $_SERVER[&quot;REMOTE_ADDR&quot;]);     @mkdir($sandbox);     @">
+<meta name="twitter:description" content="0x00 题目描述php的 shell_exec 执行了 GET 命令。GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求">
 <meta name="twitter:image" content="https://17307.github.io/2018/09/30/GET命令漏洞/CC1DB461E0374CD282ADDED8FF873BBF">
 
 
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:17:32" itemprop="dateModified" datetime="2019-03-02T23:17:32+08:00">2019-03-02</time>
               
             
           </span>
@@ -495,6 +495,7 @@
 
       
         <h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 题目描述"></a>0x00 题目描述</h1><p>php的 <code>shell_exec</code> 执行了 <code>GET</code> 命令。<br>GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求</p>
+<a id="more"></a>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    $sandbox = <span class="string">"sandbox/"</span> . md5(<span class="string">"orange"</span> . $_SERVER[<span class="string">"REMOTE_ADDR"</span>]); </span><br><span class="line">    @mkdir($sandbox); </span><br><span class="line">    @chdir($sandbox); </span><br><span class="line"></span><br><span class="line">    $data = shell_exec(<span class="string">"GET "</span> . escapeshellarg($_GET[<span class="string">"url"</span>])); </span><br><span class="line">    $info = pathinfo($_GET[<span class="string">"filename"</span>]); </span><br><span class="line">    $dir  = str_replace(<span class="string">"."</span>, <span class="string">""</span>, basename($info[<span class="string">"dirname"</span>])); </span><br><span class="line">    @mkdir($dir); </span><br><span class="line">    @chdir($dir); </span><br><span class="line">    @file_put_contents(basename($info[<span class="string">"basename"</span>]), $data); </span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="0x01-分析"><a href="#0x01-分析" class="headerlink" title="0x01 分析"></a>0x01 分析</h1><p>最主要就是<code>$data = shell_exec(&quot;GET &quot; . escapeshellarg($_GET[&quot;url&quot;]));</code></p>
 <p>漏洞在于 GET 可以执行命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch <span class="string">'ls|'</span> <span class="comment"># 此命令我只在vps上执行成功。而 kali和ubuntu18创建后的内容均不可以。</span></span><br></pre></td></tr></table></figure></p>

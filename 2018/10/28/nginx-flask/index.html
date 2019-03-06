@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下： 123456789101112131415161718192021222324252627versio">
+  <meta name="description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下：">
 <meta name="keywords" content="docker,flask,nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx-flask">
 <meta property="og:url" content="https://17307.github.io/2018/10/28/nginx-flask/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下： 123456789101112131415161718192021222324252627versio">
+<meta property="og:description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下：">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://17307.github.io/2018/10/28/nginx-flask/964E3656ED274796B159A979276AF1C2">
 <meta property="og:image" content="https://17307.github.io/2018/10/28/nginx-flask/8B97F365B8A04583918E8A4278EC59CE">
 <meta property="og:image" content="https://17307.github.io/2018/10/28/nginx-flask/0114282659D54DB1BC818C31F5A28A58">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:updated_time" content="2019-03-02T15:13:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx-flask">
-<meta name="twitter:description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下： 123456789101112131415161718192021222324252627versio">
+<meta name="twitter:description" content="一些思考什么时候会用到compose我有了这样的一个想法：我想创建两个镜像，一个安装nginx，另一个安装python(flask),然后使用这2个容器做web服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下：">
 <meta name="twitter:image" content="https://17307.github.io/2018/10/28/nginx-flask/964E3656ED274796B159A979276AF1C2">
 
 
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:13:35" itemprop="dateModified" datetime="2019-03-02T23:13:35+08:00">2019-03-02</time>
               
             
           </span>
@@ -501,8 +501,7 @@
       
 
       
-        <h1 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h1><h2 id="什么时候会用到compose"><a href="#什么时候会用到compose" class="headerlink" title="什么时候会用到compose"></a>什么时候会用到compose</h2><p>我有了这样的一个想法：我想创建两个镜像，一个安装<code>nginx</code>，另一个安装<code>python(flask)</code>,然后使用这2个容器做<code>web</code>服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">   db:</span><br><span class="line">     image: mysql:5.7</span><br><span class="line">     volumes:</span><br><span class="line">       - db_data:/var/lib/mysql</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       MYSQL_ROOT_PASSWORD: somewordpress</span><br><span class="line">       MYSQL_DATABASE: wordpress</span><br><span class="line">       MYSQL_USER: wordpress</span><br><span class="line">       MYSQL_PASSWORD: wordpress</span><br><span class="line"></span><br><span class="line">   wordpress:</span><br><span class="line">     depends_on:</span><br><span class="line">       - db</span><br><span class="line">     image: wordpress:latest</span><br><span class="line">     ports:</span><br><span class="line">       - &quot;8000:80&quot;</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       WORDPRESS_DB_HOST: db:3306</span><br><span class="line">       WORDPRESS_DB_USER: wordpress</span><br><span class="line">       WORDPRESS_DB_PASSWORD: wordpress</span><br><span class="line">volumes:</span><br><span class="line">  db_data:</span><br></pre></td></tr></table></figure>
+        <h1 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h1><h2 id="什么时候会用到compose"><a href="#什么时候会用到compose" class="headerlink" title="什么时候会用到compose"></a>什么时候会用到compose</h2><p>我有了这样的一个想法：我想创建两个镜像，一个安装<code>nginx</code>，另一个安装<code>python(flask)</code>,然后使用这2个容器做<code>web</code>服务，但是我发现我不会写。所以我去查阅compose的各种资料。我发现常常遇到的例子都是，一个web服务器配上一个数据库的服务器。如下：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">   db:</span><br><span class="line">     image: mysql:5.7</span><br><span class="line">     volumes:</span><br><span class="line">       - db_data:/var/lib/mysql</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       MYSQL_ROOT_PASSWORD: somewordpress</span><br><span class="line">       MYSQL_DATABASE: wordpress</span><br><span class="line">       MYSQL_USER: wordpress</span><br><span class="line">       MYSQL_PASSWORD: wordpress</span><br><span class="line"></span><br><span class="line">   wordpress:</span><br><span class="line">     depends_on:</span><br><span class="line">       - db</span><br><span class="line">     image: wordpress:latest</span><br><span class="line">     ports:</span><br><span class="line">       - &quot;8000:80&quot;</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       WORDPRESS_DB_HOST: db:3306</span><br><span class="line">       WORDPRESS_DB_USER: wordpress</span><br><span class="line">       WORDPRESS_DB_PASSWORD: wordpress</span><br><span class="line">volumes:</span><br><span class="line">  db_data:</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>在wordpress的environment中，指定了数据库为：<code>db：3306</code>，这个会被解析成db容器的<code>ip:3306</code>。出现上面的原因，是因为在<code>wordpress</code>容器中使用了<code>depends_on</code>，当然也可以使用<code>link</code>方法。<br>关于<code>depends_on</code>和<code>link</code>的大概为：通过打开端口，以及一些环境变量与另一个容器进行通信。  <strong>当然</strong>，除了上面两种方法，还可以用另一种方法，在下面将介绍到。</p>
 <hr>

@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+  <meta name="description" content="一些docker简单的基础。">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker">
 <meta property="og:url" content="https://17307.github.io/2018/10/28/docker/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+<meta property="og:description" content="一些docker简单的基础。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://17307.github.io/2018/10/28/docker/413BC09A31334384851E03F517CDF8BB">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:updated_time" content="2019-03-02T15:14:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker">
-<meta name="twitter:description" content="0x00 安装官网 0x01 基本命令image12345# 拉取docker image pull hello-world# 运行image ， 产生 containerdocker container run hello-world container123456789# 列出本机正在运行的容器docker container ls# 列出本机所有容器，包括终止运行的容器docker cont">
+<meta name="twitter:description" content="一些docker简单的基础。">
 <meta name="twitter:image" content="https://17307.github.io/2018/10/28/docker/413BC09A31334384851E03F517CDF8BB">
 
 
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:14:20" itemprop="dateModified" datetime="2019-03-02T23:14:20+08:00">2019-03-02</time>
               
             
           </span>
@@ -499,7 +499,8 @@
       
 
       
-        <h1 id="0x00-安装"><a href="#0x00-安装" class="headerlink" title="0x00 安装"></a>0x00 安装</h1><p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce" target="_blank" rel="noopener">官网</a></p>
+        <p>一些docker简单的基础。<br><a id="more"></a></p>
+<h1 id="0x00-安装"><a href="#0x00-安装" class="headerlink" title="0x00 安装"></a>0x00 安装</h1><p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce" target="_blank" rel="noopener">官网</a></p>
 <h1 id="0x01-基本命令"><a href="#0x01-基本命令" class="headerlink" title="0x01 基本命令"></a>0x01 基本命令</h1><h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取</span></span><br><span class="line">docker image pull hello-world</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行image ， 产生 container</span></span><br><span class="line">docker container run hello-world</span><br></pre></td></tr></table></figure>
 <h2 id="container"><a href="#container" class="headerlink" title="container"></a>container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 列出本机正在运行的容器</span></span><br><span class="line">docker container ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container ls --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 杀死某个 container</span></span><br><span class="line">docker container <span class="built_in">kill</span> [containID]</span><br></pre></td></tr></table></figure>
 <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>这里给出一个flask的小例子。</p>

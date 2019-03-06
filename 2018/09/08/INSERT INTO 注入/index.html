@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含 题目分析在文章post处,存在insert into的注入 解决INSERT TO 语句INSERT INTO 表名称 VALUES (值1, 值2,....) payload构造在本题中,发现无法闭合&amp;#39;.同时由于插入的content部分为&amp;lt;textarea&amp;gt;,所以需要将payload插入到标题.但">
+  <meta name="description" content="CTF 题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含">
 <meta name="keywords" content="sql注入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="INSERT INTO注入">
 <meta property="og:url" content="https://17307.github.io/2018/09/08/INSERT INTO 注入/index.html">
 <meta property="og:site_name" content="o1hy">
-<meta property="og:description" content="题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含 题目分析在文章post处,存在insert into的注入 解决INSERT TO 语句INSERT INTO 表名称 VALUES (值1, 值2,....) payload构造在本题中,发现无法闭合&amp;#39;.同时由于插入的content部分为&amp;lt;textarea&amp;gt;,所以需要将payload插入到标题.但">
+<meta property="og:description" content="CTF 题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://17307.github.io/2018/09/08/INSERT%20INTO%20注入/1.png">
 <meta property="og:image" content="https://17307.github.io/2018/09/08/INSERT%20INTO%20注入/2.png">
 <meta property="og:image" content="https://17307.github.io/2018/09/08/INSERT%20INTO%20注入/3.png">
-<meta property="og:updated_time" content="2019-02-02T11:52:17.000Z">
+<meta property="og:updated_time" content="2019-03-02T15:21:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="INSERT INTO注入">
-<meta name="twitter:description" content="题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含 题目分析在文章post处,存在insert into的注入 解决INSERT TO 语句INSERT INTO 表名称 VALUES (值1, 值2,....) payload构造在本题中,发现无法闭合&amp;#39;.同时由于插入的content部分为&amp;lt;textarea&amp;gt;,所以需要将payload插入到标题.但">
+<meta name="twitter:description" content="CTF 题目描述登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含">
 <meta name="twitter:image" content="https://17307.github.io/2018/09/08/INSERT%20INTO%20注入/1.png">
 
 
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-02 19:52:17" itemprop="dateModified" datetime="2019-02-02T19:52:17+08:00">2019-02-02</time>
+                <time title="Modified: 2019-03-02 23:21:58" itemprop="dateModified" datetime="2019-03-02T23:21:58+08:00">2019-03-02</time>
               
             
           </span>
@@ -494,7 +494,9 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含</p>
+        <p>CTF</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>登陆,存在kindeditor编辑器,可以读取目录,无法上传,文件包含</p>
+<a id="more"></a>
 <h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>在文章post处,存在insert into的注入</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="INSERT-TO-语句"><a href="#INSERT-TO-语句" class="headerlink" title="INSERT TO 语句"></a>INSERT TO 语句</h3><p><code>INSERT INTO 表名称 VALUES (值1, 值2,....)</code></p>
 <h3 id="payload构造"><a href="#payload构造" class="headerlink" title="payload构造"></a>payload构造</h3><p>在本题中,发现无法闭合<code>&#39;</code>.同时由于插入的content部分为<code>&lt;textarea&gt;</code>,所以需要将payload插入到标题.<br>但是文章标题有长度限制,所以采取通过插入多条内容绕过.<br>通过尝试,得到插入语句应该为:<code>insert into 表 values (id,title,contetn)</code>.同时无法闭合最后的<code>&#39;与)</code>.所以只能构造出相应的闭合.  </p>
