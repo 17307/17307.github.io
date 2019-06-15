@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'EJEZINIHYM',
+      apiKey: 'bd8c08bd8abb18a323382649a08df5e6',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一些关于twisted的简单内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="twisted-1">
+<meta property="og:url" content="https://17307.github.io/2019/06/15/twisted-1/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="一些关于twisted的简单内容">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/007BTj79gy1g40tng2gx0j306o0amjre.jpg">
+<meta property="og:updated_time" content="2019-06-15T03:05:19.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="twisted-1">
+<meta name="twitter:description" content="一些关于twisted的简单内容">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/007BTj79gy1g40tng2gx0j306o0amjre.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://17307.github.io/2019/06/15/twisted-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>twisted-1 | o1hy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">o1hy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://17307.github.io/2019/06/15/twisted-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="o1hy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="o1hy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">twisted-1
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-15 11:02:24 / Modified: 11:05:19" itemprop="dateCreated datePublished" datetime="2019-06-15T11:02:24+08:00">2019-06-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/15/twisted-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/15/twisted-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一些关于<strong>twisted</strong>的简单内容</p>
+<a id="more"></a>
+<h1 id="TCP-SERVER"><a href="#TCP-SERVER" class="headerlink" title="TCP SERVER"></a>TCP SERVER</h1><h2 id="protocol"><a href="#protocol" class="headerlink" title="protocol"></a>protocol</h2><p>通常用于处理协议的子类为：<strong>twisted.internet.protocol.Protocol</strong> ， 为了保存配置文件，使用工厂模式：<strong><a href="https://twistedmatrix.com/documents/19.2.1/api/twisted.internet.protocol.Factory.html" target="_blank" rel="noopener">twisted.internet.protocol.Factory</a></strong> </p>
+<p>先看一个简单的例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Echo</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.transport.write(data)</span><br></pre></td></tr></table></figure>
+<p>这就是一个简单的协议，重写了<code>dataReceived</code> 当收到消息时，返回给 <strong>sender</strong> 同样内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QOTD</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionMade</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.transport.write(<span class="string">b"An apple a day keeps the doctor away\r\n"</span>)</span><br><span class="line">        self.transport.loseConnection()</span><br></pre></td></tr></table></figure>
+<p>上面这个重写了<code>connectionMade</code>方法，这个时双方建立连接时的协商工作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.protocols.basic <span class="keyword">import</span> LineReceiver</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Answer</span><span class="params">(LineReceiver)</span>:</span></span><br><span class="line"></span><br><span class="line">    answers = &#123;<span class="string">b'How are you?'</span>: <span class="string">b'Fine'</span>, <span class="keyword">None</span>: <span class="string">b"I don't know what you mean"</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lineReceived</span><span class="params">(self, line)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> line <span class="keyword">in</span> self.answers:</span><br><span class="line">            self.sendLine(self.answers[line])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.sendLine(self.answers[<span class="keyword">None</span>])</span><br></pre></td></tr></table></figure>
+<p>这是一个没收到一行就处理一次的Protocol。</p>
+<h2 id="运行server"><a href="#运行server" class="headerlink" title="运行server"></a>运行server</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Factory</span><br><span class="line"><span class="keyword">from</span> twisted.internet.endpoints <span class="keyword">import</span> TCP4ServerEndpoint</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QOTDFactory</span><span class="params">(Factory)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buildProtocol</span><span class="params">(self, addr)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> QOTD()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8007 is the port you want to run under. Choose something &gt;1024</span></span><br><span class="line">endpoint = TCP4ServerEndpoint(reactor, <span class="number">8007</span>)</span><br><span class="line">endpoint.listen(QOTDFactory())</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p>创建工程类，重写 <strong>buildProtocol</strong> 方法，返回你的 <strong>Protocol子类</strong>。然后通过 <strong><a href="https://twistedmatrix.com/documents/19.2.1/api/twisted.internet.endpoints.TCP4ServerEndpoint.html" target="_blank" rel="noopener">TCP4ServerEndpoint</a></strong> 绑定端口，然后指定工厂类。通过 <strong>reactor.run()</strong> 来启动整个流程。（目前我还不怎么会用reactor）</p>
+<p><strong>另一种工程创建方式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Factory, Protocol</span><br><span class="line"><span class="keyword">from</span> twisted.internet.endpoints <span class="keyword">import</span> TCP4ServerEndpoint</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QOTD</span><span class="params">(Protocol)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionMade</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># self.factory was set by the factory's default buildProtocol:</span></span><br><span class="line">        self.transport.write(self.factory.quote + <span class="string">b'\r\n'</span>)</span><br><span class="line">        self.transport.loseConnection()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QOTDFactory</span><span class="params">(Factory)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># This will be used by the default buildProtocol to create new protocols:</span></span><br><span class="line">    protocol = QOTD</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, quote=None)</span>:</span></span><br><span class="line">        self.quote = quote <span class="keyword">or</span> <span class="string">b'An apple a day keeps the doctor away'</span></span><br><span class="line"></span><br><span class="line">endpoint = TCP4ServerEndpoint(reactor, <span class="number">8007</span>)</span><br><span class="line">endpoint.listen(QOTDFactory(<span class="string">b"configurable quote"</span>))</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p><strong>工厂类的startup &amp; shutdown</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Factory</span><br><span class="line"><span class="keyword">from</span> twisted.protocols.basic <span class="keyword">import</span> LineReceiver</span><br><span class="line"><span class="keyword">from</span> twisted.internet.endpoints <span class="keyword">import</span> TCP4ServerEndpoint</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoggingProtocol</span><span class="params">(LineReceiver)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lineReceived</span><span class="params">(self, line)</span>:</span></span><br><span class="line">        print(line)</span><br><span class="line">        <span class="keyword">if</span> line == <span class="string">b'quit'</span>:</span><br><span class="line">            <span class="comment"># self.factory.stopFactory()</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        self.factory.fp.write(line + <span class="string">b'\n'</span>)</span><br><span class="line">        self.transport.loseConnection()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogfileFactory</span><span class="params">(Factory)</span>:</span></span><br><span class="line">    protocol = LoggingProtocol</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fileName)</span>:</span></span><br><span class="line">        self.file = fileName</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startFactory</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.fp = open(self.file, <span class="string">'ab'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stopFactory</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.fp.close()</span><br><span class="line"></span><br><span class="line">endpoint = TCP4ServerEndpoint(reactor, <span class="number">8006</span>)</span><br><span class="line">endpoint.listen(LogfileFactory(<span class="string">"1.txt"</span>))</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p>这个需要通过 <strong>python test.py</strong> 来启动，然后通过 <strong>CTRL+C</strong> 来终止。如果时pycharm直接kill的话，无法调用 <strong>stopFactory</strong> 函数，导致无法写日志。官方文档说，用户不应该手动调用此方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol</span><br><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Factory</span><br><span class="line"><span class="keyword">from</span> twisted.internet.endpoints <span class="keyword">import</span> TCP4ServerEndpoint</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Echo</span><span class="params">(Protocol)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, factory)</span>:</span></span><br><span class="line">        self.factory = factory</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionMade</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.factory.numProtocols = self.factory.numProtocols + <span class="number">1</span></span><br><span class="line">        self.transport.write(</span><br><span class="line">            <span class="string">b"Welcome! There are currently %d open connections.\n"</span> %</span><br><span class="line">            (self.factory.numProtocols,))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionLost</span><span class="params">(self, reason)</span>:</span></span><br><span class="line">        self.factory.numProtocols = self.factory.numProtocols - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.transport.write(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EchoFactory</span><span class="params">(Factory)</span>:</span></span><br><span class="line">    numProtocols = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buildProtocol</span><span class="params">(self, addr)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Echo(self)  <span class="comment"># 通过self将factory实例传入</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 34 35的代码可以通过如下代码替换</span></span><br><span class="line"><span class="comment"># reactor.listenTCP(8006, EchoFactory())</span></span><br><span class="line">endpoint = TCP4ServerEndpoint(reactor, <span class="number">8006</span>)</span><br><span class="line">endpoint.listen(EchoFactory())</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p>listenTCP是将Factory连接到网络的方法。</p>
+<h1 id="TCP-CLIENT"><a href="#TCP-CLIENT" class="headerlink" title="TCP CLIENT"></a>TCP CLIENT</h1><p>In many cases, the protocol only needs to connect to the server once, and the code just wants to get a connected instance of the protocol.</p>
+<p>文档意思是大多数情况下，Clinet只需要请求一次SERVER，所以不需要Factory。<strong>twisted.internet.endpoints</strong>提供了适当的API，特别是connectProtocol，它采用协议实例而不是工厂。</p>
+<p>一个简单的协议子类与 <strong>SERVER</strong> 版本没什么区别。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> stdout</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Echo</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        stdout.write(data)</span><br><span class="line"><span class="comment">########################################################</span></span><br><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WelcomeMessage</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionMade</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.transport.write(<span class="string">"Hello server, I am the client!\r\n"</span>)</span><br><span class="line">        self.transport.loseConnection()</span><br></pre></td></tr></table></figure>
+<p>下面是官方文档使用的例子。主要是关注下它启动的方式。还有另一种启动方式，已经不推荐。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol</span><br><span class="line"><span class="keyword">from</span> twisted.internet.endpoints <span class="keyword">import</span> TCP4ClientEndpoint, connectProtocol</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connectionMade</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.transport.write(<span class="string">b"Hello server, I am the client!\r\n"</span>)</span><br><span class="line">        <span class="comment"># self.transport.loseConnection()</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.sendMessage(<span class="string">b'yes'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendMessage</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.transport.write(<span class="string">b"MESSAGE %s\n"</span> % msg)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gotProtocol</span><span class="params">(p)</span>:</span></span><br><span class="line">    p.sendMessage(<span class="string">b"Hello"</span>)</span><br><span class="line">    reactor.callLater(<span class="number">1</span>, p.sendMessage, <span class="string">b"This is sent in a second"</span>)</span><br><span class="line">    reactor.callLater(<span class="number">2</span>, p.transport.loseConnection)</span><br><span class="line"></span><br><span class="line">point = TCP4ClientEndpoint(reactor, <span class="string">"127.0.0.1"</span>, <span class="number">1234</span>)</span><br><span class="line">d = connectProtocol(point, Greeter())</span><br><span class="line">d.addCallback(gotProtocol)</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol, ClientFactory</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> stdout</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Echo</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        stdout.write(data)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EchoClientFactory</span><span class="params">(ClientFactory)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startedConnecting</span><span class="params">(self, connector)</span>:</span></span><br><span class="line">        print(<span class="string">'Started to connect.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buildProtocol</span><span class="params">(self, addr)</span>:</span></span><br><span class="line">        print(<span class="string">'Connected.'</span>)</span><br><span class="line">        <span class="keyword">return</span> Echo()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clientConnectionLost</span><span class="params">(self, connector, reason)</span>:</span></span><br><span class="line">        print(<span class="string">'Lost connection.  Reason:'</span>, reason)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clientConnectionFailed</span><span class="params">(self, connector, reason)</span>:</span></span><br><span class="line">        print(<span class="string">'Connection failed. Reason:'</span>, reason)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line">reactor.connectTCP(<span class="string">'127.0.0.1'</span>, <span class="number">1234</span>, EchoClientFactory())</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p>无法建立连接时调用clientConnectionFailed，并且在建立连接然后断开连接时调用clientConnectionLost。</p>
+<p>下面的例子是当连接超时或者出错，进行重新连接的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet.protocol <span class="keyword">import</span> Protocol, ReconnectingClientFactory</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> stdout</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Echo</span><span class="params">(Protocol)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dataReceived</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        stdout.write(data)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EchoClientFactory</span><span class="params">(ReconnectingClientFactory)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startedConnecting</span><span class="params">(self, connector)</span>:</span></span><br><span class="line">        print(<span class="string">'Started to connect.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buildProtocol</span><span class="params">(self, addr)</span>:</span></span><br><span class="line">        print(<span class="string">'Connected.'</span>)</span><br><span class="line">        print(<span class="string">'Resetting reconnection delay'</span>)</span><br><span class="line">        self.resetDelay()</span><br><span class="line">        <span class="keyword">return</span> Echo()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clientConnectionLost</span><span class="params">(self, connector, reason)</span>:</span></span><br><span class="line">        print(<span class="string">'Lost connection.  Reason:'</span>, reason)</span><br><span class="line">        ReconnectingClientFactory.clientConnectionLost(self, connector, reason)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clientConnectionFailed</span><span class="params">(self, connector, reason)</span>:</span></span><br><span class="line">        print(<span class="string">'Connection failed. Reason:'</span>, reason)</span><br><span class="line">        ReconnectingClientFactory.clientConnectionFailed(self, connector,</span><br><span class="line">                                                         reason)</span><br></pre></td></tr></table></figure>
+<h1 id="schedule"><a href="#schedule" class="headerlink" title="schedule"></a>schedule</h1><p>对于 schedule ，官方给出3个使用案例。</p>
+<h2 id="延时调用"><a href="#延时调用" class="headerlink" title="延时调用"></a>延时调用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> task</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(<span class="string">"This will run 3.5 seconds after it was scheduled: %s"</span> % s)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hehe'</span></span><br><span class="line"></span><br><span class="line">d = task.deferLater(reactor, <span class="number">1</span>, f, <span class="string">"hello, world"</span>)</span><br><span class="line"><span class="comment">#也可以用下面的语句，但我还不知道着2个是否有什么区别</span></span><br><span class="line">reactor.callLater(<span class="number">1</span>, f, <span class="string">"This is sent in a second"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">called</span><span class="params">(result)</span>:</span></span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line">d.addCallback(called)</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<h2 id="循环调用"><a href="#循环调用" class="headerlink" title="循环调用"></a>循环调用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> task</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line">loopTimes = <span class="number">3</span>  <span class="comment"># 循环次数</span></span><br><span class="line">failInTheEnd = <span class="keyword">False</span></span><br><span class="line">_loopCounter = <span class="number">0</span>  <span class="comment"># 已经循环的次数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">runEverySecond</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Called at ever loop interval.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">global</span> _loopCounter</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> _loopCounter &lt; loopTimes:</span><br><span class="line">        _loopCounter += <span class="number">1</span></span><br><span class="line">        print(<span class="string">'A new second has passed.'</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果发生错误，则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> failInTheEnd:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'Failure during loop execution.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># We looped enough times.</span></span><br><span class="line">    loop.stop()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cbLoopDone</span><span class="params">(result)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Called when loop was stopped with success.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(<span class="string">"Loop done."</span>)</span><br><span class="line">    reactor.stop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ebLoopFailed</span><span class="params">(failure)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Called when loop execution failed.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(failure.getBriefTraceback())</span><br><span class="line">    reactor.stop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">loop = task.LoopingCall(runEverySecond)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start looping every 1 second.</span></span><br><span class="line">loopDeferred = loop.start(<span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add callbacks for stop and failure.</span></span><br><span class="line">loopDeferred.addCallback(cbLoopDone)</span><br><span class="line">loopDeferred.addErrback(ebLoopFailed)</span><br><span class="line"></span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<h2 id="取消调用"><a href="#取消调用" class="headerlink" title="取消调用"></a>取消调用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"I'll never run."</span>)</span><br><span class="line"></span><br><span class="line">callID = reactor.callLater(<span class="number">5</span>, f)</span><br><span class="line">callID.cancel()</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<h1 id="Deferred"><a href="#Deferred" class="headerlink" title="Deferred"></a>Deferred</h1><p><strong>个人理解</strong> </p>
+<p>Deferred是一个可以添加回调链的对象。上面代码中的Deferred都是通过调用延时来模拟的。实际上会有类似于请求WEB的这种API作为真实的Deferred参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor, defer</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDummyData</span><span class="params">(inputData)</span>:</span></span><br><span class="line">    print(<span class="string">'getDummyData called'</span>)</span><br><span class="line">    deferred = defer.Deferred()</span><br><span class="line">    <span class="comment"># 通过callLater来模拟一个会产生延时的函数</span></span><br><span class="line">    reactor.callLater(<span class="number">2</span>, deferred.callback, inputData * <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> deferred</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cbPrintData</span><span class="params">(result)</span>:</span></span><br><span class="line">  	<span class="comment"># 用于处理上面的输出</span></span><br><span class="line">    print(<span class="string">'Result received: &#123;&#125;'</span>.format(result))</span><br><span class="line"></span><br><span class="line">deferred = getDummyData(<span class="number">3</span>)</span><br><span class="line">deferred.addCallback(cbPrintData)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置结束</span></span><br><span class="line">reactor.callLater(<span class="number">4</span>, reactor.stop)</span><br><span class="line"><span class="comment"># start up the Twisted reactor (event loop handler) manually</span></span><br><span class="line">print(<span class="string">'Starting the reactor'</span>)</span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/007BTj79gy1g40tng2gx0j306o0amjre.jpg" alt=""></p>
+<ul>
+<li>先从数据源获取数据，这个获取的方法会产生一个 Deferred 对象。</li>
+<li>然后开始回调。</li>
+</ul>
+<p><strong>关于回调函数</strong></p>
+<ol>
+<li>如果成功，则调用 <strong>.callback(result)</strong> 。如果失败，则 <strong>.errback(failure)</strong></li>
+<li>回调函数总是将上一个函数的返回作为下个函数的参数进行传递。</li>
+<li>如果 <strong>callback</strong> 中产生异常，则切换到 <strong>errback</strong> 中。</li>
+</ol>
+<p>对于一个正常的python处理异常：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># code that may throw an exception</span></span><br><span class="line">    cookSpamAndEggs()</span><br><span class="line"><span class="keyword">except</span> (SpamException, EggException):</span><br><span class="line">    <span class="comment"># Handle SpamExceptions and EggExceptions</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>如果用twisted的异常链，应该是如下内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">errorHandler</span><span class="params">(failure)</span>:</span></span><br><span class="line">    failure.trap(SpamException, EggException)</span><br><span class="line">    <span class="comment"># Handle SpamExceptions and EggExceptions</span></span><br><span class="line"></span><br><span class="line">d.addCallback(cookSpamAndEggs)</span><br><span class="line">d.addErrback(errorHandler)</span><br></pre></td></tr></table></figure>
+<p>如果 <strong>failure.trap(…)</strong> 没有匹配到异常，则会抛出另外的异常。</p>
+<p>另一个需要注意的就是下面两种添加会掉链的方式可能有所不同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Case 1</span></span><br><span class="line">d = getDeferredFromSomewhere()</span><br><span class="line">d.addCallback(callback1)       <span class="comment"># A</span></span><br><span class="line">d.addErrback(errback1)         <span class="comment"># B</span></span><br><span class="line">d.addCallback(callback2)</span><br><span class="line">d.addErrback(errback2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Case 2</span></span><br><span class="line">d = getDeferredFromSomewhere()</span><br><span class="line">d.addCallbacks(callback1, errback1)  <span class="comment"># C</span></span><br><span class="line">d.addCallbacks(callback2, errback2)</span><br></pre></td></tr></table></figure>
+<p>对于 case1 而言，在<strong>callback1</strong>发生异常时，errback1会被调用。 而对于 case2 而言，则errback2会被调用。</p>
+<h2 id="maybeDeferred"><a href="#maybeDeferred" class="headerlink" title="maybeDeferred"></a>maybeDeferred</h2><p>这个函数用来处理，当你不知道这个到底是 <strong>同步</strong> 还是 <strong>异步</strong> 时候使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同步的验证函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">synchronousIsValidUser</span><span class="params">(user)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    Return true if user is a valid user, false otherwise</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> user <span class="keyword">in</span> [<span class="string">"Alice"</span>, <span class="string">"Angus"</span>, <span class="string">"Agnes"</span>]</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor, defer</span><br><span class="line"><span class="comment"># 异步函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">asynchronousIsValidUser</span><span class="params">(user)</span>:</span></span><br><span class="line">    d = defer.Deferred()</span><br><span class="line">    reactor.callLater(<span class="number">2</span>, d.callback, user <span class="keyword">in</span> [<span class="string">"Alice"</span>, <span class="string">"Angus"</span>, <span class="string">"Agnes"</span>])</span><br><span class="line">    <span class="keyword">return</span> d</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> defer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回结果</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printResult</span><span class="params">(result)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> result:</span><br><span class="line">        print(<span class="string">"User is authenticated"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"User is not authenticated"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">authenticateUser</span><span class="params">(isValidUser, user)</span>:</span></span><br><span class="line">    d = defer.maybeDeferred(isValidUser, user)</span><br><span class="line">    d.addCallback(printResult)</span><br><span class="line"><span class="comment"># 通过同步验证</span></span><br><span class="line">authenticateUser(synchronousIsValidUser,user)</span><br><span class="line"><span class="comment"># 通过异步验证</span></span><br><span class="line">authenticateUser(asynchronousIsValidUser,user)</span><br></pre></td></tr></table></figure>
+<h1 id="取消任务"><a href="#取消任务" class="headerlink" title="取消任务"></a>取消任务</h1><p><strong>动机</strong></p>
+<p>假如在请求某个连接时，一直在转圈圈，那么用户想停止请求它，就要取消。看一下下面模拟的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> task</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hopefully this will be called in 3 seconds or less"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(reactor)</span>:</span></span><br><span class="line">    delay = random.uniform(<span class="number">1</span>, <span class="number">5</span>)  <span class="comment"># 随机等待 1-5 秒</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">called</span><span class="params">(result)</span>:</span></span><br><span class="line">        print(<span class="string">"&#123;0&#125; seconds later:"</span>.format(delay), result)</span><br><span class="line"></span><br><span class="line">    d = task.deferLater(reactor, delay, f)</span><br><span class="line">    d.addTimeout(<span class="number">3</span>, reactor).addBoth(called)  <span class="comment"># 如果超过3秒，就会打断上面的命令，抛出异常</span></span><br><span class="line">    										  <span class="comment"># 如果没有超过3秒，就不会打断上面命令</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> d</span><br><span class="line"></span><br><span class="line"><span class="comment"># f() will be timed out if the random delay is greater than 3 seconds</span></span><br><span class="line">task.react(main)</span><br></pre></td></tr></table></figure>
+<h1 id="DeferredList"><a href="#DeferredList" class="headerlink" title="DeferredList"></a>DeferredList</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A callback that unpacks and prints the results of a DeferredList</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printResult</span><span class="params">(result)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> (success, value) <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">if</span> success:</span><br><span class="line">            print(<span class="string">'Success:'</span>, value)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'Failure:'</span>, value.getErrorMessage())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create three deferreds.</span></span><br><span class="line">deferred1 = defer.Deferred()</span><br><span class="line">deferred2 = defer.Deferred()</span><br><span class="line">deferred3 = defer.Deferred()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pack them into a DeferredList</span></span><br><span class="line">dl = defer.DeferredList([deferred1, deferred2, deferred3], consumeErrors=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add our callback</span></span><br><span class="line">dl.addCallback(printResult)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fire our three deferreds with various values.</span></span><br><span class="line">deferred1.callback(<span class="string">'one'</span>)</span><br><span class="line">deferred2.errback(Exception(<span class="string">'bang!'</span>))</span><br><span class="line">deferred3.callback(<span class="string">'three'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># At this point, dl will fire its callback, printing:</span></span><br><span class="line"><span class="comment">#    Success: one</span></span><br><span class="line"><span class="comment">#    Failure: bang!</span></span><br><span class="line"><span class="comment">#    Success: three</span></span><br><span class="line"><span class="comment"># (note that defer.SUCCESS == True, and defer.FAILURE == False)</span></span><br></pre></td></tr></table></figure>
+<p>如果在将Deferred添加到DeferredList之后向Deferred添加回调，则该回调返回的值将不会提供给DeferredList的回调。为避免混淆，我们建议在DeferredList中使用后，不要向Deferred添加回调</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printResult</span><span class="params">(result)</span>:</span></span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addTen</span><span class="params">(result)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> result + <span class="string">" ten"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deferred gets callback before DeferredList is created</span></span><br><span class="line">deferred1 = defer.Deferred()</span><br><span class="line">deferred2 = defer.Deferred()</span><br><span class="line">deferred1.addCallback(addTen)</span><br><span class="line">dl = defer.DeferredList([deferred1, deferred2])</span><br><span class="line">dl.addCallback(printResult)</span><br><span class="line">deferred1.callback(<span class="string">"one"</span>) <span class="comment"># fires addTen, checks DeferredList, stores "one ten"</span></span><br><span class="line">deferred2.callback(<span class="string">"two"</span>)</span><br><span class="line"><span class="comment"># At this point, dl will fire its callback, printing:</span></span><br><span class="line"><span class="comment">#     [(1, 'one ten'), (1, 'two')]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deferred gets callback after DeferredList is created</span></span><br><span class="line">deferred1 = defer.Deferred()</span><br><span class="line">deferred2 = defer.Deferred()</span><br><span class="line">dl = defer.DeferredList([deferred1, deferred2])</span><br><span class="line">deferred1.addCallback(addTen) <span class="comment"># will run *after* DeferredList gets its value</span></span><br><span class="line">dl.addCallback(printResult)</span><br><span class="line">deferred1.callback(<span class="string">"one"</span>) <span class="comment"># checks DeferredList, stores "one", fires addTen</span></span><br><span class="line">deferred2.callback(<span class="string">"two"</span>)</span><br><span class="line"><span class="comment"># At this point, dl will fire its callback, printing:</span></span><br><span class="line"><span class="comment">#     [(1, 'one), (1, 'two')]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> defer</span><br><span class="line"></span><br><span class="line">d1 = defer.Deferred()</span><br><span class="line">d2 = defer.Deferred()</span><br><span class="line">d = defer.gatherResults([d1, d2], consumeErrors=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cbPrintResult</span><span class="params">(result)</span>:</span></span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line">d.addCallback(cbPrintResult)</span><br><span class="line"></span><br><span class="line">d1.callback(<span class="string">"one"</span>)</span><br><span class="line"><span class="comment"># nothing is printed yet; d is still awaiting completion of d2</span></span><br><span class="line">d2.callback(<span class="string">"two"</span>)</span><br><span class="line"><span class="comment"># printResult prints ["one", "two"]</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/msf的端口转发/" rel="next" title="msf的端口转发">
+                <i class="fa fa-chevron-left"></i> msf的端口转发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">o1hy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/17307" title="GitHub &rarr; https://github.com/17307" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://das.scusec.org/" title="https://das.scusec.org/" rel="noopener" target="_blank">DAS</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/index.php" title="https://www.sec-wiki.com/index.php" rel="noopener" target="_blank">secwiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.fefairy.com" title="http://blog.fefairy.com" rel="noopener" target="_blank">prettymask</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://herasu.github.io/" title="https://herasu.github.io/" rel="noopener" target="_blank">Fish</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-SERVER"><span class="nav-number">1.</span> <span class="nav-text">TCP SERVER</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#protocol"><span class="nav-number">1.1.</span> <span class="nav-text">protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行server"><span class="nav-number">1.2.</span> <span class="nav-text">运行server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-CLIENT"><span class="nav-number">2.</span> <span class="nav-text">TCP CLIENT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂方式"><span class="nav-number">2.1.</span> <span class="nav-text">工厂方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#schedule"><span class="nav-number">3.</span> <span class="nav-text">schedule</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#延时调用"><span class="nav-number">3.1.</span> <span class="nav-text">延时调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环调用"><span class="nav-number">3.2.</span> <span class="nav-text">循环调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消调用"><span class="nav-number">3.3.</span> <span class="nav-text">取消调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deferred"><span class="nav-number">4.</span> <span class="nav-text">Deferred</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maybeDeferred"><span class="nav-number">4.1.</span> <span class="nav-text">maybeDeferred</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取消任务"><span class="nav-number">5.</span> <span class="nav-text">取消任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DeferredList"><span class="nav-number">6.</span> <span class="nav-text">DeferredList</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">o1hy</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://17307.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://17307.github.io/2019/06/15/twisted-1/";
+    this.page.identifier = "2019/06/15/twisted-1/";
+    this.page.title = 'twisted-1';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://17307.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":100,"hOffset":0,"vOffset":30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
