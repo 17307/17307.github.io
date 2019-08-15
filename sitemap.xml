@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://17307.github.io/2019/02/02/chrome-extension/</loc>
+    
+    <lastmod>2019-08-15T07:28:34.776Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://17307.github.io/2019/07/13/ptToolsChromeExtension2/</loc>
     
     <lastmod>2019-07-13T12:48:03.549Z</lastmod>
@@ -184,21 +191,14 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2019/02/02/chrome-extension/</loc>
-    
-    <lastmod>2019-02-14T11:33:28.165Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://17307.github.io/2018/08/30/ML%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://17307.github.io/2018/09/06/INSERT-INTO%E6%B3%A8%E5%85%A5/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/09/06/INSERT-INTO%E6%B3%A8%E5%85%A5/</loc>
+    <loc>https://17307.github.io/2018/08/30/ML%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -261,6 +261,13 @@
   </url>
   
   <url>
+    <loc>https://17307.github.io/2018/08/30/%E5%90%91mysql%E4%B8%AD%E5%AF%BC%E5%85%A5%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    
+    <lastmod>2019-02-02T11:52:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://17307.github.io/2018/08/30/ubuntu%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/%E5%90%91mysql%E4%B8%AD%E5%AF%BC%E5%85%A5%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://17307.github.io/2018/08/30/%E5%BF%98%E8%AE%B0mysql%E5%AF%86%E7%A0%81/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
@@ -289,13 +296,6 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/%E5%BF%98%E8%AE%B0mysql%E5%AF%86%E7%A0%81/</loc>
-    
-    <lastmod>2019-02-02T11:52:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://17307.github.io/2018/08/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
@@ -310,14 +310,14 @@
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E4%BF%A1/</loc>
+    <loc>https://17307.github.io/2018/08/30/%E9%85%8D%E7%BD%AE%E8%AE%BF%E9%97%AE%E8%99%9A%E6%8B%9F%E6%9C%BAmariadb/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://17307.github.io/2018/08/30/%E9%85%8D%E7%BD%AE%E8%AE%BF%E9%97%AE%E8%99%9A%E6%8B%9F%E6%9C%BAmariadb/</loc>
+    <loc>https://17307.github.io/2018/08/30/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E4%BF%A1/</loc>
     
     <lastmod>2019-02-02T11:52:17.000Z</lastmod>
     
