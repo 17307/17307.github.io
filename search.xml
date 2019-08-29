@@ -116,8 +116,8 @@
         <category>nginx</category>
       </categories>
       <tags>
-        <tag>flask</tag>
         <tag>docker</tag>
+        <tag>flask</tag>
         <tag>nginx</tag>
       </tags>
   </entry>
