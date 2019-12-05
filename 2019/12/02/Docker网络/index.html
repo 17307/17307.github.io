@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="o1hy">
 <meta property="og:description" content="《docker 容器与容器云第二版》&amp;amp; 官方文档读书笔记">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-02T02:42:20.636Z">
+<meta property="og:updated_time" content="2019-12-05T06:57:36.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker网络">
 <meta name="twitter:description" content="《docker 容器与容器云第二版》&amp;amp; 官方文档读书笔记">
@@ -411,12 +411,24 @@
                 
               
 
-              <time title="Created: 2019-12-02 10:39:36 / Modified: 10:42:20" itemprop="dateCreated datePublished" datetime="2019-12-02T10:39:36+08:00">2019-12-02</time>
+              <time title="Created: 2019-12-02 10:39:36" itemprop="dateCreated datePublished" datetime="2019-12-02T10:39:36+08:00">2019-12-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-05 14:57:36" itemprop="dateModified" datetime="2019-12-05T14:57:36+08:00">2019-12-05</time>
               
             
           </span>
@@ -490,6 +502,7 @@
       
         <p>《docker 容器与容器云第二版》&amp; 官方文档读书笔记</p>
 <a id="more"></a>
+<h1 id="Docker网络"><a href="#Docker网络" class="headerlink" title="Docker网络"></a>Docker网络</h1><p>Created: Nov 30, 2019 9:52 PM</p>
 <h1 id="0x00-Docker网络基础"><a href="#0x00-Docker网络基础" class="headerlink" title="0x00 Docker网络基础"></a>0x00 Docker网络基础</h1><h2 id="1）构架"><a href="#1）构架" class="headerlink" title="1）构架"></a>1）构架</h2><p>Docker daemon通过调用 <code>libnetwork</code> 对外提供的API完成网络的创建和管理功能。libnetwork中使用CNM来完成网络功能的提供。CNM包括 沙盒、端点和网络三种组件。</p>
 <ul>
 <li>沙盒：一个沙盒包含了一个容器网络栈的信息。沙盒可以对容器的接口、路由和DNS设置等进行管理。一个沙盒可以有多个端点和多个网络。</li>
@@ -506,12 +519,15 @@
 </ul>
 <p>实例：</p>
 <p>首先创建两个网络</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create backenddocker network create frontend</span><br></pre></td></tr></table></figure>
+<p><code>docker network create backend</code></p>
+<p><code>docker network create frontend</code> </p>
 <p>然后创建容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --it --name c1 --net backend busyboxdocker run --it --name c2 --net backend busyboxdocker run --it --name c3 --net frontend busybox</span><br></pre></td></tr></table></figure>
+<p><code>docker run --it --name c1 --net backend busybox</code></p>
+<p><code>docker run --it --name c2 --net backend busybox</code></p>
+<p><code>docker run --it --name c3 --net frontend busybox</code></p>
 <p>1和2通，2和3不通</p>
 <p>将2加入到frontend网络中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect frontend c2</span><br></pre></td></tr></table></figure>
+<p><code>docker network connect frontend c2</code></p>
 <h2 id="2）bridge驱动实现机制"><a href="#2）bridge驱动实现机制" class="headerlink" title="2）bridge驱动实现机制"></a>2）bridge驱动实现机制</h2><h2 id="3）传统的link"><a href="#3）传统的link" class="headerlink" title="3）传统的link"></a>3）传统的link</h2><ul>
 <li><code>docker run -d --name db mongo</code></li>
 <li><code>docker run -d -P --name web --link db:webdb webapp python app.py</code></li>
@@ -521,7 +537,7 @@
 <p><strong>link究竟做了什么：</strong></p>
 <ul>
 <li>设置接受容器的环境变量<ul>
-<li>设置一个 _NAME 环境变量（ WEBDB_NAME = /web/webdb)</li>
+<li>设置一个 <alias>_NAME 环境变量（ WEBDB_NAME = /web/webdb)</alias></li>
 <li>在源容器中设置的环境变量（ <code>-e --env = []</code> , <code>ENV</code>），也会在接收容器中设置。如：在源容器中 -e doc=docker 则在web容器中： WEBDB_ENV_doc = docker</li>
 <li>为源容器暴露的端口这只环境变量</li>
 </ul>
@@ -540,25 +556,22 @@
 <p>Your app’s network is given a name based on the “project name”, which is based on the name of the directory it lives in. You can override the project name with either the –project-name flag or the COMPOSE_PROJECT_NAME environment variable.</p>
 </blockquote>
 <h2 id="2）设置自己的网络"><a href="#2）设置自己的网络" class="headerlink" title="2）设置自己的网络"></a>2）设置自己的网络</h2><p>top-level的 networks可以用来自定义一个网络，也可以使用一个已经存在的网络</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.5&quot;services:  proxy:    build: ./proxy    networks:      - custom_frontend  app:    build: ./app    networks:      - custom_frontend      - backend  db:    image: postgres    networks:      - backendnetworks:  frontend:    # Use a custom driver        name: custom_frontend  # 重新指定网络名 3.5以上支持    driver: custom-driver-1  backend:    # Use a custom driver which takes special options    driver: custom-driver-2    driver_opts:      foo: &quot;1&quot;      bar: &quot;2&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.5"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  proxy:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./proxy</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">custom_frontend</span></span><br><span class="line"><span class="attr">  app:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./app</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">custom_frontend</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">backend</span></span><br><span class="line"><span class="attr">  db:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">postgres</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">backend</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  frontend:</span></span><br><span class="line">    <span class="comment"># Use a custom driver</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">custom_frontend</span>  <span class="comment"># 重新指定网络名 3.5以上支持</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">custom-driver-1</span></span><br><span class="line"><span class="attr">  backend:</span></span><br><span class="line">    <span class="comment"># Use a custom driver which takes special options</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">custom-driver-2</span></span><br><span class="line"><span class="attr">    driver_opts:</span></span><br><span class="line"><span class="attr">      foo:</span> <span class="string">"1"</span></span><br><span class="line"><span class="attr">      bar:</span> <span class="string">"2"</span></span><br></pre></td></tr></table></figure>
 <h2 id="3）设置默认的网络"><a href="#3）设置默认的网络" class="headerlink" title="3）设置默认的网络"></a>3）设置默认的网络</h2><p>加入一个已经存在的网络</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">networks:  default:    external:      name: my-pre-existing-network</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  default:</span></span><br><span class="line"><span class="attr">    external:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">my-pre-existing-network</span></span><br></pre></td></tr></table></figure>
 <h2 id="4）top-level的网络选项"><a href="#4）top-level的网络选项" class="headerlink" title="4）top-level的网络选项"></a>4）top-level的网络选项</h2><ul>
 <li><p>driver：网络使用的驱动</p>
 <blockquote>
 <p>it is bridge on a single host and overlay on a Swarm.</p>
 </blockquote>
 <ul>
-<li><p>bridge: <a href="https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md" target="_blank" rel="noopener">https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md</a></p>
-</li>
-<li><p>overlay:<a href="https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md" target="_blank" rel="noopener">https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md</a></p>
-</li>
+<li>bridge: <a href="https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md" target="_blank" rel="noopener">https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md</a></li>
+<li>overlay:<a href="https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md" target="_blank" rel="noopener">https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md</a></li>
 <li><p>HOST OR NONE</p>
 <ul>
-<li><p>使用network_mode <a href="https://docs.docker.com/compose/compose-file/#network_mode" target="_blank" rel="noopener">https://docs.docker.com/compose/compose-file/#network_mode</a></p>
-</li>
+<li>使用network_mode <a href="https://docs.docker.com/compose/compose-file/#network_mode" target="_blank" rel="noopener">https://docs.docker.com/compose/compose-file/#network_mode</a></li>
 <li><p>或者如下方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;  services:    web:      networks:        hostnet: &#123;&#125;  networks:    hostnet:      external: true      name: host  services:    web:      ...      networks:        nonet: &#123;&#125;  networks:    nonet:      external: true      name: none  services:    web:      ...      build:        ...        network: host        context: .        ...</span><br></pre></td></tr></table></figure>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">    version:</span> <span class="string">"3.7"</span></span><br><span class="line"><span class="attr">    services:</span></span><br><span class="line"><span class="attr">      web:</span></span><br><span class="line"><span class="attr">        networks:</span></span><br><span class="line"><span class="attr">          hostnet:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      hostnet:</span></span><br><span class="line"><span class="attr">        external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># =========================</span></span><br><span class="line"><span class="attr">    services:</span></span><br><span class="line"><span class="attr">      web:</span></span><br><span class="line">        <span class="string">...</span></span><br><span class="line"><span class="attr">        networks:</span></span><br><span class="line"><span class="attr">          nonet:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      nonet:</span></span><br><span class="line"><span class="attr">        external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">none</span></span><br><span class="line">    <span class="comment"># =========================</span></span><br><span class="line"><span class="attr">    services:</span></span><br><span class="line"><span class="attr">      web:</span></span><br><span class="line">        <span class="string">...</span></span><br><span class="line"><span class="attr">        build:</span></span><br><span class="line">          <span class="string">...</span></span><br><span class="line"><span class="attr">          network:</span> <span class="string">host</span></span><br><span class="line"><span class="attr">          context:</span> <span class="string">.</span></span><br><span class="line">          <span class="string">...</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -569,56 +582,42 @@
 <li>指定选项列表作为键值对，以传递给该网络的驱动程序。</li>
 </ul>
 </li>
-<li><p>enable_ipv6</p>
-</li>
+<li>enable_ipv6</li>
 <li><p>ipam</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipam:    driver: default    config:      - subnet: 172.28.0.0/16        ip_range: 172.28.5.0/24        gateway: 172.28.5.254        aux_addresses:          host1: 172.28.1.5          host2: 172.28.1.6          host3: 172.28.1.7    options:      foo: bar      baz: &quot;0&quot;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ipam:</span></span><br><span class="line"><span class="attr">  driver:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">  config:</span></span><br><span class="line"><span class="attr">    - subnet:</span> <span class="number">172.28</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span></span><br><span class="line"><span class="attr">      ip_range:</span> <span class="number">172.28</span><span class="number">.5</span><span class="number">.0</span><span class="string">/24</span></span><br><span class="line"><span class="attr">      gateway:</span> <span class="number">172.28</span><span class="number">.5</span><span class="number">.254</span></span><br><span class="line"><span class="attr">      aux_addresses:</span></span><br><span class="line"><span class="attr">        host1:</span> <span class="number">172.28</span><span class="number">.1</span><span class="number">.5</span></span><br><span class="line"><span class="attr">        host2:</span> <span class="number">172.28</span><span class="number">.1</span><span class="number">.6</span></span><br><span class="line"><span class="attr">        host3:</span> <span class="number">172.28</span><span class="number">.1</span><span class="number">.7</span></span><br><span class="line"><span class="attr">  options:</span></span><br><span class="line"><span class="attr">    foo:</span> <span class="string">bar</span></span><br><span class="line"><span class="attr">baz:</span> <span class="string">"0"</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ul>
-<li><p>internal:true</p>
-<ul>
-<li>创建一个隔离网络</li>
-</ul>
-</li>
-<li><p>labels:</p>
-<ul>
-<li>元数据</li>
-</ul>
-</li>
-<li><p>external</p>
-<ul>
-<li><p>true 一个已经存在的网络</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;  services:    proxy:      build: ./proxy      networks:        - outside        - default    app:      build: ./app      networks:        - default  networks:    outside:      external: true</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>- 具体指定已经存在的网络的名称
+<pre><code>- internal:true
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">networks:    outside: # service中仍然使用这个      external:        name: actual-name-of-network # 是指的已经存在的网络名称</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>name （Added in version 3.5 file format）</p>
-<ul>
-<li><p>命名这个网络</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;  networks:    network1:  # service使用的名称      name: my-app-net # 网络名称</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="5）services下-network的选项"><a href="#5）services下-network的选项" class="headerlink" title="5）services下 network的选项"></a>5）services下 network的选项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services:  some-service:    networks:     - some-network # 要加入的网络     - other-network</span><br></pre></td></tr></table></figure>
+    - 创建一个隔离网络
+- labels:
+
+    - 元数据
+- external
+    - true 一个已经存在的网络
+
+        <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.7"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  proxy:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./proxy</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">outside</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">default</span></span><br><span class="line"><span class="attr">  app:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">./app</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">default</span></span><br><span class="line">        </span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">      outside:</span></span><br><span class="line"><span class="attr">external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+- 具体指定已经存在的网络的名称
+
+    <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  outside:</span> <span class="comment"># service中仍然使用这个</span></span><br><span class="line"><span class="attr">        external:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">actual-name-of-network</span> <span class="comment"># 是指的已经存在的网络名称</span></span><br></pre></td></tr></table></figure>
+
+
+- name （Added in version 3.5 file format）
+    - 命名这个网络
+
+        <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.7"</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  network1:</span>  <span class="comment"># service使用的名称</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">my-app-net</span> <span class="comment"># 网络名称</span></span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="5）services下-network的选项"><a href="#5）services下-network的选项" class="headerlink" title="5）services下 network的选项"></a>5）services下 network的选项</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  some-service:</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">     -</span> <span class="string">some-network</span> <span class="comment"># 要加入的网络</span></span><br><span class="line"><span class="bullet">     -</span> <span class="string">other-network</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>alias 别名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services:    some-service:      networks:        some-network:          aliases:           - alias1           - alias3        other-network:          aliases:           - alias2</span><br></pre></td></tr></table></figure>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  some-service:</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      some-network:</span></span><br><span class="line"><span class="attr">        aliases:</span></span><br><span class="line"><span class="bullet">         -</span> <span class="string">alias1</span></span><br><span class="line"><span class="bullet">         -</span> <span class="string">alias3</span></span><br><span class="line"><span class="attr">      other-network:</span></span><br><span class="line"><span class="attr">        aliases:</span></span><br><span class="line"><span class="bullet">         -</span> <span class="string">alias2</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>IPV4_ADDRESS, IPV6_ADDRESS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;  services:    app:      image: nginx:alpine      networks:        app_net:          ipv4_address: 172.16.238.10          ipv6_address: 2001:3984:3989::10  networks:    app_net:      ipam:        driver: default        config:          - subnet: &quot;172.16.238.0/24&quot;          - subnet: &quot;2001:3984:3989::/64&quot;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.7"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  app:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">nginx:alpine</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      app_net:</span></span><br><span class="line"><span class="attr">        ipv4_address:</span> <span class="number">172.16</span><span class="number">.238</span><span class="number">.10</span></span><br><span class="line"><span class="attr">        ipv6_address:</span> <span class="number">2001</span><span class="string">:3984:3989::10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  app_net:</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line"><span class="attr">        - subnet:</span> <span class="string">"172.16.238.0/24"</span></span><br><span class="line"><span class="attr">    - subnet:</span> <span class="string">"2001:3984:3989::/64"</span></span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
 <li><p>PRIORITY 网络连接顺序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;2.4&quot;  services:    app:      image: busybox      command: top      networks:        app_net_1:          priority: 1000        app_net_2:        app_net_3:          priority: 100  networks:    app_net_1:    app_net_2:    app_net_3:</span><br></pre></td></tr></table></figure>
-</li>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"2.4"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  app:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">top</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="attr">      app_net_1:</span></span><br><span class="line"><span class="attr">        priority:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">      app_net_2:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">      app_net_3:</span></span><br><span class="line"><span class="attr">        priority:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  app_net_1:</span></span><br><span class="line"><span class="attr">  app_net_2:</span></span><br><span class="line"><span class="attr">  app_net_3:</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -901,7 +900,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-Docker网络基础"><span class="nav-number">1.</span> <span class="nav-text">0x00 Docker网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）构架"><span class="nav-number">1.1.</span> <span class="nav-text">1）构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）bridge驱动实现机制"><span class="nav-number">1.2.</span> <span class="nav-text">2）bridge驱动实现机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）传统的link"><span class="nav-number">1.3.</span> <span class="nav-text">3）传统的link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4）新的link"><span class="nav-number">1.4.</span> <span class="nav-text">4）新的link</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-docker-compose-中的网络"><span class="nav-number">2.</span> <span class="nav-text">0x01 docker-compose 中的网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）不设置"><span class="nav-number">2.1.</span> <span class="nav-text">1）不设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）设置自己的网络"><span class="nav-number">2.2.</span> <span class="nav-text">2）设置自己的网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）设置默认的网络"><span class="nav-number">2.3.</span> <span class="nav-text">3）设置默认的网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4）top-level的网络选项"><span class="nav-number">2.4.</span> <span class="nav-text">4）top-level的网络选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5）services下-network的选项"><span class="nav-number">2.5.</span> <span class="nav-text">5）services下 network的选项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker网络"><span class="nav-number">1.</span> <span class="nav-text">Docker网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-Docker网络基础"><span class="nav-number">2.</span> <span class="nav-text">0x00 Docker网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）构架"><span class="nav-number">2.1.</span> <span class="nav-text">1）构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）bridge驱动实现机制"><span class="nav-number">2.2.</span> <span class="nav-text">2）bridge驱动实现机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）传统的link"><span class="nav-number">2.3.</span> <span class="nav-text">3）传统的link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4）新的link"><span class="nav-number">2.4.</span> <span class="nav-text">4）新的link</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-docker-compose-中的网络"><span class="nav-number">3.</span> <span class="nav-text">0x01 docker-compose 中的网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）不设置"><span class="nav-number">3.1.</span> <span class="nav-text">1）不设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）设置自己的网络"><span class="nav-number">3.2.</span> <span class="nav-text">2）设置自己的网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）设置默认的网络"><span class="nav-number">3.3.</span> <span class="nav-text">3）设置默认的网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4）top-level的网络选项"><span class="nav-number">3.4.</span> <span class="nav-text">4）top-level的网络选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5）services下-network的选项"><span class="nav-number">3.5.</span> <span class="nav-text">5）services下 network的选项</span></a></li></ol></li></ol></div>
             
 
           </div>
