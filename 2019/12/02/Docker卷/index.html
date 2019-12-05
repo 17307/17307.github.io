@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="o1hy">
 <meta property="og:description" content="《docker 容器与容器云第二版》&amp;amp; 官方文档读书笔记">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-02T02:42:36.685Z">
+<meta property="og:updated_time" content="2019-12-05T12:38:13.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker卷">
 <meta name="twitter:description" content="《docker 容器与容器云第二版》&amp;amp; 官方文档读书笔记">
@@ -411,12 +411,24 @@
                 
               
 
-              <time title="Created: 2019-12-02 10:38:27 / Modified: 10:42:36" itemprop="dateCreated datePublished" datetime="2019-12-02T10:38:27+08:00">2019-12-02</time>
+              <time title="Created: 2019-12-02 10:38:27" itemprop="dateCreated datePublished" datetime="2019-12-02T10:38:27+08:00">2019-12-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-05 20:38:13" itemprop="dateModified" datetime="2019-12-05T20:38:13+08:00">2019-12-05</time>
               
             
           </span>
@@ -490,34 +502,35 @@
       
         <p>《docker 容器与容器云第二版》&amp; 官方文档读书笔记</p>
 <a id="more"></a>
-<h1 id="0x00-创建卷"><a href="#0x00-创建卷" class="headerlink" title="0x00 创建卷"></a>0x00 创建卷</h1><ul>
-<li><p><code>docker volume create --name test</code> 用来创建一个卷</p>
-</li>
-<li><p>用户在 <code>docker run</code> 或 <code>docker create</code> 创建容器时，也可以使用  <code>-v</code> 为容器添加卷</p>
+<h1 id="Docker卷"><a href="#Docker卷" class="headerlink" title="Docker卷"></a>Docker卷</h1><p>Created: Nov 30, 2019 8:44 PM</p>
+<h1 id="一-创建卷"><a href="#一-创建卷" class="headerlink" title="一 创建卷"></a>一 创建卷</h1><ul>
+<li><code>docker volume create --name test</code> 用来创建一个卷</li>
+<li><p>用户在 <code>docker run</code> 或 <code>docker create</code> 创建容器时，也可以使用 <code>-v</code> 为容器添加卷</p>
 <ul>
 <li><p>以下命令随机创建一个卷</p>
-<p><code>docker run -d -v /data busybox /bin/bash</code></p>
+<p>  <code>docker run -d -v /data busybox /bin/bash</code></p>
 </li>
 <li><p>以下命令创建一个指定名字的卷</p>
-<p><code>docker run -d -v test:/data busybox /bin/bash</code></p>
-<p>docker 会在宿主机的 <em>/var/lib/docker/volume/</em> 中创建一个以 volume ID （上面的 <code>test</code> ）为名的目录，并将内容存储在 <code>_data</code> 中。</p>
+<p>  <code>docker run -d -v test:/data busybox /bin/bash</code> </p>
+<p>  docker 会在宿主机的 <em>/var/lib/docker/volume/</em> 中创建一个以 volume ID （上面的 <code>test</code> ）为名的目录，并将内容存储在 <code>_data</code> 中。</p>
 </li>
 </ul>
 </li>
 </ul>
-<p>在docker run使用 -v 挂在本机文件时候，必须给出绝对路径，否则会在 <code>/bar/lib/docker/volumes/</code> 下创建，而在 docker-compose.yml 中使用，可以使用相对路径</p>
-<h1 id="0x01-挂载卷"><a href="#0x01-挂载卷" class="headerlink" title="0x01 挂载卷"></a>0x01 挂载卷</h1><p>用户在 <code>docker run</code> 或 <code>docker create</code> 创建容器时，也可以使用 <code>-v</code> 为容器添加卷，用户可以将自行创建或者由docker创建的volume挂载到容器中，也可以将宿主机上的目录或者文件作为volume挂载到容器中。</p>
-<h2 id="1）方法一"><a href="#1）方法一" class="headerlink" title="1）方法一"></a>1）方法一</h2><ul>
+<p>在docker run使用 -v 的时候，必须给出绝对路劲，否则会在 <code>/bar/lib/docker/volumes/</code> 下创建</p>
+<p>而在 docker-compose.yml 中使用，可以使用相对路径</p>
+<h1 id="二-挂载卷"><a href="#二-挂载卷" class="headerlink" title="二 挂载卷"></a>二 挂载卷</h1><p>用户在 <code>docker run</code> 或 <code>docker create</code> 创建容器时，也可以使用 <code>-v</code> 为容器添加卷，用户可以将自行创建或者由docker创建的volume挂载到容器中，也可以将宿主机上的目录或者文件作为volume挂载到容器中。</p>
+<h2 id="2-1-方法一"><a href="#2-1-方法一" class="headerlink" title="2.1 方法一"></a>2.1 方法一</h2><ul>
 <li><p>先创建，再挂载</p>
-<p><code>docker volume create --name test</code>  (可省略)</p>
-<p><code>docker run -d -v test:/data busybox /bin/bash</code></p>
+<p>  <code>docker volume create --name test</code>  (可省略)</p>
+<p>  <code>docker run -d -v test:/data busybox /bin/bash</code> </p>
 </li>
 <li><p>用户可以使用如下命令创建一个随机ID的volume。</p>
-<p><code>docker run -d -v /data busybox /bin/bash</code></p>
+<p>  <code>docker run -d -v /data busybox /bin/bash</code></p>
 </li>
 </ul>
-<h2 id="2）方法二"><a href="#2）方法二" class="headerlink" title="2）方法二"></a>2）方法二</h2><ul>
-<li>docker 也允许我们挂载宿主机的目录到容器中<ul>
+<h2 id="2-2-方法二"><a href="#2-2-方法二" class="headerlink" title="2.2 方法二"></a>2.2 方法二</h2><p>docker 也允许我们挂载宿主机的目录到容器中</p>
+<ul>
 <li>必须使用绝对路径。</li>
 <li>如果宿主机不存在，则创建空</li>
 <li>如果镜像中原有文件夹存在，则原有的内容被隐藏，保持和宿主机相同</li>
@@ -529,131 +542,141 @@
 </li>
 <li>使用多个 <code>-v</code> 挂载多个</li>
 </ul>
-</li>
-</ul>
-<h1 id="0x02-Dockerfile-VOLUME"><a href="#0x02-Dockerfile-VOLUME" class="headerlink" title="0x02 Dockerfile VOLUME"></a>0x02 Dockerfile VOLUME</h1><p>使用Dockerfile的 VOLUME</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME /data</span><br></pre></td></tr></table></figure>
+<h1 id="三-Dockerfile-VOLUME"><a href="#三-Dockerfile-VOLUME" class="headerlink" title="三 Dockerfile VOLUME"></a>三 Dockerfile VOLUME</h1><p>使用Dockerfile的 VOLUME</p>
+<p><code>VOLUME /data</code> </p>
 <p>在使用 docker build时生成镜像，并启动容器时，会挂载一个 volume 到 <code>/data</code> 。<strong>如果镜像中存在 <code>/data</code> 这个文件夹，这个文件夹的内容将全部被复制到宿主机对应的文件夹中。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [&quot;/data1&quot;,&quot;/data2&quot;]</span><br></pre></td></tr></table></figure>
+<p><code>VOLUME [&quot;/data1&quot;,&quot;/data2&quot;]</code></p>
 <p>与 <code>-v</code> 不同的是，VOLUME指令不能挂载 主机中指定的文件夹。这是为了保证docker的可移植性。</p>
 <p>需注意，在Dockerfile中使用<code>VOLUME</code>，Dockerfile后的操作这个volume的代码不会生效。这是因为docker每一层的 commit机制，后面的commit后没有保存。</p>
-<h1 id="0x03-共享卷"><a href="#0x03-共享卷" class="headerlink" title="0x03 共享卷"></a>0x03 共享卷</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name vol_use --volumes-from vol_simple ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+<h1 id="四-共享卷"><a href="#四-共享卷" class="headerlink" title="四 共享卷"></a>四 共享卷</h1><p><code>docker run --rm -it --name vol_use --volumes-from vol_simple ubuntu /bin/bash</code> </p>
 <ul>
 <li>新创建的容器，与之前创建的容器 <code>vol_simple</code> 会共享卷，如果被共享的容器有多个卷，那新容器也又多个，并且挂载的目的目录页相同。</li>
 <li>可以使用多个 <code>--volumes-from</code> 共享多个容器的卷。</li>
 <li>一个容器挂载了一个volume，即使它停止运行了，该volume仍然存在，其他容器也可以使用 <code>--volume-fom</code> 与这个容器共享volume。如果有一些数据，如配置文件、数据文件，要在多个荣期间共享，一张常见的作法是创建一个数据容器，其他的容器与之共享volume。</li>
 </ul>
-<h1 id="0x04-删除卷"><a href="#0x04-删除卷" class="headerlink" title="0x04 删除卷"></a>0x04 删除卷</h1><p>在 <code>rm</code> 容器时，不会删除卷对应的目录，有以下删除方法：</p>
+<h1 id="五-删除卷"><a href="#五-删除卷" class="headerlink" title="五 删除卷"></a>五 删除卷</h1><p>在 <code>rm</code> 容器时，不会删除卷对应的目录，有以下删除方法：</p>
 <ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume rm &lt;volume_name&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
+<li><code>docker volume rm &lt;volume_name&gt;</code><ul>
 <li>只会删除没有在使用的</li>
 </ul>
-<ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -v &lt;container_name&gt;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
+<li><code>docker rm -v &lt;container_name&gt;</code><ul>
 <li>只删除未命名的</li>
 </ul>
-<ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm ...</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
+<li><code>docker run --rm ...</code><ul>
 <li>只删除未命名的</li>
 </ul>
-<h1 id="0x05-备份、恢复与迁移"><a href="#0x05-备份、恢复与迁移" class="headerlink" title="0x05 备份、恢复与迁移"></a>0x05 备份、恢复与迁移</h1><p>通过复制粘贴可行，但是不推荐。推荐如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cun --rm --volumes-from vol_simple -v $(pwd):/backup ubuntu tar cvf /backup/data.tar /data</span><br></pre></td></tr></table></figure>
-<h1 id="0x06-卷的原理"><a href="#0x06-卷的原理" class="headerlink" title="0x06 卷的原理"></a>0x06 卷的原理</h1><p>卷的本质属于挂载</p>
+</li>
+</ul>
+<h1 id="六-备份、恢复与迁移"><a href="#六-备份、恢复与迁移" class="headerlink" title="六 备份、恢复与迁移"></a>六 备份、恢复与迁移</h1><p>通过复制粘贴可行，但是不推荐。推荐如下：</p>
+<p><code>docker cun --rm --volumes-from vol_simple -v $(pwd):/backup ubuntu tar cvf /backup/data.tar /data</code> </p>
+<h1 id="七-卷的原理"><a href="#七-卷的原理" class="headerlink" title="七 卷的原理"></a>七 卷的原理</h1><p>卷的本质属于挂载</p>
 <p><code>docker run -v /data busybox /bin/bash</code> 相当于如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount(&quot;/var/lib/docker/volumes/volume_id/_data&quot;,&quot;rootfs/root&quot;,&quot;none&quot;,...)</span><br></pre></td></tr></table></figure>
-<h1 id="0x07-docker-compose中的卷"><a href="#0x07-docker-compose中的卷" class="headerlink" title="0x07 docker-compose中的卷"></a>0x07 docker-compose中的卷</h1><p>在docker-compose中，卷的设置规则和docker run相同.</p>
-<h2 id="1）services下的volumes"><a href="#1）services下的volumes" class="headerlink" title="1）services下的volumes"></a>1）services下的volumes</h2><h3 id="短语法"><a href="#短语法" class="headerlink" title="短语法"></a>短语法</h3><blockquote>
+<p><code>mount(&quot;/var/lib/docker/volumes/volume_id/_data&quot;,&quot;rootfs/root&quot;,&quot;none&quot;,...)</code></p>
+<h1 id="八-docker-compose中的卷"><a href="#八-docker-compose中的卷" class="headerlink" title="八 docker-compose中的卷"></a>八 docker-compose中的卷</h1><p>在docker-compose中，卷的设置规则和docker run相同.</p>
+<h2 id="8-1-services下的volumes"><a href="#8-1-services下的volumes" class="headerlink" title="8.1 services下的volumes"></a>8.1 services下的volumes</h2><h3 id="短语法"><a href="#短语法" class="headerlink" title="短语法"></a>短语法</h3><blockquote>
 <p>Relative paths should always begin with . or ..</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line">  # Just specify a path and let the Engine create a volume </span><br><span class="line">    # 类似于 Dockerfile 中的 VOLUME</span><br><span class="line">  - /var/lib/mysql</span><br><span class="line"></span><br><span class="line">  # Specify an absolute path mapping</span><br><span class="line">  # 指定一个绝对路径</span><br><span class="line">  - /opt/data:/var/lib/mysql</span><br><span class="line"></span><br><span class="line">  # Path on the host, relative to the Compose file</span><br><span class="line">    # 可以使用相对路径挂载文件，这点与docker run不同。</span><br><span class="line">  - ./cache:/tmp/cache</span><br><span class="line"></span><br><span class="line">  # User-relative path</span><br><span class="line">  - ~/configs:/etc/configs/:ro</span><br><span class="line"></span><br><span class="line">  # Named volume</span><br><span class="line">    # 挂载一个命名卷</span><br><span class="line">  - datavolume:/var/lib/mysql</span><br></pre></td></tr></table></figure>
-<h3 id="长语法"><a href="#长语法" class="headerlink" title="长语法"></a>长语法</h3><ul>
-<li><p><code>type</code>: 挂载的类型 <code>volume</code>, <code>bind</code>, <code>tmpfs</code> or <code>npipe</code></p>
-</li>
-<li><p><code>source</code>: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level <code>volumes</code> key. Not applicable for a tmpfs mount.</p>
-<ul>
+<pre><code>volumes:
+  # Just specify a path and let the Engine create a volume 
+    # 类似于 Dockerfile 中的 VOLUME
+  - /var/lib/mysql
+
+  # Specify an absolute path mapping
+  # 指定一个绝对路径
+  - /opt/data:/var/lib/mysql
+
+  # Path on the host, relative to the Compose file
+    # 可以使用相对路径挂载文件，这点与docker run不同。
+  - ./cache:/tmp/cache
+
+  # User-relative path
+  - ~/configs:/etc/configs/:ro
+
+  # Named volume
+    # 挂载一个命名卷
+  - datavolume:/var/lib/mysql
+</code></pre><h3 id="长语法"><a href="#长语法" class="headerlink" title="长语法"></a>长语法</h3><ul>
+<li><code>type</code>: 挂载的类型 <code>volume</code>, <code>bind</code>, <code>tmpfs</code> or <code>npipe</code></li>
+<li><code>source</code>: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the <a href="https://docs.docker.com/compose/compose-file/#volume-configuration-reference" target="_blank" rel="noopener">top-level <code>volumes</code> key</a>. Not applicable for a tmpfs mount.<ul>
 <li>挂载的源，如果type是bind，则提供一个路径</li>
 <li>如果type是volume则提供卷名</li>
 <li>如果是tmpfs则不提供</li>
 </ul>
 </li>
-<li><p><code>target</code>: the path in the container where the volume is mounted</p>
-<ul>
+<li><code>target</code>: the path in the container where the volume is mounted<ul>
 <li>容器中的位置</li>
 </ul>
 </li>
-<li><p><code>read_only</code>: flag to set the volume as read-only</p>
-<ul>
+<li><code>read_only</code>: flag to set the volume as read-only<ul>
 <li>只读</li>
 </ul>
 </li>
-<li><p><code>bind</code>: configure additional bind options</p>
-<ul>
+<li><code>bind</code>: configure additional bind options<ul>
 <li><code>propagation</code>: the propagation mode used for the bind</li>
 </ul>
 </li>
-<li><p><code>volume</code>: configure additional volume options</p>
-<ul>
+<li><code>volume</code>: configure additional volume options<ul>
 <li><code>nocopy</code>: flag to disable copying of data from a container when a volume is created</li>
 </ul>
 </li>
-<li><p><code>tmpfs</code>: configure additional tmpfs options</p>
-<ul>
+<li><code>tmpfs</code>: configure additional tmpfs options<ul>
 <li><code>size</code>: the size for the tmpfs mount in bytes</li>
 </ul>
 </li>
-<li><p><code>consistency</code>: the consistency requirements of the mount, one of <code>consistent</code></p>
-<p> (host and container have identical view), <code>cached</code> (read cache, host view is authoritative) or <code>delegated</code> (read-write cache, container’s view is authoritative)</p>
-<ul>
+<li><code>consistency</code>: the consistency requirements of the mount, one of <code>consistent</code> (host and container have identical view), <code>cached</code> (read cache, host view is authoritative) or <code>delegated</code> (read-write cache, container’s view is authoritative)<ul>
 <li>和卷的更新有关</li>
 </ul>
 </li>
 </ul>
-<h2 id="2）top-level的卷"><a href="#2）top-level的卷" class="headerlink" title="2）top-level的卷"></a>2）top-level的卷</h2><h3 id="在docker-compose中声明一个卷"><a href="#在docker-compose中声明一个卷" class="headerlink" title="在docker-compose中声明一个卷"></a>在docker-compose中声明一个卷</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: db</span><br><span class="line">    volumes:</span><br><span class="line">      - data-volume:/var/lib/db</span><br><span class="line">  backup:</span><br><span class="line">    image: backup-service</span><br><span class="line">    volumes:</span><br><span class="line">      - data-volume:/var/lib/backup/data</span><br><span class="line"></span><br><span class="line">volumes:</span><br><span class="line">  data-volume:</span><br></pre></td></tr></table></figure>
-<p>当声明的卷参数为空时，使用默认参数</p>
+<h2 id="8-2-top-level的卷"><a href="#8-2-top-level的卷" class="headerlink" title="8.2 top-level的卷"></a>8.2 top-level的卷</h2><h3 id="在docker-compose中声明一个卷"><a href="#在docker-compose中声明一个卷" class="headerlink" title="在docker-compose中声明一个卷"></a>在docker-compose中声明一个卷</h3><pre><code>version: &quot;3.7&quot;
+
+services:
+  db:
+    image: db
+    volumes:
+      - data-volume:/var/lib/db
+  backup:
+    image: backup-service
+    volumes:
+      - data-volume:/var/lib/backup/data
+
+volumes:
+  data-volume:
+</code></pre><p>当声明的卷参数为空时，使用默认参数</p>
 <p><a href="https://docs.docker.com/compose/compose-file/#volume-configuration-reference" target="_blank" rel="noopener">https://docs.docker.com/compose/compose-file/#volume-configuration-reference</a></p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li><p>driver</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p><strong>driver</strong></p>
 <p>卷的驱动</p>
-</li>
-<li><p>driver_opts</p>
-<ul>
-<li>传入到驱动的变量</li>
-</ul>
-</li>
-<li><p>external</p>
-<ul>
-<li><p>如果设置为true，则指定此卷是在Compose之外创建的。 docker-compose up不会尝试创建它，如果不存在，则会引发错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;</span><br><span class="line">    </span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    volumes:</span><br><span class="line">      - data:/var/lib/postgresql/data</span><br><span class="line">    </span><br><span class="line">volumes:</span><br><span class="line">  data:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>在下面的示例中，Compose不会尝试创建名为[projectname] _data的卷，而是查找一个简单的名为data的现有卷，并将其装入db服务的容器中。
-</code></pre><ul>
-<li><p>通过name指定外部卷的名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line">  data:</span><br><span class="line">    external:</span><br><span class="line">      name: actual-name-of-volume</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>name （3.4以上）</p>
-<ul>
-<li><p>卷的名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.7&quot;</span><br><span class="line">volumes:</span><br><span class="line">  data:</span><br><span class="line">    name: my-app-data</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>lables 元数据</p>
-</li>
-</ul>
+<p><strong>driver_opts</strong></p>
+<p>传入到驱动的变量</p>
+<p><strong>external</strong></p>
+<p>通过name指定外部卷的名称</p>
+<pre><code>volumes:
+  data:
+    external:
+      name: actual-name-of-volume
+</code></pre><p>如果设置为true，则指定此卷是在Compose之外创建的。 docker-compose up不会尝试创建它，如果不存在，则会引发错误。</p>
+<pre><code>version: &quot;3.7&quot;
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
+    external: true
+</code></pre><p>在下面的示例中，Compose不会尝试创建名为[projectname] _data的卷，而是查找一个简单的名为data的现有卷，并将其装入db服务的容器中。</p>
+<p><strong>name （3.4以上）</strong></p>
+<p>卷的名称</p>
+<pre><code>version: &quot;3.7&quot;
+volumes:
+  data:
+    name: my-app-data
+</code></pre><p><strong>lables</strong> </p>
+<p>元数据</p>
 
       
     </div>
@@ -939,7 +962,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-创建卷"><span class="nav-number">1.</span> <span class="nav-text">0x00 创建卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-挂载卷"><span class="nav-number">2.</span> <span class="nav-text">0x01 挂载卷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）方法一"><span class="nav-number">2.1.</span> <span class="nav-text">1）方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）方法二"><span class="nav-number">2.2.</span> <span class="nav-text">2）方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-Dockerfile-VOLUME"><span class="nav-number">3.</span> <span class="nav-text">0x02 Dockerfile VOLUME</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-共享卷"><span class="nav-number">4.</span> <span class="nav-text">0x03 共享卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-删除卷"><span class="nav-number">5.</span> <span class="nav-text">0x04 删除卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x05-备份、恢复与迁移"><span class="nav-number">6.</span> <span class="nav-text">0x05 备份、恢复与迁移</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x06-卷的原理"><span class="nav-number">7.</span> <span class="nav-text">0x06 卷的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x07-docker-compose中的卷"><span class="nav-number">8.</span> <span class="nav-text">0x07 docker-compose中的卷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1）services下的volumes"><span class="nav-number">8.1.</span> <span class="nav-text">1）services下的volumes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语法"><span class="nav-number">8.1.1.</span> <span class="nav-text">短语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长语法"><span class="nav-number">8.1.2.</span> <span class="nav-text">长语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）top-level的卷"><span class="nav-number">8.2.</span> <span class="nav-text">2）top-level的卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在docker-compose中声明一个卷"><span class="nav-number">8.2.1.</span> <span class="nav-text">在docker-compose中声明一个卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">8.2.2.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker卷"><span class="nav-number">1.</span> <span class="nav-text">Docker卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一-创建卷"><span class="nav-number">2.</span> <span class="nav-text">一 创建卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-挂载卷"><span class="nav-number">3.</span> <span class="nav-text">二 挂载卷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-方法一"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-方法二"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-Dockerfile-VOLUME"><span class="nav-number">4.</span> <span class="nav-text">三 Dockerfile VOLUME</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-共享卷"><span class="nav-number">5.</span> <span class="nav-text">四 共享卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-删除卷"><span class="nav-number">6.</span> <span class="nav-text">五 删除卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-备份、恢复与迁移"><span class="nav-number">7.</span> <span class="nav-text">六 备份、恢复与迁移</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-卷的原理"><span class="nav-number">8.</span> <span class="nav-text">七 卷的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-docker-compose中的卷"><span class="nav-number">9.</span> <span class="nav-text">八 docker-compose中的卷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-services下的volumes"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 services下的volumes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语法"><span class="nav-number">9.1.1.</span> <span class="nav-text">短语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长语法"><span class="nav-number">9.1.2.</span> <span class="nav-text">长语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-top-level的卷"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 top-level的卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在docker-compose中声明一个卷"><span class="nav-number">9.2.1.</span> <span class="nav-text">在docker-compose中声明一个卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">9.2.2.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
