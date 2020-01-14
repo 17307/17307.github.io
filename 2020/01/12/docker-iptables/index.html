@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'EJEZINIHYM',
+      apiKey: 'bd8c08bd8abb18a323382649a08df5e6',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="docker容器流量流向分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker的流量在iptables下的流向">
+<meta property="og:url" content="https://17307.github.io/2020/01/12/docker-iptables/index.html">
+<meta property="og:site_name" content="o1hy">
+<meta property="og:description" content="docker容器流量流向分析">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%201.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%202.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%203.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%204.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%205.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%206.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%207.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%208.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%209.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2010.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2011.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2012.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2013.png">
+<meta property="og:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2014.png">
+<meta property="og:updated_time" content="2020-01-14T08:45:57.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker的流量在iptables下的流向">
+<meta name="twitter:description" content="docker容器流量流向分析">
+<meta name="twitter:image" content="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://17307.github.io/2020/01/12/docker-iptables/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>docker的流量在iptables下的流向 | o1hy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">o1hy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-notion">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="https://www.notion.so/caac5717dc0d48a8abaeca709cf8e6f7" rel="noopener" target="_blank"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>notion</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://17307.github.io/2020/01/12/docker-iptables/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="o1hy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="o1hy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker的流量在iptables下的流向
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-01-12 17:32:51" itemprop="dateCreated datePublished" datetime="2020-01-12T17:32:51+08:00">2020-01-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-01-14 16:45:57" itemprop="dateModified" datetime="2020-01-14T16:45:57+08:00">2020-01-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2020/01/12/docker-iptables/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/12/docker-iptables/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled.png" alt="DOCKER%20IPTABLES/Untitled.png"></p>
+<p>docker容器流量流向分析</p>
+<a id="more"></a>
+<h1 id="一、实验：docker容器-curl-外网"><a href="#一、实验：docker容器-curl-外网" class="headerlink" title="一、实验：docker容器 curl 外网"></a>一、实验：docker容器 curl 外网</h1><p>在docker容器中 curl <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<h2 id="1-1、流出的数据包"><a href="#1-1、流出的数据包" class="headerlink" title="1.1、流出的数据包"></a>1.1、流出的数据包</h2><p>DOCKER容器内：OUTPUT → POSTROUTING → 宿主机中：PREROUTING → FORWARD → POSTROUTING  <strong>(在宿主机内，由docker0网卡流入，ens192网卡流出)</strong> </p>
+<h3 id="容器内监听"><a href="#容器内监听" class="headerlink" title="容器内监听"></a>容器内监听</h3><pre><code>iptables -t raw -I OUTPUT -p tcp -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I POSTROUTING -p tcp -d 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%201.png" alt="DOCKER%20IPTABLES/Untitled%201.png"></p>
+<h3 id="宿主机内监听"><a href="#宿主机内监听" class="headerlink" title="宿主机内监听"></a>宿主机内监听</h3><pre><code>iptables -t raw -I PREROUTING -p tcp -i docker0 -d 39.156.66.14 -j ACCEPT
+
+iptables -t mangle -I FORWARD -p tcp -i docker0 -o docker0 -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I FORWARD -p tcp -i docker0 -o ens192 -d 39.156.66.14 -j ACCEPT
+
+iptables -t mangle -I POSTROUTING -p tcp -o docker0 -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I POSTROUTING -p tcp -o ens192 -d 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%202.png" alt="DOCKER%20IPTABLES/Untitled%202.png"></p>
+<h3 id="ICMP-情况"><a href="#ICMP-情况" class="headerlink" title="ICMP 情况"></a>ICMP 情况</h3><p>容器内监听规则</p>
+<pre><code>iptables -t raw -I OUTPUT -p icmp -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I POSTROUTING -p icmp -d 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%203.png" alt="DOCKER%20IPTABLES/Untitled%203.png"></p>
+<p>在宿主机中监听</p>
+<pre><code>iptables -t raw -I PREROUTING -p icmp -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I FORWARD -p icmp -d 39.156.66.14 -j ACCEPT
+iptables -t mangle -I POSTROUTING -p icmp -d 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%204.png" alt="DOCKER%20IPTABLES/Untitled%204.png"></p>
+<h2 id="1-2、流入的数据包"><a href="#1-2、流入的数据包" class="headerlink" title="1.2、流入的数据包"></a>1.2、流入的数据包</h2><p>宿主机内:PREROUTING → FORWARD → POSTROUTING → 容器内：PREROUTING → INPUT <strong>（在宿主机内，由ens192流入，docker0流出）</strong></p>
+<p>先看容器内收到的报文数量为7</p>
+<h3 id="宿主机监听"><a href="#宿主机监听" class="headerlink" title="宿主机监听"></a>宿主机监听</h3><pre><code>iptables -t raw -I PREROUTING -p tcp -i ens192 -s 39.156.66.14 -j ACCEPT
+iptables -t raw -I PREROUTING -p tcp -i docker0 -s 39.156.66.14 -j ACCEPT
+
+iptables -t mangle -I FORWARD -p tcp -i ens192 -o ens192 -s 39.156.66.14 -j ACCEPT
+iptables -t mangle -I FORWARD -p tcp -i ens192 -o docker0 -s 39.156.66.14 -j ACCEPT
+iptables -t mangle -I FORWARD -p tcp -i docker0 -o ens192 -s 39.156.66.14 -j ACCEPT
+iptables -t mangle -I FORWARD -p tcp -i docker0 -o docker0 -s 39.156.66.14 -j ACCEPT
+
+iptables -t mangle -I POSTROUTING -p tcp -o docker0 -s 39.156.66.14 -j ACCEPT
+iptables -t mangle -I POSTROUTING -p tcp -o ens192 -s 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%205.png" alt="DOCKER%20IPTABLES/Untitled%205.png"></p>
+<h3 id="容器内监听-1"><a href="#容器内监听-1" class="headerlink" title="容器内监听"></a>容器内监听</h3><pre><code>iptables -t raw -I PREROUTING -p tcp -i eth0 -s 39.156.66.14 -j ACCEPT
+iptables -t mangle -I INPUT -p tcp -i eth0 -s 39.156.66.14 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%206.png" alt="DOCKER%20IPTABLES/Untitled%206.png"></p>
+<h1 id="二、实验：docker容器-ping-宿主机"><a href="#二、实验：docker容器-ping-宿主机" class="headerlink" title="二、实验：docker容器 ping 宿主机"></a>二、实验：docker容器 ping 宿主机</h1><p>docker ping 宿主机</p>
+<h2 id="2-1、流入流量"><a href="#2-1、流入流量" class="headerlink" title="2.1、流入流量"></a>2.1、流入流量</h2><p>docker容器：OUPUT → POSTROUTING → 宿主机：PREROUTING → INPUT</p>
+<p>容器中：</p>
+<pre><code>iptables -t raw -I OUTPUT -s 172.17.0.2 -j ACCEPT
+iptables -t mangle -I POSTROUTING -s 172.17.0.2 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%207.png" alt="DOCKER%20IPTABLES/Untitled%207.png"></p>
+<p>宿主机：</p>
+<pre><code>iptables -t raw -I PREROUTING -i docker0 -s 172.17.0.2 -j ACCEPT
+iptables -t mangle  -I INPUT -i docker0 -s 172.17.0.2 -j ACCEPT
+iptables -t raw -I PREROUTING -i ens192 -s 172.17.0.2 -j ACCEPT
+iptables -t mangle  -I INPUT -i ens192 -s 172.17.0.2 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%208.png" alt="DOCKER%20IPTABLES/Untitled%208.png"></p>
+<h2 id="2-2、流出流量"><a href="#2-2、流出流量" class="headerlink" title="2.2、流出流量"></a>2.2、流出流量</h2><p>宿主机：OUTPUT → POSTROUTING → docker容器内：PREROUTING → INPUT</p>
+<p>宿主机</p>
+<pre><code>iptables -t raw -I OUTPUT -o ens192 -j ACCEPT
+iptables -t raw -I OUTPUT -o docker0 -j ACCEPT
+
+iptables -t mangle -I POSTROUTING -o ens192 -j ACCEPT
+iptables -t mangle -I POSTROUTING -o docker0 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%209.png" alt="DOCKER%20IPTABLES/Untitled%209.png"></p>
+<p>容器内</p>
+<pre><code>iptables -t raw -I PREROUTING -j ACCEPT
+iptables -t mangle -I INPUT -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2010.png" alt="DOCKER%20IPTABLES/Untitled%2010.png"></p>
+<h1 id="三、实验：主机-ping-docker容器"><a href="#三、实验：主机-ping-docker容器" class="headerlink" title="三、实验：主机 ping docker容器"></a>三、实验：主机 ping docker容器</h1><p>主机ping docker</p>
+<h2 id="3-1、流出流量"><a href="#3-1、流出流量" class="headerlink" title="3.1、流出流量"></a>3.1、流出流量</h2><p>宿主机: OUTPUT→ POSTROUTING → 容器内：PREROUTING → INPUT</p>
+<p>宿主机</p>
+<pre><code>iptables -t raw -I OUTPUT -o docker0 -d 172.17.0.2 -j ACCEPT
+iptables -t raw -I OUTPUT -o ens192 -d 172.17.0.2 -j ACCEPT
+
+iptables -t mangle -I POSTROUTING -o docker0 -d 172.17.0.2 -j ACCEPT
+iptables -t mangle -I POSTROUTING -o ens192 -d 172.17.0.2 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2011.png" alt="DOCKER%20IPTABLES/Untitled%2011.png"></p>
+<h2 id="3-2、流入流量"><a href="#3-2、流入流量" class="headerlink" title="3.2、流入流量"></a>3.2、流入流量</h2><p>容器内：OUTPUT → POSTROUTING → 宿主机：PREROUTING → INPUT</p>
+<p>宿主机</p>
+<pre><code>iptables -t raw -I PREROUTING -i docker0 -s 172.17.0.2 -j ACCEPT
+iptables -t mangle -I INPUT -i docker0 -s 172.17.0.2 -j ACCEPT
+iptables -t raw -I PREROUTING -i ens192 -s 172.17.0.2 -j ACCEPT
+iptables -t mangle -I INPUT -i ens192 -s 172.17.0.2 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2012.png" alt="DOCKER%20IPTABLES/Untitled%2012.png"></p>
+<h1 id="四、实验：docker-容器-ping-docker容器"><a href="#四、实验：docker-容器-ping-docker容器" class="headerlink" title="四、实验：docker 容器 ping docker容器"></a>四、实验：docker 容器 ping docker容器</h1><p>docker 容器 ping docker 容器</p>
+<p>t1容器内：OUTPUT → POSTROUTING → 宿主机内： PREROUTING → FORWARD → POSTROUTING → t2容器内：PREROUTING → INPUT</p>
+<p>t1 容器</p>
+<pre><code>iptables -t raw -I OUTPUT -d 172.17.0.3 -j ACCEPT
+iptables -t mangle -I POSTROUTING -d 172.17.0.3 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2013.png" alt="DOCKER%20IPTABLES/Untitled%2013.png"></p>
+<p>宿主机内</p>
+<pre><code>iptables -t raw -I PREROUTING -s 172.17.0.2 -d 172.17.0.3 -i docker0 -j ACCEPT
+iptables -t mangle -I FORWARD -s 172.17.0.2 -d 172.17.0.3 -i docker0 -o docker0 -j ACCEPT
+iptables -t mangle -I POSTROUTING -s 172.17.0.2 -d 172.17.0.3 -o docker0 -j ACCEPT
+</code></pre><p><img src="https://o1hy-1253938230.cos.ap-beijing.myqcloud.com/md/Untitled%2014.png" alt="DOCKER%20IPTABLES/Untitled%2014.png"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/02/Docker网络/" rel="next" title="Docker网络">
+                <i class="fa fa-chevron-left"></i> Docker网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/14/通过IPTBALS转发docker流量/" rel="prev" title="通过IPTBALS转发docker流量">
+                通过IPTBALS转发docker流量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">o1hy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/17307" title="GitHub &rarr; https://github.com/17307" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://das.scusec.org/" title="https://das.scusec.org/" rel="noopener" target="_blank">DAS</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/index.php" title="https://www.sec-wiki.com/index.php" rel="noopener" target="_blank">secwiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.fefairy.com" title="http://blog.fefairy.com" rel="noopener" target="_blank">prettymask</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://herasu.github.io/" title="https://herasu.github.io/" rel="noopener" target="_blank">Fish</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、实验：docker容器-curl-外网"><span class="nav-number">1.</span> <span class="nav-text">一、实验：docker容器 curl 外网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1、流出的数据包"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、流出的数据包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器内监听"><span class="nav-number">1.1.1.</span> <span class="nav-text">容器内监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宿主机内监听"><span class="nav-number">1.1.2.</span> <span class="nav-text">宿主机内监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP-情况"><span class="nav-number">1.1.3.</span> <span class="nav-text">ICMP 情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2、流入的数据包"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、流入的数据包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宿主机监听"><span class="nav-number">1.2.1.</span> <span class="nav-text">宿主机监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器内监听-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">容器内监听</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、实验：docker容器-ping-宿主机"><span class="nav-number">2.</span> <span class="nav-text">二、实验：docker容器 ping 宿主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1、流入流量"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、流入流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2、流出流量"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、流出流量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、实验：主机-ping-docker容器"><span class="nav-number">3.</span> <span class="nav-text">三、实验：主机 ping docker容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、流出流量"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、流出流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、流入流量"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、流入流量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、实验：docker-容器-ping-docker容器"><span class="nav-number">4.</span> <span class="nav-text">四、实验：docker 容器 ping docker容器</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">o1hy</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://17307.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://17307.github.io/2020/01/12/docker-iptables/";
+    this.page.identifier = "2020/01/12/docker-iptables/";
+    this.page.title = 'docker的流量在iptables下的流向';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://17307.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":100,"hOffset":0,"vOffset":30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
